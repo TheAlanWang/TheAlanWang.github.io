@@ -448,6 +448,30 @@ body {
     text-shadow: 0 0 10px rgba(59, 158, 255, 0.3);
 }
 
+.info-badge-logos {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.info-badge-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    border-radius: 8px;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.info-badge:hover .info-badge-logo {
+    border-color: rgba(59, 158, 255, 0.3);
+}
+
+.info-badge-logo:hover {
+    transform: scale(1.1);
+}
+
 /* Timeline */
 .timeline {
     position: relative;
@@ -525,6 +549,143 @@ body {
 .timeline-item .highlight {
     color: #7DD3FC;
     font-weight: 600;
+}
+
+/* Education – horizontal line: Macquarie → Sydney → Northeastern */
+.education-track {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    position: relative;
+    padding: 0 0.5rem;
+}
+
+.education-track-line {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 52px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(59, 158, 255, 0.4), rgba(59, 158, 255, 0.6), rgba(59, 158, 255, 0.4));
+    pointer-events: none;
+    z-index: 0;
+}
+
+.education-node {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    max-width: 220px;
+}
+
+.education-node-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    box-shadow: 0 0 12px rgba(59, 158, 255, 0.5);
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.education-node-logo {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    margin-bottom: 0.75rem;
+}
+
+.education-node-school {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+}
+
+.education-node-degree {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.2rem;
+    line-height: 1.3;
+}
+
+.education-node-meta {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.3;
+}
+
+.education-node {
+    cursor: default;
+}
+
+.education-node-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: rgba(0, 0, 0, 0.92);
+    color: rgba(255, 255, 255, 0.95);
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    min-width: 160px;
+    max-width: 220px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    margin-top: 0.5rem;
+    z-index: 100;
+    border: 1px solid rgba(59, 158, 255, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.education-node-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.92);
+}
+
+.education-node:hover .education-node-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.education-node-tooltip-title {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.education-node-tooltip ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.education-node-tooltip li {
+    padding: 0.2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    line-height: 1.35;
+}
+
+.education-node-tooltip li:last-child {
+    border-bottom: none;
 }
 
 /* Skills Section - Modern Design */
@@ -790,6 +951,27 @@ body {
 
     .timeline {
         padding-left: 2rem;
+    }
+
+    .education-track {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .education-track-line {
+        left: 50%;
+        right: auto;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        height: 100%;
+        transform: translateX(-50%);
+        background: linear-gradient(180deg, rgba(59, 158, 255, 0.4), rgba(59, 158, 255, 0.6), rgba(59, 158, 255, 0.4));
+    }
+
+    .education-node {
+        max-width: none;
     }
 }
 

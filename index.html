@@ -40,6 +40,7 @@
                     <li><a href="#about" class="nav-link" @click="closeMobileMenu">About</a></li>
                     <li><a href="#projects" class="nav-link" @click="closeMobileMenu">Projects</a></li>
                     <li><a href="#experience" class="nav-link" @click="closeMobileMenu">Experience</a></li>
+                    <li><a href="#education" class="nav-link" @click="closeMobileMenu">Education</a></li>
                     <li><a href="#skills" class="nav-link" @click="closeMobileMenu">Skills</a></li>
                     <li><a href="#contact" class="nav-link" @click="closeMobileMenu">Contact</a></li>
                 </ul>
@@ -77,7 +78,7 @@
             <div class="container mx-auto max-w-7xl">
                 <h2 class="text-5xl font-bold mb-16 text-center">About</h2>
                 
-                <!-- Introduction, Location/Experience, and University Logos -->
+                <!-- Introduction, Location/Experience -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-start">
                     <!-- Introduction - Extended to the right -->
                     <div class="lg:col-span-8">
@@ -110,8 +111,19 @@
                                 <span class="info-badge-icon">💼</span>
                                 <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Work Experience</span>
                             </div>
-                            <div class="text-lg font-bold text-white mt-1.5 tracking-tight">
-                                <span class="info-badge-accent">5+</span> Years
+                            <div class="info-badge-edu-row flex flex-wrap items-center justify-between gap-2 mt-1.5">
+                                <span class="text-lg font-bold text-white tracking-tight">
+                                    <span class="info-badge-accent">5+</span> Years
+                                </span>
+                                <div class="flex flex-wrap gap-2">
+                                    <template v-for="exp in profileData.experience" :key="exp.company">
+                                        <img v-if="exp.companyLogo && exp.company !== 'Northeastern University'"
+                                             :src="exp.companyLogo"
+                                             :alt="exp.company"
+                                             class="info-badge-logo"
+                                             @error="handleIconError">
+                                    </template>
+                                </div>
                             </div>
                         </div>
                         
@@ -121,23 +133,18 @@
                                 <span class="info-badge-icon">🎓</span>
                                 <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Education</span>
                             </div>
-                            <div class="text-lg font-bold text-white mt-1.5 tracking-tight">MCS Student</div>
-                        </div>
-                        
-                        <!-- University Logos -->
-                        <div class="flex flex-col items-start gap-6 mt-6">
-                            <img :src="profileData.universityLogos.northeastern || '/assets/logos/universities/northeastern.png'" 
-                                 alt="Northeastern University" 
-                                 class="university-logo"
-                                 @error="handleLogoError">
-                            <img :src="profileData.universityLogos.sydney || '/assets/logos/universities/sydney.png'" 
-                                 alt="University of Sydney" 
-                                 class="university-logo"
-                                 @error="handleLogoError">
-                            <img :src="profileData.universityLogos.macquarie || '/assets/logos/universities/macquarie.png'" 
-                                 alt="Macquarie University" 
-                                 class="university-logo"
-                                 @error="handleLogoError">
+                            <div class="info-badge-edu-row flex flex-wrap items-center justify-between gap-2 mt-1.5">
+                                <span class="text-lg font-bold text-white tracking-tight">CS Student</span>
+                                <div class="flex flex-wrap gap-2">
+                                    <template v-for="edu in [...profileData.education].reverse()" :key="edu.school">
+                                        <img v-if="edu.schoolLogo"
+                                             :src="edu.schoolLogo"
+                                             :alt="edu.school"
+                                             class="info-badge-logo"
+                                             @error="handleIconError">
+                                    </template>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -205,6 +212,35 @@
                                 <li v-for="detail in exp.details" :key="detail" v-html="'• ' + detail"></li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section – horizontal line: Macquarie → Sydney → Northeastern -->
+        <section id="education" class="py-20 px-6">
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="text-5xl font-bold mb-16 text-center">Education</h2>
+                <div class="education-track">
+                    <div class="education-track-line" aria-hidden="true"></div>
+                    <div v-for="edu in profileData.education" 
+                         :key="edu.school + edu.degree"
+                         class="education-node">
+                        <div v-if="edu.studied && edu.studied.length" class="education-node-tooltip">
+                            <span class="education-node-tooltip-title">What I studied</span>
+                            <ul>
+                                <li v-for="s in edu.studied" :key="s">{{ s }}</li>
+                            </ul>
+                        </div>
+                        <div class="education-node-dot"></div>
+                        <img v-if="edu.schoolLogo" 
+                             :src="edu.schoolLogo" 
+                             :alt="edu.school"
+                             class="education-node-logo"
+                             @error="handleIconError">
+                        <h3 class="education-node-school">{{ edu.school }}</h3>
+                        <p class="education-node-degree">{{ edu.degree }}</p>
+                        <p class="education-node-meta">{{ edu.period }}{{ edu.gpa ? ' · GPA ' + edu.gpa : '' }}</p>
                     </div>
                 </div>
             </div>

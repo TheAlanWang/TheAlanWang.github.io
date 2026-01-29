@@ -10,9 +10,9 @@
         photo: "/assets/photo/photo.jpeg",
         photoPosition: "80% center",
         universityLogos: {
-            northeastern: "/assets/logos/universities/northeastern.png",
-            sydney: "/assets/logos/universities/sydney.png",
-            macquarie: "/assets/logos/universities/macquarie.png"
+            northeastern: "/assets/logos/universities/NEU.png",
+            sydney: "/assets/logos/universities/USDY.png",
+            macquarie: "/assets/logos/universities/Macquarie.png"
         },
         about: {
             intro: "I'm a Master of Computer Science student at Northeastern University with a passion for building full-stack applications and solving complex technical challenges. With experience as a Project Manager, I've led the development of 20+ enterprise applications.",
@@ -59,6 +59,17 @@
         ],
         experience: [
             {
+                title: "Teaching Assistant - Part time",
+                company: "Northeastern University",
+                companyLogo: "/assets/logos/universities/NEU.png",
+                date: "2024 – Present",
+                details: [
+                    "Support course instruction, <span class='highlight'>grading</span>, and <span class='highlight'>office hours</span> for CS courses",
+                    "Tutor students on <span class='highlight'>algorithms</span>, <span class='highlight'>data structures</span>, and programming concepts",
+                    "Assist with lab sessions and <span class='highlight'>code reviews</span>"
+                ]
+            },
+            {
                 title: "Tech Project Manager (Software Engineer)",
                 company: "Shanghai Securities",
                 companyLogo: "/assets/logos/companies/com_shanghaisecurities.png",
@@ -91,6 +102,35 @@
                     "Led <span class='highlight'>architecture design</span> and authored 20+ technical documents",
                     "Optimized <span class='highlight'>database queries</span>, improving performance by 35%"
                 ]
+            }
+        ],
+        education: [
+            {
+                school: "Macquarie University",
+                degree: "Bachelor of Commerce, Professional Accounting",
+                period: "2014 – 2018",
+                gpa: "",
+                schoolLogo: "/assets/logos/universities/Macquarie.png",
+                details: [],
+                studied: ["Commerce", "Information Systems", "Statistics", "Economics"]
+            },
+            {
+                school: "University of Sydney",
+                degree: "Master of Commmerce, Finance & Big Data",
+                period: "2017 – 2019",
+                gpa: "",
+                schoolLogo: "/assets/logos/universities/USDY.png",
+                details: [],
+                studied: ["Machine Learning", "Data Structure", "Algorithm", "Python", "Linear Algebra", "Calculus", "Probability and Statistics"]
+            },
+            {
+                school: "Northeastern University",
+                degree: "Master of Science in Computer Science",
+                period: "2024 – Present",
+                gpa: "4.0",
+                schoolLogo: "/assets/logos/universities/NEU.png",
+                details: [],
+                studied: ["Data Structures & Algorithms", "Operating Systems", "Database Systems", "Software Engineering", "Computer Networks", "Distributed Systems", "Machine Learning", "Web Development", "Computer Architecture", "Programming Languages"]
             }
         ],
         skills: {
