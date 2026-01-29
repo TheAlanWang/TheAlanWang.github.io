@@ -55,6 +55,13 @@
                 gif: "/assets/demos/demo_calmCube.gif",
                 description: "Vibe-coded hackathon MVP: a heart-rate responsive relaxation assistant with adaptive calming modes including guided breathing, ambient soundscapes, and AI chat support.",
                 github: "https://github.com/TheAlanWang/calmcube-mvp"
+            },
+            {
+                title: "Brain Site",
+                tech: "Quartz v4, TypeScript, Markdown",
+                gif: "/assets/demos/demo_Brain.gif",
+                description: "Personal knowledge base / digital garden — notes on Computer Science, systems, and learning. Features graph view, backlinks, search, and a clean reading experience.",
+                github: "https://github.com/TheAlanWang/alan-brain-site"
             }
         ],
         experience: [

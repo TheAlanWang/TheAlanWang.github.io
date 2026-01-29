@@ -161,10 +161,11 @@
                          class="glass rounded-xl overflow-hidden hover:bg-white/5 transition-all duration-300 flex flex-col"
                          ref="projectCards">
                         <!-- GIF Demo at the top -->
-                        <div class="project-gif-container">
+                        <div class="project-gif-container" v-if="project.gif && project.gif.trim() !== ''">
                             <img :src="project.gif" 
                                  :alt="project.title + ' demo'"
-                                 class="project-gif">
+                                 class="project-gif"
+                                 @error="handleIconError">
                         </div>
                         <!-- Project Info -->
                         <div class="p-6 flex flex-col flex-grow text-center">
