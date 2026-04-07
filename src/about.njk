@@ -1,0 +1,117 @@
+---
+layout: layouts/base.njk
+title: About Me
+description: About Me page for Alan Wang.
+navKey: about
+pageShellClass: about-layout
+permalink: /about.html
+---
+<div class="layout-grid">
+    <aside class="identity-rail">
+        <div class="identity-block">
+            <p class="eyebrow">Personal website</p>
+            <h1 class="identity-title">{{ site.name }}</h1>
+            <p class="identity-summary">{{ site.tagline }}</p>
+        </div>
+
+        <div class="identity-meta">
+            {% for fact in site.quickFacts %}
+                <span class="meta-pill">{{ fact }}</span>
+            {% endfor %}
+        </div>
+    </aside>
+
+    <main class="content-column">
+        <section class="about-hero">
+            <p class="section-kicker">About Me</p>
+            <h2 class="about-title">{{ site.about.headline }}</h2>
+            <p class="about-hero-note">A concise overview of my background, experience, and current focus.</p>
+        </section>
+
+        <section class="about-panel">
+            <p class="about-copy">{{ site.about.intro }}</p>
+            <p class="about-copy">{{ site.about.shortBio }}</p>
+            {% if site.about.quote %}
+                <p class="pull-quote">{{ site.about.quote }}</p>
+            {% endif %}
+        </section>
+
+        <section class="content-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Work Experience</p>
+                    <h2 class="section-title">Professional Experience.</h2>
+                </div>
+            </div>
+
+            <div class="about-list">
+                {% for item in site.about.experience %}
+                    <article class="about-list-item">
+                        <div class="about-list-header">
+                            <div>
+                                <h3 class="about-list-title">{{ item.role }}</h3>
+                                <p class="about-list-subtitle">{{ item.organization }}</p>
+                            </div>
+                            <p class="about-list-period">{{ item.period }}</p>
+                        </div>
+                        <ul class="about-list-points">
+                            {% for point in item.points %}
+                                <li>{{ point }}</li>
+                            {% endfor %}
+                        </ul>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Education</p>
+                    <h2 class="section-title">Academic background.</h2>
+                </div>
+            </div>
+
+            <div class="about-list">
+                {% for item in site.about.education %}
+                    <article class="about-list-item">
+                        <div class="about-list-header">
+                            <div>
+                                <h3 class="about-list-title">{{ item.degree }}</h3>
+                                <p class="about-list-subtitle">{{ item.school }}</p>
+                            </div>
+                            <p class="about-list-period">{{ item.period }}</p>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Contact</p>
+                    <h2 class="section-title">Contact</h2>
+                </div>
+            </div>
+
+            <div class="contact-panel">
+                <p class="contact-copy">{{ site.contact.blurb }}</p>
+                <div class="contact-links">
+                    {% for link in site.contact.links %}
+                        <a href="{{ link.url }}"
+                           {% if link.external %}target="_blank" rel="noreferrer"{% endif %}
+                           class="contact-link">
+                            {{ link.label }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <p>{{ site.footerText }}</p>
+            <p>&copy; 2026 {{ site.name }}</p>
+        </footer>
+    </main>
+</div>

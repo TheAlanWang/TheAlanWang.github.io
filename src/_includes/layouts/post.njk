@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+navKey: posts
+pageShellClass: post-layout
+---
+<main class="post-shell">
+    <article class="post-article">
+        <a href="/posts/" class="back-link">All posts</a>
+
+        <header class="post-header">
+            <div class="stream-meta">
+                <span class="stream-topic">{{ type }}</span>
+                <span class="stream-subtopic">{{ topic }}</span>
+                <span class="stream-date">{{ date | displayDate }}</span>
+            </div>
+            <h1 class="post-title">{{ title }}</h1>
+            {% if excerpt %}
+                <p class="post-dek">{{ excerpt }}</p>
+            {% endif %}
+        </header>
+
+        <div class="prose">
+            {{ content | safe }}
+        </div>
+    </article>
+</main>

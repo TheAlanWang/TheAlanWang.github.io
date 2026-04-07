@@ -1,0 +1,57 @@
+---
+layout: layouts/base.njk
+title: Posts
+description: Posts archive for Alan Wang.
+navKey: posts
+---
+<div class="layout-grid">
+    <aside class="identity-rail">
+        <div class="identity-block">
+            <h1 class="identity-title">{{ site.name }}</h1>
+            <p class="identity-summary">{{ site.tagline }}</p>
+        </div>
+
+        <div class="identity-meta">
+            {% for fact in site.quickFacts %}
+                <span class="meta-pill">{{ fact }}</span>
+            {% endfor %}
+        </div>
+    </aside>
+
+    <main class="content-column">
+        <section class="lead-panel">
+            <p class="section-kicker">Posts</p>
+            <h2 class="lead-title">{{ site.postsPageIntroTitle }}</h2>
+            <p class="lead-copy">{{ site.postsPageIntroText }}</p>
+        </section>
+
+        <section class="content-section">
+            <div class="list-stream">
+                {% for post in collections.postsDesc %}
+                    <article class="stream-item post-item">
+                        <div class="stream-copy">
+                            <div class="stream-meta">
+                                <span class="stream-topic">{{ post.data.type }}</span>
+                                <span class="stream-subtopic">{{ post.data.topic }}</span>
+                                <span class="stream-date">{{ post.date | displayDate }}</span>
+                            </div>
+                            <h3 class="stream-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+                            <p class="stream-excerpt">{{ post.data.excerpt }}</p>
+                            <div class="stream-actions">
+                                <a href="{{ post.url }}" class="text-link">Read post</a>
+                            </div>
+                        </div>
+                        <a href="{{ post.url }}" class="stream-preview{% if post.data.imageFit == 'contain' %} stream-preview-contain{% endif %}" aria-label="Open {{ post.data.title }}">
+                            <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="stream-preview-image">
+                        </a>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <p>{{ site.footerText }}</p>
+            <p>&copy; 2026 {{ site.name }}</p>
+        </footer>
+    </main>
+</div>

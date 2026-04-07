@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description or site.homeIntroText }}">
+    <title>{% if title %}{{ title }} | {% endif %}{{ site.name }}</title>
+    <link rel="icon" href="/assets/favicon/Favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="page-shell{% if pageShellClass %} {{ pageShellClass }}{% endif %}">
+        <header class="site-header">
+            <a href="/" class="site-brand">{{ site.name }}</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="/" class="site-nav-link{% if navKey == 'home' %} current{% endif %}">Home</a>
+                <a href="/posts/" class="site-nav-link{% if navKey == 'posts' %} current{% endif %}">Posts</a>
+                <a href="/about.html" class="site-nav-link{% if navKey == 'about' %} current{% endif %}">About Me</a>
+                <a href="/about.html#contact" class="site-nav-link">Contact</a>
+            </nav>
+        </header>
+        {{ content | safe }}
+    </div>
+</body>
+</html>
