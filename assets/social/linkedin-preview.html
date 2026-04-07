@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alan Wang Social Preview</title>
+  <style>
+    :root {
+      --bg: #f3f4f1;
+      --bg-soft: #eceee9;
+      --line: rgba(18, 24, 33, 0.12);
+      --text: #161a20;
+      --muted: #5d6673;
+      --soft-text: #7a8390;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 1200px;
+      height: 627px;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: var(--font-sans);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.72), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(219, 224, 231, 0.6), transparent 38%),
+        linear-gradient(180deg, #f7f8f5 0%, var(--bg) 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .frame {
+      position: relative;
+      width: 1200px;
+      height: 627px;
+      padding: 82px 72px 64px;
+    }
+
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 28%, rgba(255, 255, 255, 0.18) 100%);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .rule {
+      position: absolute;
+      top: 82px;
+      left: 72px;
+      width: calc(100% - 144px);
+      height: 1px;
+      background: var(--line);
+    }
+
+    .eyebrow {
+      position: absolute;
+      top: 110px;
+      left: 72px;
+      margin: 0;
+      color: var(--soft-text);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .name {
+      position: absolute;
+      top: 148px;
+      left: 72px;
+      margin: 0;
+      font-size: 112px;
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      z-index: 1;
+    }
+
+    .meta {
+      position: absolute;
+      top: 438px;
+      left: 72px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.45;
+      z-index: 1;
+    }
+
+    .headline {
+      position: absolute;
+      top: 118px;
+      left: 470px;
+      margin: 0;
+      font-size: 66px;
+      line-height: 0.97;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      z-index: 1;
+    }
+
+    .headline span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .copy {
+      position: absolute;
+      top: 378px;
+      left: 470px;
+      width: 620px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.55;
+      z-index: 1;
+    }
+
+    .url {
+      position: absolute;
+      top: 520px;
+      left: 470px;
+      margin: 0;
+      color: var(--text);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <div class="rule"></div>
+    <p class="eyebrow">Personal website</p>
+    <h1 class="name">Alan<br>Wang</h1>
+    <div class="meta">
+      <div>San Jose, California</div>
+      <div>M.S. Computer Science</div>
+    </div>
+    <h2 class="headline">
+      <span>Projects,</span>
+      <span>technical notes,</span>
+      <span>and systems work.</span>
+    </h2>
+    <p class="copy">A collection of projects, technical write-ups, and hand-drawn sketches across software, cloud, and AI.</p>
+    <p class="url">thealanwang.github.io</p>
+  </main>
+</body>
+</html>

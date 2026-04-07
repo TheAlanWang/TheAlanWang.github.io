@@ -1,5 +1,7 @@
 module.exports = {
     name: "Alan Wang",
+    url: "https://thealanwang.github.io",
+    socialImage: "https://thealanwang.github.io/assets/social/linkedin-preview.png",
     tagline: "Build while learning. Share while building.",
     quickFacts: [
         "San Jose, California",

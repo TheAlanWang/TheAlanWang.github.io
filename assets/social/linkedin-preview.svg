@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="627" viewBox="0 0 1200 627" role="img" aria-labelledby="title desc">
+  <title id="title">Alan Wang</title>
+  <desc id="desc">Projects, technical notes, and systems work.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7f8f5" />
+      <stop offset="100%" stop-color="#f1f2ee" />
+    </linearGradient>
+    <radialGradient id="glowA" cx="0%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="100%" cy="100%" r="85%">
+      <stop offset="0%" stop-color="#dde2ea" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#dde2ea" stop-opacity="0" />
+    </radialGradient>
+    <style>
+      .eyebrow { fill: #7a8390; font: 700 22px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0.22em; text-transform: uppercase; }
+      .name { fill: #161a20; font: 800 112px/0.92 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -0.06em; }
+      .headline { fill: #161a20; font: 800 66px/0.97 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -0.06em; }
+      .copy { fill: #5d6673; font: 500 26px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .meta { fill: #5d6673; font: 500 24px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .url { fill: #161a20; font: 700 24px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -0.02em; }
+      .rule { stroke: rgba(22,26,32,0.12); stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="627" fill="url(#bg)" />
+  <rect width="1200" height="627" fill="url(#glowA)" />
+  <rect width="1200" height="627" fill="url(#glowB)" />
+
+  <line x1="72" y1="82" x2="1128" y2="82" class="rule" />
+
+  <g transform="translate(68 110)">
+    <text class="eyebrow">Personal website</text>
+    <text class="name" x="0" y="146">
+      <tspan x="0" dy="0">Alan</tspan>
+      <tspan x="0" dy="102">Wang</tspan>
+    </text>
+    <text class="meta" x="0" y="310">San Jose, California</text>
+    <text class="meta" x="0" y="348">M.S. Computer Science</text>
+  </g>
+
+  <g transform="translate(470 118)">
+    <text class="headline" x="0" y="78">
+      <tspan x="0" dy="0">Projects,</tspan>
+      <tspan x="0" dy="78">technical notes,</tspan>
+      <tspan x="0" dy="78">and systems work.</tspan>
+    </text>
+
+    <text class="copy" x="0" y="330">
+      <tspan x="0" dy="0">A collection of projects, technical write-ups, and</tspan>
+      <tspan x="0" dy="36">hand-drawn sketches across software, cloud, and AI.</tspan>
+    </text>
+
+    <text class="url" x="0" y="468">thealanwang.github.io</text>
+  </g>
+</svg>
