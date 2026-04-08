@@ -8,13 +8,13 @@ type: Sketch
 topic: Systems
 tags:
   - posts
-image: /assets/sketches/redis-overview.png
+image: /assets/sketches/redis-overview.svg
 imageFit: contain
 permalink: /posts/redis-overview/index.html
 ---
 This sketch is a compact Redis reference that I use as a structural overview rather than a full tutorial. It pulls together the parts that are easy to forget in practice: core data types, common commands, cache patterns, persistence choices, and a few operational notes.
 
-![Redis Overview](/assets/sketches/redis-overview.png)
+![Redis Overview](/assets/sketches/redis-overview.svg)
 
 ## What It Covers
 
