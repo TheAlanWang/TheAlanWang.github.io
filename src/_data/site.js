@@ -8,7 +8,7 @@ module.exports = {
   homeIntroLines: [
     "Applied AI,",
     "backend systems,",
-    "and production-minded engineering.",
+    "and reliable engineering.",
   ],
   homeIntroText:
     "I build AI applications with a systems mindset and use this site to share projects, technical notes, and visual sketches on applied AI, backend systems, and cloud infrastructure.",
