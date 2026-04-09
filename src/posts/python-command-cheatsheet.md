@@ -5,7 +5,7 @@ description: A quick command cheatsheet for checking Python, managing virtual en
 excerpt: A quick command cheatsheet for checking Python, managing virtual environments, handling packages, and running files or modules.
 date: 2026-04-01
 type: Sketch
-topic: Python
+topic: Tools
 tags:
   - posts
 image: /assets/sketches/python-cheatsheet.svg

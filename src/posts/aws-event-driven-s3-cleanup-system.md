@@ -5,7 +5,7 @@ description: A serverless workflow that tracks S3 bucket size over time, trigger
 excerpt: A serverless workflow that tracks S3 bucket size over time, triggers cleanup when thresholds are reached, and generates a final plot from workflow history.
 date: 2026-03-29
 type: Project
-topic: AWS
+topic: Cloud
 tags:
   - posts
 image: /assets/projects/aws-cleanup-architecture.svg

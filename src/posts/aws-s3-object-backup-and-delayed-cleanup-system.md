@@ -5,7 +5,7 @@ description: An event-driven AWS backup system that creates timestamped S3 copie
 excerpt: An event-driven AWS backup system that creates timestamped S3 copies, tracks lifecycle metadata in DynamoDB, and removes stale backups through a scheduled cleanup path.
 date: 2026-03-30
 type: Project
-topic: AWS
+topic: Cloud
 tags:
   - posts
 image: /assets/projects/object-backup-system-architecture.svg

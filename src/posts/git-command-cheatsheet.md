@@ -5,7 +5,7 @@ description: A quick Git command cheatsheet covering repository setup, branching
 excerpt: A quick Git command cheatsheet covering repository setup, branching, status checks, commits, sync, and rollback basics.
 date: 2026-04-02
 type: Sketch
-topic: Git
+topic: Tools
 tags:
   - posts
 image: /assets/sketches/git-cheatsheet.svg

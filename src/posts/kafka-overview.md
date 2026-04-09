@@ -5,7 +5,7 @@ description: A quick structural sketch of brokers, partitions, consumer groups, 
 excerpt: A quick structural sketch of brokers, partitions, consumer groups, and replication.
 date: 2026-03-30
 type: Sketch
-topic: Distributed Systems
+topic: Systems
 tags:
   - posts
 image: /assets/sketches/kafka-overview.svg
