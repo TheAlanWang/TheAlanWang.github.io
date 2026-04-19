@@ -205,6 +205,10 @@ select {
     border-top: 1px solid var(--line);
 }
 
+.lead-panel-archive {
+    padding-top: 12px;
+}
+
 .lead-title,
 .section-title,
 .about-title {
@@ -232,6 +236,14 @@ select {
     margin: 18px 0 0;
     max-width: 72ch;
     font-size: 1.02rem;
+}
+
+.lead-panel-archive .lead-title {
+    margin-bottom: 0;
+}
+
+.lead-panel-archive .lead-copy {
+    margin-top: 10px;
 }
 
 .content-section {
@@ -275,12 +287,90 @@ select {
     display: grid;
 }
 
+.posts-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 0 0 8px;
+    align-items: center;
+}
+
+.posts-filters-archive {
+    margin-top: -34px;
+    margin-bottom: -38px;
+}
+
+.posts-filters-archive-bordered {
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+}
+
+.posts-filter-label {
+    margin: 0;
+    color: var(--soft-text);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.posts-filter-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.posts-filter-select {
+    min-width: 120px;
+    border: 0;
+    border-bottom: 1px solid rgba(18, 24, 33, 0.14);
+    border-radius: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 4px 18px 4px 0;
+    font-size: 0.92rem;
+    line-height: 1.2;
+    transition: color var(--ease), border-color var(--ease);
+    appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, var(--soft-text) 50%),
+        linear-gradient(135deg, var(--soft-text) 50%, transparent 50%);
+    background-position:
+        calc(100% - 10px) calc(50% - 1px),
+        calc(100% - 4px) calc(50% - 1px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    text-align: center;
+    text-align-last: center;
+}
+
+.posts-filter-select:hover,
+.posts-filter-select:focus-visible {
+    color: var(--text);
+    border-color: rgba(18, 24, 33, 0.34);
+    outline: none;
+}
+
 .stream-item {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 220px;
     gap: 24px;
     padding: 28px 0;
     border-bottom: 1px solid var(--line);
+}
+
+.post-item[hidden] {
+    display: none;
+}
+
+.content-section-archive {
+    border-top: 0;
+    padding-top: 0;
+}
+
+.content-section-archive .post-item-first-visible {
+    padding-top: 0;
 }
 
 .stream-item:first-child {

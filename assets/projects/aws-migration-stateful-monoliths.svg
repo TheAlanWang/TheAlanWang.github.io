@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#FFFFFF"/>
+  <rect x="60" y="60" width="1480" height="780" rx="32" fill="#FFFFFF" stroke="#D7DBD2" stroke-width="2"/>
+
+  <text x="110" y="150" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="4">AWS MIGRATION STRATEGY</text>
+  <text x="110" y="230" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="72" font-weight="800">Mature Stateful Monoliths</text>
+  <text x="110" y="285" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="30">Practical path: rehost when needed, replatform first, refactor selectively.</text>
+
+  <rect x="110" y="360" width="390" height="330" rx="24" fill="#FFFFFF" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="140" y="425" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="2">STARTING POINT</text>
+  <text x="140" y="485" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="44" font-weight="800">Classic Monolith</text>
+  <text x="140" y="535" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">Spring Boot / RuoYi-style</text>
+  <text x="140" y="575" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">MySQL, local files, jobs, logs</text>
+  <text x="140" y="615" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">tightly coupled operational state</text>
+
+  <rect x="605" y="360" width="390" height="330" rx="24" fill="#FFFFFF" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="635" y="425" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="2">BEST FIRST MOVE</text>
+  <text x="635" y="485" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="44" font-weight="800">Replatform</text>
+  <text x="635" y="535" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">App -&gt; EC2 or ECS</text>
+  <text x="635" y="575" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">DB -&gt; RDS MySQL</text>
+  <text x="635" y="615" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">Files -&gt; S3, logs -&gt; CloudWatch</text>
+
+  <rect x="1100" y="360" width="390" height="330" rx="24" fill="#FFFFFF" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="1130" y="425" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="2">LATER, IF NEEDED</text>
+  <text x="1130" y="480" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="40" font-weight="800">Selective</text>
+  <text x="1130" y="525" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="40" font-weight="800">Refactor</text>
+  <text x="1130" y="565" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="23">split high-payoff modules only</text>
+  <text x="1130" y="602" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="23">files, jobs, async work,</text>
+  <text x="1130" y="639" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="23">exports, avoid premature</text>
+  <text x="1130" y="676" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="23">microservices</text>
+
+  <path d="M520 525H575" stroke="#161A20" stroke-width="4" stroke-linecap="round"/>
+  <path d="M545 495L575 525L545 555" stroke="#161A20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1015 525H1070" stroke="#161A20" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1040 495L1070 525L1040 555" stroke="#161A20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="110" y="765" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="26">Use the 7 Rs as a decision framework, but for mature stateful systems the real choice is usually staged risk reduction.</text>
+</svg>

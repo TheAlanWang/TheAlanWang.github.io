@@ -20,16 +20,29 @@ navKey: posts
     </aside>
 
     <main class="content-column">
-        <section class="lead-panel">
+        <section class="lead-panel lead-panel-archive">
             <p class="section-kicker">Posts</p>
             <h2 class="lead-title">{{ site.postsPageIntroTitle }}</h2>
             <p class="lead-copy">{{ site.postsPageIntroText }}</p>
         </section>
 
-        <section class="content-section">
+        <div class="posts-filters posts-filters-archive posts-filters-archive-bordered" aria-label="Post filters">
+            <label class="posts-filter-inline">
+                <span class="posts-filter-label">Type</span>
+                <select class="posts-filter-select" data-filter-group="type" aria-label="Filter posts by type"></select>
+            </label>
+            <label class="posts-filter-inline">
+                <span class="posts-filter-label">Topic</span>
+                <select class="posts-filter-select" data-filter-group="topic" aria-label="Filter posts by topic"></select>
+            </label>
+        </div>
+
+        <section class="content-section content-section-archive">
             <div class="list-stream">
                 {% for post in collections.postsDesc %}
-                    <article class="stream-item post-item">
+                    <article class="stream-item post-item"
+                             data-type="{{ post.data.type | lower }}"
+                             data-topic="{{ post.data.topic | lower }}">
                         <div class="stream-copy">
                             <div class="stream-meta">
                                 <span class="stream-topic">{{ post.data.type }}</span>
@@ -56,3 +69,88 @@ navKey: posts
         </footer>
     </main>
 </div>
+<script>
+    (() => {
+        const posts = Array.from(document.querySelectorAll(".post-item"));
+        if (!posts.length) return;
+
+        const state = { type: "all", topic: "all" };
+        const groups = ["type", "topic"];
+        const selects = Object.fromEntries(
+            groups.map((group) => [group, document.querySelector(`[data-filter-group="${group}"]`)])
+        );
+        const allValues = Object.fromEntries(
+            groups.map((group) => [
+                group,
+                Array.from(new Set(posts.map((post) => post.dataset[group]).filter(Boolean))).sort(),
+            ])
+        );
+
+        const formatLabel = (value) =>
+            value.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ");
+
+        const setOptions = (group, values) => {
+            const select = selects[group];
+            if (!select) return;
+            const options = ["all", ...values];
+            select.innerHTML = "";
+
+            options.forEach((value) => {
+                const option = document.createElement("option");
+                option.value = value;
+                option.textContent = value === "all" ? "All" : formatLabel(value);
+                select.appendChild(option);
+            });
+        };
+
+        const renderGroup = (group) => {
+            const select = selects[group];
+            if (!select) return;
+            setOptions(group, allValues[group]);
+            select.value = "all";
+            select.addEventListener("change", () => {
+                state[group] = select.value;
+                update();
+            });
+        };
+
+        const availableValues = (group) => {
+            const otherGroup = group === "type" ? "topic" : "type";
+            return Array.from(
+                new Set(
+                    posts
+                        .filter((post) => state[otherGroup] === "all" || post.dataset[otherGroup] === state[otherGroup])
+                        .map((post) => post.dataset[group])
+                        .filter(Boolean)
+                )
+            ).sort();
+        };
+
+        const update = () => {
+            groups.forEach((group) => {
+                const values = availableValues(group);
+                const current = state[group];
+                setOptions(group, values);
+                if (current !== "all" && !values.includes(current)) {
+                    state[group] = "all";
+                }
+                selects[group].value = state[group];
+            });
+
+            posts.forEach((post) => {
+                const matchesType = state.type === "all" || post.dataset.type === state.type;
+                const matchesTopic = state.topic === "all" || post.dataset.topic === state.topic;
+                post.hidden = !(matchesType && matchesTopic);
+                post.classList.remove("post-item-first-visible");
+            });
+
+            const firstVisible = posts.find((post) => !post.hidden);
+            if (firstVisible) {
+                firstVisible.classList.add("post-item-first-visible");
+            }
+        };
+
+        groups.forEach(renderGroup);
+        update();
+    })();
+</script>
