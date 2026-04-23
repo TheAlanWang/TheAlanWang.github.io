@@ -86,8 +86,21 @@ navKey: posts
             ])
         );
 
+        const acronymMap = {
+            ai: "AI",
+            rag: "RAG",
+            aws: "AWS",
+            api: "API",
+            apis: "APIs",
+            db: "DB",
+            llm: "LLM",
+        };
+
         const formatLabel = (value) =>
-            value.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ");
+            value
+                .split("-")
+                .map((part) => acronymMap[part] || (part.charAt(0).toUpperCase() + part.slice(1)))
+                .join(" ");
 
         const setOptions = (group, values) => {
             const select = selects[group];

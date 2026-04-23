@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#FFFFFF"/>
+  <rect x="56" y="56" width="1488" height="788" rx="32" fill="#FFFFFF" stroke="#D7DBD2" stroke-width="2"/>
+
+  <text x="112" y="148" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="4">DISTRIBUTED DATABASES</text>
+  <text x="112" y="232" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="68" font-weight="800">Why We Distribute</text>
+  <text x="112" y="286" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="30">Three scaling paths, three different costs.</text>
+
+  <rect x="112" y="356" width="408" height="340" rx="28" fill="#FBFBF8" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="148" y="416" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">STEP 1</text>
+  <text x="148" y="472" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="800">Scale Up</text>
+  <text x="148" y="515" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">One larger machine</text>
+
+  <rect x="150" y="552" width="132" height="92" rx="20" fill="#EEF1EA" stroke="#CBD2C7" stroke-width="2"/>
+  <rect x="188" y="528" width="56" height="32" rx="10" fill="#DCE3D7" stroke="#CBD2C7" stroke-width="2"/>
+  <circle cx="178" cy="596" r="6" fill="#A6B2A2"/>
+  <circle cx="208" cy="596" r="6" fill="#A6B2A2"/>
+  <circle cx="238" cy="596" r="6" fill="#A6B2A2"/>
+  <text x="312" y="572" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="22">Simple query path</text>
+  <text x="312" y="608" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="22">Easy correctness</text>
+  <text x="312" y="644" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="22">Hard ceiling</text>
+
+  <rect x="596" y="356" width="408" height="340" rx="28" fill="#FBFBF8" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="632" y="416" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">STEP 2</text>
+  <text x="632" y="472" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="800">Read Replicas</text>
+  <text x="632" y="515" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">One writer, many readers</text>
+
+  <ellipse cx="718" cy="558" rx="48" ry="18" fill="#B7D6F5" stroke="#7FA7D8" stroke-width="2"/>
+  <rect x="670" y="558" width="96" height="62" fill="#B7D6F5" stroke="#7FA7D8" stroke-width="2"/>
+  <ellipse cx="718" cy="620" rx="48" ry="18" fill="#B7D6F5" stroke="#7FA7D8" stroke-width="2"/>
+  <ellipse cx="860" cy="578" rx="38" ry="14" fill="#E4EDF7" stroke="#CBD2DB" stroke-width="2"/>
+  <rect x="822" y="578" width="76" height="48" fill="#E4EDF7" stroke="#CBD2DB" stroke-width="2"/>
+  <ellipse cx="860" cy="626" rx="38" ry="14" fill="#E4EDF7" stroke="#CBD2DB" stroke-width="2"/>
+  <ellipse cx="934" cy="578" rx="38" ry="14" fill="#E4EDF7" stroke="#CBD2DB" stroke-width="2"/>
+  <rect x="896" y="578" width="76" height="48" fill="#E4EDF7" stroke="#CBD2DB" stroke-width="2"/>
+  <ellipse cx="934" cy="626" rx="38" ry="14" fill="#E4EDF7" stroke="#CBD2DB" stroke-width="2"/>
+  <path d="M770 590H814" stroke="#7FA7D8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M844 554V534" stroke="#CBD2DB" stroke-width="3" stroke-linecap="round"/>
+  <path d="M918 554V534" stroke="#CBD2DB" stroke-width="3" stroke-linecap="round"/>
+  <text x="632" y="664" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="22">Read scale improves</text>
+  <text x="632" y="696" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="22">Writes stay centralized</text>
+
+  <rect x="1080" y="356" width="408" height="340" rx="28" fill="#FBFBF8" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="1116" y="416" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">STEP 3</text>
+  <text x="1116" y="472" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="800">Partitioning</text>
+  <text x="1116" y="515" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">Data split across nodes</text>
+
+  <ellipse cx="1168" cy="570" rx="44" ry="16" fill="#F4D6A6" stroke="#D6A45F" stroke-width="2"/>
+  <rect x="1124" y="570" width="88" height="58" fill="#F4D6A6" stroke="#D6A45F" stroke-width="2"/>
+  <ellipse cx="1168" cy="628" rx="44" ry="16" fill="#F4D6A6" stroke="#D6A45F" stroke-width="2"/>
+  <ellipse cx="1284" cy="570" rx="44" ry="16" fill="#CFE2C8" stroke="#95B08B" stroke-width="2"/>
+  <rect x="1240" y="570" width="88" height="58" fill="#CFE2C8" stroke="#95B08B" stroke-width="2"/>
+  <ellipse cx="1284" cy="628" rx="44" ry="16" fill="#CFE2C8" stroke="#95B08B" stroke-width="2"/>
+  <ellipse cx="1400" cy="570" rx="44" ry="16" fill="#F1C9C7" stroke="#CF8D89" stroke-width="2"/>
+  <rect x="1356" y="570" width="88" height="58" fill="#F1C9C7" stroke="#CF8D89" stroke-width="2"/>
+  <ellipse cx="1400" cy="628" rx="44" ry="16" fill="#F1C9C7" stroke="#CF8D89" stroke-width="2"/>
+  <path d="M1218 598H1230" stroke="#B3BCB8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M1334 598H1346" stroke="#B3BCB8" stroke-width="3" stroke-linecap="round"/>
+  <text x="1116" y="664" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="22">Routing and rebalance matter</text>
+  <text x="1116" y="696" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="22">Queries and correctness get harder</text>
+
+  <path d="M538 524H576" stroke="#161A20" stroke-width="4" stroke-linecap="round"/>
+  <path d="M548 506L576 524L548 542" stroke="#161A20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1022 524H1060" stroke="#161A20" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1032 506L1060 524L1032 542" stroke="#161A20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="112" y="780" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="26">More scale usually means more coordination. Distribution expands capacity, but it also changes how queries run, how failures behave, and how correctness is maintained.</text>
+</svg>

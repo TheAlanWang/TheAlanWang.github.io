@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#FFFFFF"/>
+  <rect x="56" y="56" width="1488" height="788" rx="32" fill="#FFFFFF" stroke="#D7DBD2" stroke-width="2"/>
+
+  <text x="112" y="148" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="4">MESSAGE QUEUES</text>
+  <text x="112" y="232" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="68" font-weight="800">Decoupling Work</text>
+  <text x="112" y="304" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="68" font-weight="800">Without Losing Reliability</text>
+  <text x="112" y="360" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="30">Hand off work now, coordinate delivery later.</text>
+
+  <rect x="112" y="432" width="280" height="210" rx="26" fill="#FBFBF8" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="148" y="490" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">STEP 1</text>
+  <text x="148" y="548" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="800">Producer</text>
+  <text x="148" y="592" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">Accept the request</text>
+  <text x="148" y="628" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">publish work</text>
+
+  <rect x="468" y="432" width="280" height="210" rx="26" fill="#FBFBF8" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="504" y="490" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">STEP 2</text>
+  <text x="504" y="548" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="800">Broker</text>
+  <text x="504" y="592" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">Receive, route, retain</text>
+  <text x="504" y="628" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">deliver later</text>
+
+  <rect x="824" y="432" width="280" height="210" rx="26" fill="#FBFBF8" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="860" y="490" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">STEP 3</text>
+  <text x="860" y="548" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="800">Queue</text>
+  <text x="860" y="592" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">Hold work between</text>
+  <text x="860" y="628" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">send and processing</text>
+
+  <rect x="1180" y="432" width="280" height="210" rx="26" fill="#FBFBF8" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="1216" y="490" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">STEP 4</text>
+  <text x="1216" y="548" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="800">Consumer</text>
+  <text x="1216" y="592" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">Process when ready</text>
+  <text x="1216" y="628" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">ack when complete</text>
+
+  <path d="M404 536H452" stroke="#161A20" stroke-width="4" stroke-linecap="round"/>
+  <path d="M424 516L452 536L424 556" stroke="#161A20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M760 536H808" stroke="#161A20" stroke-width="4" stroke-linecap="round"/>
+  <path d="M780 516L808 536L780 556" stroke="#161A20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1116 536H1164" stroke="#161A20" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1136 516L1164 536L1136 556" stroke="#161A20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="112" y="700" width="1348" height="96" rx="24" fill="#F6F7F3" stroke="#D7DBD2" stroke-width="2"/>
+  <text x="148" y="756" fill="#7A8390" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">RELIABILITY LAYER</text>
+  <text x="420" y="756" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700">Publisher confirms</text>
+  <text x="750" y="756" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700">Persistent queues</text>
+  <text x="1048" y="756" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700">Manual acks</text>
+  <text x="1288" y="756" fill="#161A20" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700">Failover</text>
+  <text x="148" y="788" fill="#5D6673" font-family="Manrope, Arial, sans-serif" font-size="24">Queues improve decoupling, but reliable delivery comes from explicit agreement about acceptance, storage, completion, and recovery.</text>
+</svg>

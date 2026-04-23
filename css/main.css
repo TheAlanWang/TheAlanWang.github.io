@@ -624,6 +624,91 @@ select {
     box-shadow: var(--shadow-soft);
 }
 
+.prose pre {
+    position: relative;
+    margin: 22px 0 26px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(236, 238, 233, 0.82);
+}
+
+.prose pre[data-language]::before {
+    content: attr(data-language);
+    position: absolute;
+    top: 0.72rem;
+    right: 1rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+    line-height: 1;
+    padding-left: 0.4rem;
+    background: rgba(236, 238, 233, 0.92);
+    color: var(--soft-text);
+}
+
+.prose pre code {
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    font-size: 0.94rem;
+    line-height: 1.7;
+}
+
+.prose .token.comment,
+.prose .token.prolog,
+.prose .token.doctype,
+.prose .token.cdata {
+    color: #7a8390;
+}
+
+.prose .token.punctuation {
+    color: #6c7280;
+}
+
+.prose .token.property,
+.prose .token.tag,
+.prose .token.constant,
+.prose .token.symbol,
+.prose .token.deleted,
+.prose .token.number,
+.prose .token.boolean {
+    color: #b45309;
+}
+
+.prose .token.selector,
+.prose .token.attr-name,
+.prose .token.string,
+.prose .token.char,
+.prose .token.builtin,
+.prose .token.inserted {
+    color: #0f766e;
+}
+
+.prose .token.operator,
+.prose .token.entity,
+.prose .token.url,
+.prose .language-css .token.string,
+.prose .style .token.string,
+.prose .token.variable {
+    color: #475569;
+}
+
+.prose .token.atrule,
+.prose .token.attr-value,
+.prose .token.function,
+.prose .token.class-name {
+    color: #1d4ed8;
+}
+
+.prose .token.keyword,
+.prose .token.regex,
+.prose .token.important {
+    color: #7c3aed;
+}
+
 .prose code {
     padding: 0.15rem 0.35rem;
     background: rgba(255, 255, 255, 0.72);
@@ -840,17 +925,33 @@ select {
     }
 
     .site-header {
+        width: 100%;
+        position: static;
+        top: auto;
         flex-direction: column;
         align-items: start;
-        gap: 10px;
+        gap: 8px;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 
     .site-brand {
         display: block;
+        font-size: 0.94rem;
     }
 
     .site-nav {
+        width: 100%;
         justify-content: start;
+        gap: 14px;
+        row-gap: 8px;
+    }
+
+    .site-nav-link {
+        font-size: 0.9rem;
     }
 
     .identity-title {
