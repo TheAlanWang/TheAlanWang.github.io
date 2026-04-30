@@ -631,7 +631,7 @@ select {
     overflow-x: auto;
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: #f6f7f4;
+    background: #eef4f8;
 }
 
 .prose pre[data-language]::before {
@@ -645,7 +645,7 @@ select {
     text-transform: lowercase;
     line-height: 1;
     padding-left: 0.4rem;
-    background: #f6f7f4;
+    background: #eef4f8;
     color: var(--soft-text);
 }
 
