@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 2260" role="img" aria-labelledby="title desc">
+  <title id="title">HPC GPU PyTorch Backprop Practical Notes</title>
+  <desc id="desc">An English poster summarizing Northeastern Explorer HPC login, GPU allocation, CUDA, Conda, PyTorch, forward computation, and backpropagation workflow.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f6f4ef; }
+      .ink { fill: #15191f; }
+      .muted { fill: #66707c; }
+      .soft { fill: #8a939c; }
+      .panel { fill: #ffffff; stroke: #d9ddd6; stroke-width: 2; }
+      .panel-dark { fill: #17202a; }
+      .panel-green { fill: #e8f4ea; stroke: #b8d7bf; stroke-width: 2; }
+      .panel-blue { fill: #e8f0f7; stroke: #bfd0df; stroke-width: 2; }
+      .panel-amber { fill: #fff1dc; stroke: #e2c590; stroke-width: 2; }
+      .accent { fill: #2f7d5b; }
+      .accent-blue { fill: #2c638e; }
+      .accent-amber { fill: #af6b19; }
+      .code-bg { fill: #111820; }
+      .code { fill: #e9f1ed; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 31px; }
+      .code-small { fill: #e9f1ed; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 27px; }
+      .code-tiny { fill: #e9f1ed; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 23px; }
+      .label { font-family: Inter, Manrope, "Segoe UI", Arial, sans-serif; font-size: 28px; font-weight: 800; letter-spacing: .12em; }
+      .h1 { font-family: Inter, Manrope, "Segoe UI", Arial, sans-serif; font-size: 86px; font-weight: 900; letter-spacing: -1px; }
+      .h2 { font-family: Inter, Manrope, "Segoe UI", Arial, sans-serif; font-size: 42px; font-weight: 850; }
+      .h3 { font-family: Inter, Manrope, "Segoe UI", Arial, sans-serif; font-size: 34px; font-weight: 850; }
+      .body { font-family: Inter, Manrope, "Segoe UI", Arial, sans-serif; font-size: 31px; font-weight: 520; }
+      .small { font-family: Inter, Manrope, "Segoe UI", Arial, sans-serif; font-size: 27px; font-weight: 520; }
+      .tiny { font-family: Inter, Manrope, "Segoe UI", Arial, sans-serif; font-size: 24px; font-weight: 560; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 28px; }
+      .line { stroke: #cdd3ce; stroke-width: 3; fill: none; }
+      .arrow { stroke: #2f7d5b; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .dot { fill: #2f7d5b; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2f7d5b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1600" height="2260"/>
+  <path d="M0 0H1600V260H0Z" fill="#edf1e8"/>
+  <path d="M0 1992H1600V2260H0Z" fill="#17202a"/>
+
+  <text x="92" y="95" class="label accent">ALAN'S HPC NOTE</text>
+  <text x="92" y="178" class="h1 ink">HPC + GPU + PyTorch</text>
+  <text x="92" y="252" class="h1 ink">Practical Guide</text>
+  <text x="92" y="320" class="body muted">Explorer Cluster: login → GPU → CUDA → PyTorch → forward → backprop</text>
+
+  <rect x="1042" y="80" width="430" height="210" rx="26" class="panel-dark"/>
+  <text x="1086" y="135" class="tiny" fill="#a9c7b6">ONE-LINE LOOP</text>
+  <text x="1086" y="190" class="h3" fill="#ffffff">forward → loss</text>
+  <text x="1086" y="238" class="h3" fill="#ffffff">→ backward → update</text>
+
+  <rect x="88" y="392" width="462" height="366" rx="24" class="panel"/>
+  <text x="124" y="450" class="h2 ink">1. Login</text>
+  <circle cx="128" cy="500" r="7" class="dot"/>
+  <text x="150" y="510" class="body ink">Connect to Explorer</text>
+  <rect x="124" y="536" width="384" height="106" rx="16" class="code-bg"/>
+  <text x="146" y="578" class="code-tiny">ssh your_netid@login.explorer</text>
+  <text x="146" y="616" class="code-tiny">.northeastern.edu</text>
+  <circle cx="128" cy="682" r="7" class="dot"/>
+  <text x="150" y="692" class="body ink">Check environment</text>
+  <text x="150" y="735" class="mono muted">hostname / pwd / whoami</text>
+
+  <rect x="570" y="392" width="462" height="366" rx="24" class="panel-blue"/>
+  <text x="606" y="450" class="h2 ink">2. Resources</text>
+  <rect x="606" y="490" width="352" height="70" rx="16" class="code-bg"/>
+  <text x="630" y="536" class="code">sinfo</text>
+  <text x="606" y="612" class="body ink">Key fields</text>
+  <text x="606" y="662" class="small muted">PARTITION = cpu / gpu</text>
+  <text x="606" y="708" class="small muted">STATE = idle / mix / alloc / drain</text>
+  <text x="606" y="754" class="small muted">NODELIST = node names</text>
+
+  <rect x="1052" y="392" width="462" height="366" rx="24" class="panel-green"/>
+  <text x="1088" y="450" class="h2 ink">3. Request GPU</text>
+  <rect x="1088" y="490" width="378" height="188" rx="16" class="code-bg"/>
+  <text x="1112" y="532" class="code-tiny">srun --partition=gpu-</text>
+  <text x="1112" y="570" class="code-tiny">interactive --gres=gpu:1</text>
+  <text x="1112" y="608" class="code-tiny">--time=00:30:00</text>
+  <text x="1112" y="646" class="code-tiny">--mem=8G --pty bash</text>
+  <text x="1088" y="718" class="small muted">squeue -u your_netid</text>
+  <text x="1088" y="754" class="small muted">PD = pending, R = running</text>
+
+  <path class="arrow" marker-end="url(#arrowhead)" d="M550 575H570"/>
+  <path class="arrow" marker-end="url(#arrowhead)" d="M1032 575H1052"/>
+
+  <rect x="88" y="812" width="690" height="370" rx="24" class="panel"/>
+  <text x="124" y="870" class="h2 ink">4. Compute Node</text>
+  <text x="124" y="928" class="body ink">Check node and GPU:</text>
+  <rect x="124" y="962" width="594" height="122" rx="16" class="code-bg"/>
+  <text x="148" y="1006" class="code">hostname</text>
+  <text x="148" y="1054" class="code">nvidia-smi</text>
+  <text x="124" y="1130" class="small muted">Example node: d1013</text>
+  <text x="124" y="1168" class="small muted">Example GPU: Tesla V100-SXM2-32GB</text>
+
+  <rect x="822" y="812" width="692" height="370" rx="24" class="panel-amber"/>
+  <text x="858" y="870" class="h2 ink">5. Load Modules</text>
+  <rect x="858" y="912" width="594" height="122" rx="16" class="code-bg"/>
+  <text x="882" y="956" class="code">module load miniconda3/25.9.1</text>
+  <text x="882" y="1004" class="code">module load cuda/12.3.0</text>
+  <text x="858" y="1088" class="small muted">Verify: which conda / nvcc --version</text>
+  <text x="858" y="1135" class="small muted">Modules expose system software.</text>
+
+  <rect x="88" y="1236" width="690" height="402" rx="24" class="panel-green"/>
+  <text x="124" y="1294" class="h2 ink">6. Conda + PyTorch</text>
+  <rect x="124" y="1336" width="594" height="198" rx="16" class="code-bg"/>
+  <text x="148" y="1378" class="code-tiny">conda create -n gpu-test python=3.10 -y</text>
+  <text x="148" y="1416" class="code-tiny">source $(conda info --base)/etc/...</text>
+  <text x="148" y="1454" class="code-tiny">conda activate gpu-test</text>
+  <text x="148" y="1492" class="code-tiny">pip install torch torchvision torchaudio</text>
+  <text x="148" y="1530" class="code-tiny">--index-url https://download.pytorch...</text>
+  <text x="124" y="1586" class="small muted">Env path: ~/.conda/envs/gpu-test, persistent.</text>
+
+  <rect x="822" y="1236" width="692" height="402" rx="24" class="panel"/>
+  <text x="858" y="1294" class="h2 ink">7. Test GPU</text>
+  <rect x="858" y="1336" width="594" height="154" rx="16" class="code-bg"/>
+  <text x="882" y="1378" class="code-tiny">python -c "import torch;</text>
+  <text x="882" y="1416" class="code-tiny">print(torch.cuda.is_available());</text>
+  <text x="882" y="1454" class="code-tiny">print(torch.cuda.get_device_name(0))"</text>
+  <text x="858" y="1546" class="small muted">Success: True + Tesla V100-SXM2-32GB</text>
+  <text x="858" y="1586" class="small muted">CUDA is NVIDIA's GPU platform</text>
+  <text x="858" y="1624" class="small muted">that lets PyTorch use the GPU.</text>
+
+  <rect x="88" y="1692" width="462" height="272" rx="24" class="panel-blue"/>
+  <text x="124" y="1750" class="h2 ink">8. Forward</text>
+  <text x="124" y="1804" class="small muted">Matrix multiply is GPU-friendly.</text>
+  <rect x="124" y="1832" width="352" height="92" rx="16" class="code-bg"/>
+  <text x="148" y="1874" class="code-tiny">x = randn(..., cuda)</text>
+  <text x="148" y="1912" class="code-tiny">z = x @ y</text>
+
+  <rect x="570" y="1692" width="462" height="272" rx="24" class="panel-green"/>
+  <text x="606" y="1750" class="h2 ink">9. Backprop</text>
+  <text x="606" y="1804" class="small muted">Loss is one scalar, not a matrix.</text>
+  <rect x="606" y="1832" width="352" height="92" rx="16" class="code-bg"/>
+  <text x="630" y="1874" class="code-tiny">loss = y.pow(2).mean()</text>
+  <text x="630" y="1912" class="code-tiny">loss.backward()</text>
+
+  <rect x="1052" y="1692" width="462" height="272" rx="24" class="panel-amber"/>
+  <text x="1088" y="1750" class="h2 ink">10. HPC Model</text>
+  <text x="1088" y="1804" class="small muted">Login Node: submit jobs</text>
+  <text x="1088" y="1850" class="small muted">Compute Node: run jobs</text>
+  <text x="1088" y="1896" class="small muted">/home: persistent storage</text>
+  <text x="1088" y="1942" class="small muted">exit returns to login node</text>
+
+  <path class="arrow" marker-end="url(#arrowhead)" d="M550 1828H570"/>
+  <path class="arrow" marker-end="url(#arrowhead)" d="M1032 1828H1052"/>
+
+  <text x="92" y="2058" class="h2" fill="#ffffff">Next Time</text>
+  <text x="92" y="2110" class="code-tiny">module load miniconda3/25.9.1</text>
+  <text x="92" y="2146" class="code-tiny">module load cuda/12.3.0</text>
+  <text x="92" y="2182" class="code-tiny">source $(conda info --base)/etc/profile.d/conda.sh</text>
+  <text x="92" y="2218" class="code-tiny">conda activate gpu-test</text>
+  <text x="930" y="2058" class="h3" fill="#ffffff">Full Loop</text>
+  <text x="930" y="2114" class="small" fill="#cbd5d1">HPC → GPU → CUDA → PyTorch</text>
+  <text x="930" y="2156" class="small" fill="#cbd5d1">→ Forward → Backprop</text>
+</svg>
