@@ -4,28 +4,121 @@ navKey: posts
 pageShellClass: post-layout
 ---
 <main class="post-shell">
-    <article class="post-article">
-        <a href="/posts/" class="back-link">All posts</a>
+    <div class="post-frame">
+        <article class="post-article">
+            <a href="/posts/" class="back-link">All posts</a>
 
-        <header class="post-header">
-            <div class="stream-meta">
-                <span class="stream-topic">{{ type }}</span>
-                <span class="stream-subtopic">{{ topic }}</span>
-                <span class="stream-date">{{ date | displayDate }}</span>
+            <header class="post-header">
+                <div class="stream-meta">
+                    <span class="stream-topic">{{ type }}</span>
+                    <span class="stream-subtopic">{{ topic }}</span>
+                    <span class="stream-date">{{ date | displayDate }}</span>
+                </div>
+                <h1 class="post-title">{{ title }}</h1>
+                {% if excerpt %}
+                    <p class="post-dek">{{ excerpt }}</p>
+                {% endif %}
+            </header>
+
+            <div class="prose" data-prose>
+                {{ content | safe }}
             </div>
-            <h1 class="post-title">{{ title }}</h1>
-            {% if excerpt %}
-                <p class="post-dek">{{ excerpt }}</p>
-            {% endif %}
-        </header>
+        </article>
 
-        <div class="prose">
-            {{ content | safe }}
-        </div>
-    </article>
+        <aside class="post-toc" aria-label="On this page" data-post-toc hidden>
+            <nav class="post-toc-nav">
+                <ol class="post-toc-list" data-post-toc-list></ol>
+            </nav>
+        </aside>
+    </div>
 
     <footer class="site-footer">
         <p>{{ site.footerText }}</p>
         <p>&copy; 2026 {{ site.name }}</p>
     </footer>
 </main>
+
+<script>
+(() => {
+    const article = document.querySelector("[data-prose]");
+    const toc = document.querySelector("[data-post-toc]");
+    const tocList = document.querySelector("[data-post-toc-list]");
+    if (!article || !toc || !tocList) return;
+
+    const headings = Array.from(article.querySelectorAll("h2"));
+    if (headings.length < 2) return;
+
+    const usedIds = new Set();
+    const slugify = (value) => value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\u4e00-\u9fff]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "section";
+
+    const links = [];
+
+    headings.forEach((heading) => {
+        let baseId = heading.id || slugify(heading.textContent);
+        let nextId = baseId;
+        let index = 2;
+        while (usedIds.has(nextId) || (document.getElementById(nextId) && document.getElementById(nextId) !== heading)) {
+            nextId = `${baseId}-${index}`;
+            index += 1;
+        }
+        heading.id = nextId;
+        usedIds.add(nextId);
+
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `#${nextId}`;
+        link.textContent = heading.textContent;
+        link.addEventListener("click", () => {
+            setCurrent(heading);
+            requestAnimationFrame(() => setCurrent(heading));
+        });
+        item.append(link);
+        tocList.append(item);
+        links.push({ heading, link });
+    });
+
+    toc.hidden = false;
+
+    const setCurrent = (activeHeading) => {
+        links.forEach(({ heading, link }) => {
+            link.classList.toggle("current", heading === activeHeading);
+        });
+        const activeLink = links.find(({ heading }) => heading === activeHeading)?.link;
+        if (activeLink) {
+            const tocRect = toc.getBoundingClientRect();
+            const linkRect = activeLink.getBoundingClientRect();
+            toc.style.setProperty("--toc-marker-top", `${linkRect.top - tocRect.top + toc.scrollTop}px`);
+            toc.style.setProperty("--toc-marker-height", `${linkRect.height}px`);
+        }
+    };
+
+    setCurrent(links[0].heading);
+
+    const updateCurrentFromScroll = () => {
+        const anchorLine = 96;
+        let active = links[0].heading;
+
+        for (const { heading } of links) {
+            if (heading.getBoundingClientRect().top <= anchorLine) {
+                active = heading;
+            } else {
+                break;
+            }
+        }
+
+        setCurrent(active);
+    };
+
+    window.addEventListener("scroll", updateCurrentFromScroll, { passive: true });
+    window.addEventListener("resize", updateCurrentFromScroll);
+    toc.addEventListener("scroll", () => {
+        const active = links.find(({ link }) => link.classList.contains("current"))?.heading;
+        if (active) setCurrent(active);
+    }, { passive: true });
+    updateCurrentFromScroll();
+})();
+</script>
