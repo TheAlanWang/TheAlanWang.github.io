@@ -8,7 +8,7 @@ type: Poster
 topic: HPC
 tags:
   - posts
-image: /assets/sketches/ddp-poster.svg
+image: /assets/sketches/ddp-poster.png
 imageFit: contain
 permalink: /posts/distributed-data-parallel-ddp-poster/index.html
 ---
