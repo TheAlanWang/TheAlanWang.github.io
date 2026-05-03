@@ -4,8 +4,8 @@ title: ReLU, Neural Nets, and Backpropagation
 description: A compact sketch of ReLU activations, neural network structure, and backpropagation flow.
 excerpt: A compact sketch of ReLU activations, neural network structure, and backpropagation flow.
 date: 2026-04-09
-type: Sketch
-topic: AI
+category: AI
+subcategory: ML
 tags:
   - posts
 image: /assets/sketches/relu-nnet-backpropagation.svg

@@ -4,8 +4,8 @@ title: Attention Is All You Need
 description: A sketch of the Transformer paper, with the main architecture pieces and a few key questions to keep in mind while reading it.
 excerpt: A sketch of the Transformer paper, with the main architecture pieces and a few key questions to keep in mind while reading it.
 date: 2026-04-11
-type: Sketch
-topic: AI
+category: AI
+subcategory: ML
 tags:
   - posts
 image: /assets/sketches/attention-is-all-you-need.svg

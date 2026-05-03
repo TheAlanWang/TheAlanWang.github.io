@@ -4,8 +4,9 @@ title: Native to Agentic RAG
 description: A two-stage RAG project that starts with a local LangChain baseline and grows into a LangGraph agentic workflow with grading, routing, retries, and web fallback.
 excerpt: A two-stage RAG project that moves from a local baseline to an agentic workflow with grading, routing, retries, and web fallback.
 date: 2026-04-07
-type: Project
-topic: RAG
+category: AI
+subcategory: RAG
+kind: Project
 tags:
   - posts
 image: /assets/projects/agentic-rag.svg

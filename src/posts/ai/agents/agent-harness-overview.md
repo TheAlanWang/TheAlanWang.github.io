@@ -4,8 +4,8 @@ title: Agent Harness Overview
 description: A sketch of how agent systems split responsibilities between the model and the harness around it.
 excerpt: A sketch of how agent systems split responsibilities between the model and the harness around it.
 date: 2026-04-14
-type: Sketch
-topic: AI
+category: AI
+subcategory: Agents
 tags:
   - posts
 image: /assets/sketches/agent-harness-overview.svg

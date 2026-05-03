@@ -4,8 +4,8 @@ title: RAG Overview
 description: A visual overview of retrieval, ranking, and generation flow in a RAG pipeline.
 excerpt: A visual overview of retrieval, ranking, and generation flow in a RAG pipeline.
 date: 2026-03-31
-type: Sketch
-topic: RAG
+category: AI
+subcategory: RAG
 tags:
   - posts
 image: /assets/sketches/rag-overview.svg

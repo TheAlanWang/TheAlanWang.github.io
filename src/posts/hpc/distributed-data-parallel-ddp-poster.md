@@ -1,11 +1,11 @@
 ---
 layout: layouts/post.njk
-title: "Distributed Data Parallel Poster"
+title: "Distributed Data Parallel"
 description: "A visual poster explaining PyTorch DDP, all-reduce, NCCL, Forge usage, and the DDP versus FSDP decision."
 excerpt: "A compact visual guide to DDP: full model copies, per-GPU batches, gradient all-reduce, NCCL, and when Forge should use DDP versus FSDP."
 date: 2026-05-01
-type: Poster
-topic: HPC
+category: HPC
+subcategory: GPU / PyTorch
 tags:
   - posts
 image: /assets/sketches/ddp-poster.png

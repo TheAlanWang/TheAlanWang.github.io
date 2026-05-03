@@ -4,8 +4,9 @@ title: AWS S3 Object Backup and Delayed Cleanup System
 description: An event-driven AWS backup system that creates timestamped S3 copies, tracks lifecycle metadata in DynamoDB, and removes stale backups through a scheduled cleanup path.
 excerpt: An event-driven AWS backup system that creates timestamped S3 copies, tracks lifecycle metadata in DynamoDB, and removes stale backups through a scheduled cleanup path.
 date: 2026-03-30
-type: Project
-topic: Cloud
+category: Cloud
+subcategory: AWS
+kind: Project
 tags:
   - posts
 image: /assets/projects/object-backup-system-architecture.svg

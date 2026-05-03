@@ -50,17 +50,17 @@ module.exports = {
     ],
     experience: [
       {
-        role: "Software Engineer",
+        role: "Technical Project Manager",
         organization: "Shanghai Securities",
         period: "Apr 2022 – Dec 2024",
         points: [
-          "Implemented and deployed integrated REST APIs across HR, expense, and project management systems into an Office Automation platform serving 3K+ employees.",
-          "Migrated a project management system used by 100+ users from a monolith to microservices with Kafka-based async workflows, Kubernetes, and CI/CD, cutting deployment time by 40%.",
-          "Supported delivery across 20+ internal software projects, working across deployment, testing, release validation, and post-launch issue support in Agile environments.",
+          "Implemented and deployed integrated REST APIs across 3 enterprise systems (HR, reimbursement, project management) intoan Office Automation system serving 3K+ users, improving cross-system workflow automation and internal access efficiency.",
+          "Migrated a 500+ user system from a monolith to microservices architecture using Kafka async workflows and CI/CD pipelineswith Kubernetes, reducing deployment time by 40%.",
+          "Led cross-functional delivery for 20+ internal projects, driving deployment, testing, validation, and post-launch issue support.",
         ],
       },
       {
-        role: "Consultant (Data Engineering & Modeling)",
+        role: "Tech Consultant (Risk & Data Analytics) ",
         organization: "Deloitte",
         period: "Dec 2021 – Apr 2022",
         points: [
@@ -69,7 +69,7 @@ module.exports = {
         ],
       },
       {
-        role: "Backend Engineer",
+        role: "Tech Consultant ",
         organization: "Cubewise",
         period: "Feb 2020 – Dec 2021",
         points: [
