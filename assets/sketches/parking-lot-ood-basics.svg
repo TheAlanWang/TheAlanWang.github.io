@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Parking Lot OOD Basics</title>
+  <desc id="desc">A beginner object-oriented design diagram for a parking lot with vehicle, parking spot, and parking lot classes.</desc>
+  <rect width="1200" height="760" fill="#f7f8f5"/>
+  <rect x="72" y="58" width="1056" height="644" rx="18" fill="#fffdf8" stroke="#22272b" stroke-width="3"/>
+  <text x="116" y="126" fill="#1f2529" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="800">Parking Lot OOD Basics</text>
+  <text x="118" y="172" fill="#66717c" font-family="Inter, Arial, sans-serif" font-size="23">A first-pass design for assigning a vehicle to an available compatible spot.</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <g transform="translate(128 248)">
+      <rect width="262" height="138" rx="12" fill="#f1eef7" stroke="#5a4572" stroke-width="2"/>
+      <text x="28" y="44" fill="#352544" font-size="29" font-weight="800">Vehicle</text>
+      <text x="28" y="82" fill="#62566d" font-size="19">license_plate</text>
+      <text x="28" y="110" fill="#62566d" font-size="19">vehicle_type</text>
+    </g>
+
+    <path d="M418 317 H510" stroke="#22272b" stroke-width="3" stroke-linecap="round"/>
+    <path d="M500 306 L516 317 L500 328" fill="none" stroke="#22272b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(536 248)">
+      <rect width="286" height="138" rx="12" fill="#f7eadf" stroke="#7a4024" stroke-width="2"/>
+      <text x="28" y="44" fill="#4e2616" font-size="29" font-weight="800">ParkingSpot</text>
+      <text x="28" y="82" fill="#6c5548" font-size="19">is_fit(vehicle)</text>
+      <text x="28" y="110" fill="#6c5548" font-size="19">park(vehicle)</text>
+    </g>
+
+    <path d="M850 317 H942" stroke="#22272b" stroke-width="3" stroke-linecap="round"/>
+    <path d="M932 306 L948 317 L932 328" fill="none" stroke="#22272b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(964 248)">
+      <rect width="120" height="138" rx="12" fill="#e8eef7" stroke="#264d7a" stroke-width="2"/>
+      <text x="60" y="50" text-anchor="middle" fill="#182f4f" font-size="24" font-weight="800">Lot</text>
+      <text x="60" y="84" text-anchor="middle" fill="#526171" font-size="17">stores</text>
+      <text x="60" y="108" text-anchor="middle" fill="#526171" font-size="17">spots</text>
+    </g>
+
+    <g transform="translate(164 470)">
+      <rect width="372" height="128" rx="12" fill="#e7f0ea" stroke="#24533b" stroke-width="2"/>
+      <text x="28" y="44" fill="#173d2b" font-size="27" font-weight="800">Enums</text>
+      <text x="28" y="80" fill="#4d6356" font-size="19">VehicleType: CAR, TRUCK</text>
+      <text x="28" y="108" fill="#4d6356" font-size="19">SpotState: AVAILABLE, OCCUPIED</text>
+    </g>
+
+    <g transform="translate(628 470)">
+      <rect width="408" height="128" rx="12" fill="#f3f0e6" stroke="#6d5b35" stroke-width="2"/>
+      <text x="28" y="44" fill="#40351f" font-size="27" font-weight="800">Assignment Flow</text>
+      <text x="28" y="80" fill="#675c43" font-size="19">loop through spots</text>
+      <text x="28" y="108" fill="#675c43" font-size="19">park in the first matching available spot</text>
+    </g>
+
+    <g transform="translate(142 652)">
+      <rect width="916" height="2" fill="#d3d7d4"/>
+      <text x="0" y="42" fill="#5f6870" font-size="20">Beginner scope: no floors, no tickets, no payment, no concurrency.</text>
+    </g>
+  </g>
+</svg>

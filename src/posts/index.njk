@@ -164,11 +164,17 @@ navKey: posts
                 const matches = groups.every((group) => state[group] === "all" || post.dataset[group] === state[group]);
                 post.hidden = !matches;
                 post.classList.remove("post-item-first-visible");
+                post.classList.remove("post-item-last-visible");
             });
 
-            const firstVisible = posts.find((post) => !post.hidden);
+            const visiblePosts = posts.filter((post) => !post.hidden);
+            const firstVisible = visiblePosts[0];
             if (firstVisible) {
                 firstVisible.classList.add("post-item-first-visible");
+            }
+            const lastVisible = visiblePosts[visiblePosts.length - 1];
+            if (lastVisible) {
+                lastVisible.classList.add("post-item-last-visible");
             }
         };
 
