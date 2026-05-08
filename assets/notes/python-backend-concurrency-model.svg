@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="2180" viewBox="0 0 1400 2180" role="img" aria-labelledby="title desc">
+  <title id="title">Python Backend Concurrency Model</title>
+  <desc id="desc">A poster explaining processes, threads, coroutines, sync and async execution, the GIL, and I/O-bound versus CPU-bound backend workloads in Python.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f5ef; }
+      .ink { fill: #20242a; }
+      .muted { fill: #65707c; }
+      .panel { fill: #fffdf8; stroke: #d8d0c3; stroke-width: 3; }
+      .blue { fill: #edf5fb; stroke: #8eb5cf; stroke-width: 3; }
+      .green { fill: #eff8f1; stroke: #8fbd9b; stroke-width: 3; }
+      .red { fill: #fff1ed; stroke: #d79886; stroke-width: 3; }
+      .yellow { fill: #fff8df; stroke: #d6b75b; stroke-width: 3; }
+      .dark { fill: #20242a; }
+      .line { stroke: #20242a; stroke-width: 4; fill: none; }
+      .soft-line { stroke: #9aa2ad; stroke-width: 3; fill: none; stroke-dasharray: 10 12; }
+      .title { font: 800 60px/1.1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .subtitle { font: 500 27px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .h2 { font: 800 34px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .h3 { font: 800 25px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .body { font: 500 23px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .small { font: 500 19px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .emph { font: 800 22px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .tiny { font: 500 17px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .mono { font: 800 22px/1.25 "SFMono-Regular", Consolas, monospace; letter-spacing: 0; }
+      .white { fill: #ffffff; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1400" height="2180"/>
+  <rect x="56" y="56" width="1288" height="2068" rx="30" fill="none" stroke="#20242a" stroke-width="4"/>
+
+  <text x="96" y="138" class="title ink">Python Backend Concurrency Model</text>
+  <text x="98" y="184" class="subtitle muted">General Python backend concepts. FastAPI-specific behavior belongs in a separate note.</text>
+
+  <rect x="96" y="228" width="1208" height="210" rx="18" class="panel"/>
+  <text x="126" y="282" class="h2 ink">0. Terms and Ownership</text>
+  <rect x="126" y="316" width="350" height="98" rx="14" class="blue"/>
+  <text x="150" y="350" class="h3 ink">OS level</text>
+  <text x="150" y="378" class="tiny muted">Process / Thread</text>
+  <text x="150" y="398" class="tiny muted">Sync / Async, I/O vs CPU</text>
+  <rect x="526" y="316" width="350" height="98" rx="14" class="green"/>
+  <text x="550" y="350" class="h3 ink">Cross-language</text>
+  <text x="550" y="378" class="tiny muted">Coroutine</text>
+  <text x="550" y="398" class="tiny muted">async / await syntax</text>
+  <rect x="926" y="316" width="348" height="98" rx="14" class="red"/>
+  <text x="950" y="350" class="h3 ink">CPython-specific</text>
+  <text x="950" y="378" class="tiny muted">GIL: interpreter lock</text>
+  <text x="950" y="398" class="tiny muted">Java / Go / C# / JS do not have it</text>
+
+  <rect x="96" y="470" width="1208" height="330" rx="18" class="blue"/>
+  <text x="126" y="526" class="h2 ink">1. Three Execution Units: Process / Thread / Coroutine</text>
+  <text x="152" y="588" class="mono ink">Process</text>
+  <line x1="245" y1="581" x2="350" y2="581" class="line"/>
+  <text x="376" y="588" class="mono ink">Main thread</text>
+  <line x1="545" y1="581" x2="650" y2="581" class="line"/>
+  <text x="675" y="588" class="mono ink">Coroutine x N</text>
+  <text x="376" y="632" class="small muted">async def runs here; await yields control</text>
+  <text x="152" y="694" class="mono ink">Process</text>
+  <line x1="245" y1="687" x2="350" y2="687" class="line"/>
+  <text x="376" y="694" class="mono ink">Worker thread pool</text>
+  <line x1="610" y1="687" x2="715" y2="687" class="line"/>
+  <text x="740" y="694" class="mono ink">Thread x N</text>
+  <text x="376" y="738" class="small muted">def runs here; blocking request occupies one OS thread</text>
+  <rect x="915" y="552" width="350" height="166" rx="14" fill="#fffdf8" stroke="#8eb5cf" stroke-width="3"/>
+  <text x="945" y="594" class="h3 ink">Switching model</text>
+  <text x="945" y="632" class="tiny muted">Thread: preemptive, OS can interrupt</text>
+  <text x="945" y="662" class="tiny muted">Coroutine: cooperative, switches at await</text>
+  <text x="945" y="692" class="tiny muted">Between awaits: no coroutine switch</text>
+
+  <rect x="96" y="832" width="584" height="380" rx="18" class="green"/>
+  <text x="126" y="888" class="h2 ink">2. Sync vs Async</text>
+  <text x="126" y="944" class="body ink">sync def</text>
+  <text x="292" y="944" class="small muted">Occupies a thread until return</text>
+  <text x="292" y="974" class="small muted">During I/O, the OS parks the thread</text>
+  <text x="126" y="1024" class="body ink">async def</text>
+  <text x="292" y="1024" class="small muted">Yields at await during I/O</text>
+  <text x="292" y="1054" class="small muted">The event loop runs other coroutines</text>
+  <rect x="138" y="1082" width="214" height="54" rx="14" class="dark"/>
+  <text x="175" y="1117" class="mono white">def</text>
+  <text x="382" y="1117" class="small ink">-> thread pool, no coroutine</text>
+  <rect x="138" y="1150" width="214" height="54" rx="14" class="dark"/>
+  <text x="163" y="1185" class="mono white">async def</text>
+  <text x="382" y="1185" class="small ink">-> event loop, no thread pool</text>
+
+  <rect x="720" y="832" width="584" height="380" rx="18" class="yellow"/>
+  <text x="750" y="888" class="h2 ink">3. GIL: CPython's Interpreter Lock</text>
+  <text x="750" y="940" class="emph ink">One process: one bytecode thread at a time.</text>
+  <text x="750" y="988" class="small muted">Python bytecode: needs the GIL</text>
+  <text x="750" y="1020" class="small muted">Waiting on I/O: usually releases it</text>
+  <text x="750" y="1052" class="small muted">C extensions: may release it</text>
+  <rect x="750" y="1090" width="504" height="82" rx="14" fill="#fffdf8" stroke="#d6b75b" stroke-width="3"/>
+  <text x="775" y="1122" class="emph ink">CPU-heavy threads serialize.</text>
+  <text x="775" y="1152" class="small muted">Use processes for parallel CPU work.</text>
+
+  <rect x="96" y="1244" width="1208" height="350" rx="18" class="panel"/>
+  <text x="126" y="1300" class="h2 ink">4. I/O-bound vs CPU-bound: Diagnose the Bottleneck</text>
+  <rect x="126" y="1344" width="540" height="178" rx="16" class="blue"/>
+  <text x="156" y="1386" class="h3 ink">I/O-bound</text>
+  <text x="156" y="1424" class="small muted">Mostly waiting on DB, network, disk, or APIs.</text>
+  <text x="156" y="1458" class="emph ink">Low CPU + slow app</text>
+  <text x="156" y="1488" class="small muted">Increase concurrency: threads or async</text>
+  <rect x="734" y="1344" width="540" height="178" rx="16" class="red"/>
+  <text x="764" y="1386" class="h3 ink">CPU-bound</text>
+  <text x="764" y="1424" class="small muted">Mostly computing: crypto, compression, image, math.</text>
+  <text x="764" y="1458" class="emph ink">CPU near 100%</text>
+  <text x="764" y="1488" class="small muted">Use processes; async will not speed it up</text>
+  <line x1="162" y1="1552" x2="1238" y2="1552" class="soft-line"/>
+  <text x="160" y="1570" class="tiny muted">Key idea: await helps while waiting on I/O. CPU-bound work has no natural yield point.</text>
+
+  <rect x="96" y="1626" width="1208" height="318" rx="18" class="green"/>
+  <text x="126" y="1682" class="h2 ink">5. Selection Cheat Sheet</text>
+  <text x="150" y="1738" class="body ink">I/O-bound:</text>
+  <text x="292" y="1738" class="body muted">small concurrency -> sync + threads; high concurrency / WebSocket / SSE -> async</text>
+  <text x="150" y="1790" class="body ink">CPU-bound:</text>
+  <text x="292" y="1790" class="body muted">multiprocessing or worker count close to CPU core count</text>
+  <text x="150" y="1842" class="body ink">Production:</text>
+  <text x="292" y="1842" class="body muted">I/O workers 2-4 often enough; CPU workers by cores; threadpool about 40</text>
+  <text x="150" y="1894" class="body ink">Warning:</text>
+  <text x="292" y="1894" class="body muted">requests.get or time.sleep inside async def blocks the whole event loop</text>
+
+  <rect x="96" y="1976" width="1208" height="86" rx="18" fill="#20242a"/>
+  <text x="130" y="2014" class="body white">Insights: coroutines are not true parallelism; they are cheap scheduling units for waiting workloads.</text>
+  <text x="130" y="2048" class="body white">Threads can also do concurrent I/O, but thousands of threads cost far more memory than coroutines.</text>
+</svg>

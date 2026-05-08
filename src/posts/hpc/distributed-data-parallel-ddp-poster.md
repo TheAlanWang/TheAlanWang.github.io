@@ -6,6 +6,8 @@ excerpt: "A compact visual guide to DDP: full model copies, per-GPU batches, gra
 date: 2026-05-01
 category: HPC
 subcategory: GPU / PyTorch
+topic: Distributed Training
+kind: Note
 tags:
   - posts
 image: /assets/sketches/ddp-poster.png

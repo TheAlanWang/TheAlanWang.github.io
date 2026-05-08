@@ -4,8 +4,10 @@ title: "Message Queues: Decoupling Work Without Losing Reliability"
 description: A systems note on why asynchronous messaging exists, how queues decouple producers and consumers, and why acknowledgments, persistence, and failover matter.
 excerpt: A systems note on why asynchronous messaging exists, how queues decouple producers and consumers, and why acknowledgments, persistence, and failover matter.
 date: 2026-04-21
-category: Systems
-subcategory: Messaging
+category: Messaging
+subcategory: Queueing
+topic: Message Queues
+kind: Note
 tags:
   - posts
 image: /assets/projects/message-queues-reliability-path.svg

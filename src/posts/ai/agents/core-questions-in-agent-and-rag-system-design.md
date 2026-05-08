@@ -6,6 +6,8 @@ excerpt: A practical note on core question clusters in agent and RAG system desi
 date: 2026-04-22
 category: AI
 subcategory: Agents
+topic: Agent Design
+kind: Note
 tags:
   - posts
 image: /assets/projects/agent-rag-interview-notes.svg

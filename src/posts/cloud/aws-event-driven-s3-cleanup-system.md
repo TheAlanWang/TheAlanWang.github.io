@@ -6,6 +6,7 @@ excerpt: A serverless workflow that tracks S3 bucket size over time, triggers cl
 date: 2026-03-29
 category: Cloud
 subcategory: AWS
+topic: Event-Driven Cleanup
 kind: Project
 tags:
   - posts

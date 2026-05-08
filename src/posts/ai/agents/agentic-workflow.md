@@ -6,6 +6,8 @@ excerpt: A compact sketch of a tool-first agentic workflow, showing how reasonin
 date: 2026-04-10
 category: AI
 subcategory: Agents
+topic: Agentic Workflow
+kind: Note
 tags:
   - posts
 image: /assets/sketches/agentic-workflow-reason-act-observe.svg

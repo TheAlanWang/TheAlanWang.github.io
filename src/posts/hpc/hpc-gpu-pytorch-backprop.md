@@ -6,6 +6,7 @@ excerpt: A practical note for the full HPC to GPU to CUDA to PyTorch to backprop
 date: 2026-04-30
 category: HPC
 subcategory: GPU / PyTorch
+topic: PyTorch Backpropagation
 kind: Guide
 tags:
   - posts

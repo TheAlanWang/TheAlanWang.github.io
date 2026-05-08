@@ -6,6 +6,8 @@ excerpt: A practical migration note for mature stateful monoliths, using a class
 date: 2026-04-19
 category: Cloud
 subcategory: AWS
+topic: Migration
+kind: Project
 tags:
   - posts
 image: /assets/projects/aws-migration-stateful-monoliths.svg

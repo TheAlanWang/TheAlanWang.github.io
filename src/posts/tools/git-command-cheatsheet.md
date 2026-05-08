@@ -6,6 +6,7 @@ excerpt: A quick Git command cheatsheet covering repository setup, branching, st
 date: 2026-04-02
 category: Tools
 subcategory: Command Line
+topic: Git CLI
 kind: Cheatsheet
 tags:
   - posts

@@ -6,6 +6,8 @@ excerpt: A sketch of how agent systems split responsibilities between the model 
 date: 2026-04-14
 category: AI
 subcategory: Agents
+topic: Agent Harness
+kind: Note
 tags:
   - posts
 image: /assets/sketches/agent-harness-overview.svg

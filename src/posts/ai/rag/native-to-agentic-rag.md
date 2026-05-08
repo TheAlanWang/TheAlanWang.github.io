@@ -6,6 +6,7 @@ excerpt: A two-stage RAG project that moves from a local baseline to an agentic 
 date: 2026-04-07
 category: AI
 subcategory: RAG
+topic: Agentic RAG
 kind: Project
 tags:
   - posts

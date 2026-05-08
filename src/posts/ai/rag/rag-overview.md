@@ -6,6 +6,8 @@ excerpt: A visual overview of retrieval, ranking, and generation flow in a RAG p
 date: 2026-03-31
 category: AI
 subcategory: RAG
+topic: RAG Basics
+kind: Note
 tags:
   - posts
 image: /assets/sketches/rag-overview.svg

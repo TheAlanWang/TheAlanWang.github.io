@@ -36,8 +36,8 @@ navKey: posts
                 <select class="posts-filter-select" data-filter-group="subcategory" aria-label="Filter posts by subcategory"></select>
             </label>
             <label class="posts-filter-inline">
-                <span class="posts-filter-label">Kind</span>
-                <select class="posts-filter-select" data-filter-group="kind" aria-label="Filter posts by kind"></select>
+                <span class="posts-filter-label">Topic</span>
+                <select class="posts-filter-select" data-filter-group="topic" aria-label="Filter posts by topic"></select>
             </label>
         </div>
 
@@ -47,11 +47,15 @@ navKey: posts
                     <article class="stream-item post-item"
                              data-category="{{ post.data.category }}"
                              data-subcategory="{{ post.data.subcategory }}"
+                             data-topic="{{ post.data.topic or '' }}"
                              data-kind="{{ post.data.kind or '' }}">
                         <div class="stream-copy">
                             <div class="stream-meta">
                                 <span class="stream-topic">{{ post.data.category }}</span>
                                 <span class="stream-subtopic">{{ post.data.subcategory }}</span>
+                                {% if post.data.topic %}
+                                    <span class="stream-subtopic">{{ post.data.topic }}</span>
+                                {% endif %}
                                 <span class="stream-date">{{ post.date | displayDate }}</span>
                             </div>
                             <h3 class="stream-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
@@ -79,7 +83,7 @@ navKey: posts
         const posts = Array.from(document.querySelectorAll(".post-item"));
         if (!posts.length) return;
 
-        const groups = ["category", "subcategory", "kind"];
+        const groups = ["category", "subcategory", "topic"];
         const state = Object.fromEntries(groups.map((group) => [group, "all"]));
         const selects = Object.fromEntries(
             groups.map((group) => [group, document.querySelector(`[data-filter-group="${group}"]`)])

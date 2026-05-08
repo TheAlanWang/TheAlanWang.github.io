@@ -6,6 +6,7 @@ excerpt: A small ReAct agent project that makes the reasoning-action-observation
 date: 2026-04-15
 category: AI
 subcategory: Agents
+topic: ReAct Agents
 kind: Project
 tags:
   - posts

@@ -1,7 +1,7 @@
 module.exports = {
   name: "Alan Wang",
   url: "https://thealanwang.github.io",
-  assetVersion: "2026-05-01-post-layout-v3",
+  assetVersion: "2026-05-08-project-spacing-v1",
   socialImage:
     "https://thealanwang.github.io/assets/social/linkedin-preview.png",
   tagline: "Building applied AI with a systems mindset.",
@@ -27,6 +27,22 @@ module.exports = {
     shortBio:
       "My background is in backend engineering, distributed workflows, and data systems. I am now focusing that foundation on applied AI, with particular interest in retrieval systems, agentic workflows, evaluation, and building LLM features that behave reliably beyond a demo.",
     quote: "I build reliable systems on strong backend foundations.",
+    projects: [
+      {
+        name: "Unsaid",
+        type: "A privacy-preserving anonymous campus forum for verified Northeastern users",
+        period: "Apr 2026 – Present",
+        url: "https://unsaidhub.xyz/feed",
+        details: [
+          "Unsaid is an anonymous campus discussion platform for Northeastern students. I wanted to explore how an online community could balance <strong>privacy</strong>, <strong>safety</strong>, and <strong>verified access</strong>, so students could participate more honestly without exposing their real identity.",
+          "I led a small team to build the platform and was mainly responsible for the backend system. I built the backend with <strong>FastAPI</strong>, <strong>PostgreSQL</strong>, and <strong>SQLAlchemy</strong>, and designed <strong>RESTful APIs</strong> for posts, comments, replies, likes, bookmarks, notifications, tags, and categories. I also coordinated with teammates on the frontend implementation and tag/category design to keep the product structure aligned with the backend data model.",
+          "One of the most important backend decisions was separating <strong>verified access</strong> from <strong>anonymous posting identity</strong>. Users verify with a Northeastern email, but posts are attributed to anonymous personas instead of real emails or visible user identities. This preserves user privacy while still keeping the community limited to verified Northeastern members.",
+          "I also built the core interaction system, including comments, replies, likes, bookmarks, notifications, and <strong>unread count tracking</strong>. For the feed, I implemented <strong>newest</strong> and <strong>hot ranking</strong>, using signals such as likes, comments, and post age to help users discover active discussions.",
+          "The platform was deployed as a public web application with a <strong>React</strong> and <strong>TypeScript</strong> frontend, a <strong>FastAPI</strong> backend on <strong>Fly.io</strong>, and <strong>PostgreSQL</strong> on <strong>Supabase</strong>. I handled production setup including <strong>CORS</strong>, authentication, environment variables, and custom domain configuration.",
+          "The biggest engineering challenge was designing a backend that supported social interaction while protecting anonymity. Through this project, I learned how to build <strong>privacy-aware data models</strong>, structure <strong>social platform APIs</strong>, and reason about future scalability for notifications, feed ranking, <strong>Redis</strong> caching, and <strong>WebSocket</strong>-based real-time updates.",
+        ],
+      },
+    ],
     facts: [
       {
         label: "Based in",

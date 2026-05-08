@@ -64,6 +64,51 @@ permalink: /about.html
             </div>
         </section>
 
+        {% if site.about.projects %}
+            <section class="content-section">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">Projects</p>
+                        <h2 class="section-title">Product work.</h2>
+                    </div>
+                </div>
+
+                <div class="about-list">
+                    {% for item in site.about.projects %}
+                        <article class="about-list-item project-list-item">
+                            <div class="about-list-header">
+                                <div>
+                                    <h3 class="about-list-title">{{ item.name }}</h3>
+                                    <p class="about-list-subtitle">{{ item.type }}</p>
+                                </div>
+                                <div class="project-header-meta">
+                                    {% if item.period %}
+                                        <p class="about-list-period">{{ item.period }}</p>
+                                    {% endif %}
+                                    {% if item.url %}
+                                        <a href="{{ item.url }}" target="_blank" rel="noreferrer" class="project-url">Visit website</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if item.summary %}
+                                <p class="project-summary">{{ item.summary | safe }}</p>
+                            {% endif %}
+                            {% if item.details %}
+                                <div class="project-details" data-project-details>
+                                    <div class="project-details-body" id="project-details-{{ loop.index }}" data-project-details-body>
+                                        {% for paragraph in item.details %}
+                                            <p>{{ paragraph | safe }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    <button class="project-details-toggle" type="button" aria-expanded="false" aria-controls="project-details-{{ loop.index }}" data-project-details-toggle>Read more</button>
+                                </div>
+                            {% endif %}
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
         <section class="content-section">
             <div class="section-heading">
                 <div>
@@ -115,3 +160,17 @@ permalink: /about.html
         </footer>
     </main>
 </div>
+
+<script>
+    document.querySelectorAll("[data-project-details]").forEach((details) => {
+        const body = details.querySelector("[data-project-details-body]");
+        const toggle = details.querySelector("[data-project-details-toggle]");
+        if (!body || !toggle) return;
+
+        toggle.addEventListener("click", () => {
+            const isExpanded = details.classList.toggle("is-expanded");
+            toggle.setAttribute("aria-expanded", String(isExpanded));
+            toggle.textContent = isExpanded ? "Show less" : "Read more";
+        });
+    });
+</script>

@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="2260" viewBox="0 0 1400 2260" role="img" aria-labelledby="title desc">
+  <title id="title">FastAPI Concurrency Implementation</title>
+  <desc id="desc">A poster explaining how FastAPI, Uvicorn, Starlette, and AnyIO handle async routes, sync routes, worker processes, thread pools, and database connection pools.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f5ef; }
+      .ink { fill: #20242a; }
+      .muted { fill: #65707c; }
+      .panel { fill: #fffdf8; stroke: #d8d0c3; stroke-width: 3; }
+      .blue { fill: #edf5fb; stroke: #8eb5cf; stroke-width: 3; }
+      .green { fill: #eff8f1; stroke: #8fbd9b; stroke-width: 3; }
+      .red { fill: #fff1ed; stroke: #d79886; stroke-width: 3; }
+      .yellow { fill: #fff8df; stroke: #d6b75b; stroke-width: 3; }
+      .dark { fill: #20242a; }
+      .line { stroke: #20242a; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+      .soft-line { stroke: #9aa2ad; stroke-width: 3; fill: none; stroke-dasharray: 10 12; }
+      .title { font: 800 58px/1.1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .subtitle { font: 500 27px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .h2 { font: 800 34px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .h3 { font: 800 25px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .body { font: 500 23px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .small { font: 500 19px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .tiny { font: 500 17px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .emph { font: 800 22px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .mono { font: 800 22px/1.25 "SFMono-Regular", Consolas, monospace; letter-spacing: 0; }
+      .white { fill: #ffffff; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#20242a"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1400" height="2260"/>
+  <rect x="56" y="56" width="1288" height="2148" rx="30" fill="none" stroke="#20242a" stroke-width="4"/>
+
+  <text x="96" y="138" class="title ink">FastAPI Concurrency Implementation</text>
+  <text x="98" y="184" class="subtitle muted">How FastAPI, Uvicorn, Starlette, and AnyIO actually route work.</text>
+
+  <rect x="96" y="228" width="1208" height="260" rx="18" class="panel"/>
+  <text x="126" y="282" class="h2 ink">1. Process Shape: Uvicorn Workers</text>
+  <rect x="126" y="324" width="500" height="112" rx="16" class="blue"/>
+  <text x="156" y="364" class="h3 ink">Default</text>
+  <text x="156" y="400" class="mono ink">uvicorn app.main:app</text>
+  <text x="156" y="430" class="small muted">1 process = 1 worker handles all requests</text>
+  <rect x="704" y="324" width="540" height="112" rx="16" class="green"/>
+  <text x="734" y="364" class="h3 ink">Multiple workers</text>
+  <text x="734" y="400" class="mono ink">uvicorn app.main:app --workers 4</text>
+  <text x="734" y="430" class="small muted">master supervises; workers do the business work</text>
+  <text x="126" y="470" class="tiny muted">Each worker is a separate process: independent GIL, memory, thread pool, event loop, and DB pool.</text>
+
+  <rect x="96" y="520" width="1208" height="330" rx="18" class="blue"/>
+  <text x="126" y="576" class="h2 ink">2. Inside One Worker</text>
+  <rect x="126" y="622" width="540" height="168" rx="16" fill="#fffdf8" stroke="#8eb5cf" stroke-width="3"/>
+  <text x="156" y="664" class="h3 ink">Main thread = event-loop thread</text>
+  <text x="156" y="704" class="small muted">Runs the event loop</text>
+  <text x="156" y="734" class="small muted">Schedules all async def route coroutines</text>
+  <text x="156" y="764" class="emph ink">If blocked, the whole worker stalls.</text>
+  <rect x="734" y="622" width="510" height="168" rx="16" fill="#fffdf8" stroke="#8eb5cf" stroke-width="3"/>
+  <text x="764" y="664" class="h3 ink">AnyIO worker thread pool</text>
+  <text x="764" y="704" class="small muted">Runs sync def route code only</text>
+  <text x="764" y="734" class="small muted">One blocking request occupies one thread</text>
+  <text x="764" y="764" class="emph ink">Default limit: 40 tokens.</text>
+  <line x1="640" y1="707" x2="725" y2="707" class="line"/>
+
+  <rect x="96" y="882" width="1208" height="330" rx="18" class="green"/>
+  <text x="126" y="938" class="h2 ink">3. Request Dispatch: Route Signature Decides</text>
+  <text x="156" y="1002" class="mono ink">inspect.iscoroutinefunction(handler)</text>
+  <text x="156" y="1036" class="small muted">FastAPI classifies handlers at startup; requests are then dispatched by type.</text>
+  <rect x="146" y="1070" width="455" height="96" rx="16" class="blue"/>
+  <text x="176" y="1112" class="h3 ink">async def route</text>
+  <text x="176" y="1148" class="small muted">Register coroutine on the main event loop</text>
+  <rect x="742" y="1070" width="455" height="96" rx="16" class="yellow"/>
+  <text x="772" y="1112" class="h3 ink">def route</text>
+  <text x="772" y="1148" class="small muted">AnyIO to_thread sends it to the thread pool</text>
+  <line x1="604" y1="1118" x2="735" y2="1118" class="soft-line"/>
+
+  <rect x="96" y="1244" width="584" height="356" rx="18" class="yellow"/>
+  <text x="126" y="1300" class="h2 ink">4. AnyIO Thread Pool</text>
+  <text x="126" y="1354" class="emph ink">40 is a CapacityLimiter, not precreated threads.</text>
+  <text x="126" y="1402" class="small muted">Startup: 0 worker threads</text>
+  <text x="126" y="1432" class="small muted">Threads are created on demand, reused when idle</text>
+  <text x="126" y="1462" class="small muted">At 40 busy threads, request #41 awaits a token</text>
+  <rect x="126" y="1500" width="500" height="60" rx="14" class="dark"/>
+  <text x="152" y="1538" class="small white">Symptom of saturation: latency rises, not automatic 500s</text>
+
+  <rect x="720" y="1244" width="584" height="356" rx="18" class="red"/>
+  <text x="750" y="1300" class="h2 ink">5. Database Pool Trap</text>
+  <text x="750" y="1354" class="emph ink">Each worker owns its own DB pool.</text>
+  <text x="750" y="1402" class="mono ink">4 workers x pool_size 25 = 100</text>
+  <text x="750" y="1434" class="small muted">If max_connections = 100, the app can consume every slot.</text>
+  <text x="750" y="1462" class="small muted">Business traffic, admin sessions, and metrics then fail.</text>
+  <rect x="750" y="1500" width="504" height="60" rx="14" fill="#fffdf8" stroke="#d79886" stroke-width="3"/>
+  <text x="775" y="1538" class="small ink">Rule: max_connections >= workers x pool_size + margin</text>
+
+  <rect x="96" y="1632" width="1208" height="318" rx="18" class="panel"/>
+  <text x="126" y="1688" class="h2 ink">6. Performance Traps</text>
+  <rect x="126" y="1732" width="350" height="150" rx="16" class="red"/>
+  <text x="156" y="1770" class="h3 ink">Blocking sync in async</text>
+  <text x="156" y="1808" class="small muted">requests.get inside async def</text>
+  <text x="156" y="1838" class="emph ink">Freezes the event loop</text>
+  <rect x="526" y="1732" width="350" height="150" rx="16" class="red"/>
+  <text x="556" y="1770" class="h3 ink">Long CPU in async</text>
+  <text x="556" y="1808" class="small muted">No await, no yield point</text>
+  <text x="556" y="1838" class="emph ink">Main thread is stuck</text>
+  <rect x="926" y="1732" width="348" height="150" rx="16" class="red"/>
+  <text x="956" y="1770" class="h3 ink">Slow sync sleeps</text>
+  <text x="956" y="1808" class="small muted">time.sleep holds one thread</text>
+  <text x="956" y="1838" class="emph ink">40 sleepers fill the pool</text>
+  <text x="126" y="1920" class="tiny muted">Fixes: async HTTP clients, async DB drivers, background queues, explicit timeouts, and careful worker x pool sizing.</text>
+
+  <rect x="96" y="1982" width="1208" height="124" rx="18" class="green"/>
+  <text x="126" y="2024" class="h2 ink">Decision Guide</text>
+  <text x="126" y="2060" class="small muted">Small CRUD: sync def + default worker is fine. High concurrency or long connections: async stack.</text>
+  <text x="126" y="2088" class="small muted">CPU-heavy work: use multiple workers or separate processes.</text>
+
+  <rect x="96" y="2130" width="1208" height="54" rx="27" fill="#20242a"/>
+  <text x="130" y="2165" class="small white">Insight: async does not create threads. 1000 async requests = one event-loop thread plus 1000 coroutines.</text>
+</svg>

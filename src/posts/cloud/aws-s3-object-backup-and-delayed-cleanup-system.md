@@ -6,6 +6,7 @@ excerpt: An event-driven AWS backup system that creates timestamped S3 copies, t
 date: 2026-03-30
 category: Cloud
 subcategory: AWS
+topic: S3 Backup
 kind: Project
 tags:
   - posts

@@ -6,6 +6,8 @@ excerpt: A sketch of the Transformer paper, with the main architecture pieces an
 date: 2026-04-11
 category: AI
 subcategory: ML
+topic: Transformers
+kind: Note
 tags:
   - posts
 image: /assets/sketches/attention-is-all-you-need.svg
