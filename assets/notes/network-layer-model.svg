@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1700" viewBox="0 0 1200 1700" role="img" aria-labelledby="title desc">
+  <title id="title">Network Layering Model: TCP/IP 5 Layers</title>
+  <desc id="desc">A poster explaining the TCP/IP five-layer model, TLS placement, common protocol ownership, and debugging order.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f4ee; }
+      .ink { fill: #20242a; }
+      .muted { fill: #68707b; }
+      .soft { fill: #fdfbf6; stroke: #d8d0c3; stroke-width: 3; }
+      .blue { fill: #edf5fb; stroke: #8eb5cf; stroke-width: 3; }
+      .green { fill: #eef7f0; stroke: #91bd99; stroke-width: 3; }
+      .red { fill: #fff1ed; stroke: #d79886; stroke-width: 3; }
+      .yellow { fill: #fff7df; stroke: #d5b766; stroke-width: 3; }
+      .purple { fill: #f2effb; stroke: #aa9ad2; stroke-width: 3; }
+      .dark { fill: #20242a; }
+      .line { stroke: #20242a; stroke-width: 4; fill: none; marker-end: url(#arrowhead); }
+      .thin { stroke: #68707b; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead-muted); }
+      .dash { stroke: #9aa1aa; stroke-width: 3; stroke-dasharray: 9 10; fill: none; }
+      .title { font: 800 56px/1.1 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: 0; }
+      .subtitle { font: 500 24px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .h2 { font: 800 32px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: 0; }
+      .h3 { font: 800 24px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: 0; }
+      .body { font: 500 21px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .small { font: 500 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .tiny { font: 600 15px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .mono { font: 800 20px/1.2 "SFMono-Regular", Consolas, monospace; letter-spacing: 0; }
+      .center { text-anchor: middle; }
+      .white { fill: #ffffff; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#20242a"/>
+    </marker>
+    <marker id="arrowhead-muted" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" fill="#68707b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="1700"/>
+  <rect x="54" y="54" width="1092" height="1592" rx="28" fill="none" stroke="#20242a" stroke-width="4"/>
+
+  <text x="90" y="128" class="title ink">Network Layering Model</text>
+  <text x="90" y="170" class="subtitle muted">TCP/IP 5 layers: place each protocol where it belongs before debugging.</text>
+  <rect x="90" y="198" width="1020" height="54" rx="27" class="dark"/>
+  <text x="120" y="233" class="body white">Prioritize Layer 5 and Layer 4 first; learn the lower layers as mental infrastructure.</text>
+
+  <rect x="90" y="286" width="492" height="650" rx="22" class="soft"/>
+  <text x="126" y="342" class="h2 ink">1. The 5-Layer Stack</text>
+  <text x="126" y="376" class="small muted">Each layer solves one problem and hides details above it.</text>
+
+  <rect x="126" y="416" width="420" height="84" rx="16" class="blue"/>
+  <text x="154" y="452" class="h3 ink">5 Application</text>
+  <text x="154" y="481" class="small muted">HTTP / WebSocket / DNS / SSH / SMTP</text>
+  <text x="400" y="452" class="tiny muted">data meaning</text>
+
+  <rect x="126" y="520" width="420" height="84" rx="16" class="green"/>
+  <text x="154" y="556" class="h3 ink">4 Transport</text>
+  <text x="154" y="585" class="small muted">TCP / UDP</text>
+  <text x="358" y="556" class="tiny muted">reliability / order / ports</text>
+
+  <rect x="126" y="624" width="420" height="84" rx="16" class="yellow"/>
+  <text x="154" y="660" class="h3 ink">3 Network</text>
+  <text x="154" y="689" class="small muted">IP / ICMP</text>
+  <text x="368" y="660" class="tiny muted">cross-network routing</text>
+
+  <rect x="126" y="728" width="420" height="84" rx="16" class="purple"/>
+  <text x="154" y="764" class="h3 ink">2 Data Link</text>
+  <text x="154" y="793" class="small muted">Ethernet / Wi-Fi / ARP</text>
+  <text x="373" y="764" class="tiny muted">local-network next hop</text>
+
+  <rect x="126" y="832" width="420" height="64" rx="16" class="red"/>
+  <text x="154" y="871" class="h3 ink">1 Physical</text>
+  <text x="340" y="870" class="small muted">cable / fiber / radio</text>
+
+  <rect x="618" y="286" width="492" height="300" rx="22" class="blue"/>
+  <text x="654" y="342" class="h2 ink">2. Learning Priority</text>
+  <text x="654" y="390" class="body ink">Must know: Application + Transport</text>
+  <text x="654" y="427" class="small muted">APIs, WebSocket, and backend code.</text>
+  <text x="654" y="477" class="body ink">Know the basics: Network</text>
+  <text x="654" y="514" class="small muted">IP addresses, routing, and ping.</text>
+  <text x="654" y="556" class="small muted">Lower layers: learn boundaries first.</text>
+
+  <rect x="618" y="626" width="492" height="310" rx="22" class="green"/>
+  <text x="654" y="682" class="h2 ink">3. TCP vs UDP</text>
+  <rect x="654" y="718" width="194" height="150" rx="16" fill="#ffffff" stroke="#91bd99" stroke-width="2"/>
+  <text x="684" y="756" class="h3 ink">TCP</text>
+  <text x="684" y="792" class="small muted">Reliable, ordered</text>
+  <text x="684" y="824" class="small muted">Connection-based</text>
+  <text x="684" y="856" class="small muted">HTTP foundation</text>
+  <rect x="880" y="718" width="194" height="150" rx="16" fill="#ffffff" stroke="#91bd99" stroke-width="2"/>
+  <text x="910" y="756" class="h3 ink">UDP</text>
+  <text x="910" y="792" class="small muted">No delivery</text>
+  <text x="910" y="824" class="small muted">guarantee</text>
+  <text x="910" y="856" class="small muted">Connectionless</text>
+  <text x="654" y="906" class="body ink">Default to TCP unless UDP is required.</text>
+
+  <rect x="90" y="972" width="1020" height="286" rx="22" class="soft"/>
+  <text x="126" y="1028" class="h2 ink">4. How a Generic HTTPS Request Travels</text>
+  <text x="126" y="1064" class="small muted">Example: a browser requests https://api.example.com/items</text>
+  <text x="210" y="1118" class="h3 ink center">Client</text>
+  <text x="990" y="1118" class="h3 ink center">Server</text>
+  <line x1="250" y1="1138" x2="250" y2="1218" class="dash"/>
+  <line x1="950" y1="1138" x2="950" y2="1218" class="dash"/>
+  <line x1="285" y1="1150" x2="915" y2="1150" class="line"/>
+  <text x="600" y="1140" class="mono ink center">HTTP GET /items</text>
+  <line x1="285" y1="1195" x2="915" y2="1195" class="thin"/>
+  <text x="600" y="1186" class="small muted center">TLS encrypts -> TCP segments -> IP routes -> bits move</text>
+  <rect x="126" y="1222" width="948" height="2" fill="#d8d0c3"/>
+  <text x="126" y="1246" class="tiny muted">Logically: HTTP talks to HTTP, TCP to TCP, IP to IP. Physically: down one stack, across the network, then up the other.</text>
+
+  <rect x="90" y="1294" width="492" height="238" rx="22" class="yellow"/>
+  <text x="126" y="1350" class="h2 ink">5. Where TLS Fits</text>
+  <rect x="146" y="1378" width="380" height="44" rx="12" class="blue"/>
+  <text x="336" y="1407" class="small ink center">Application: HTTP / WebSocket</text>
+  <rect x="182" y="1432" width="308" height="44" rx="12" fill="#20242a"/>
+  <text x="336" y="1461" class="small white center">TLS: encryption layer, often "4.5"</text>
+  <rect x="146" y="1486" width="380" height="44" rx="12" class="green"/>
+  <text x="336" y="1515" class="small ink center">Transport: TCP</text>
+
+  <rect x="618" y="1294" width="492" height="238" rx="22" class="red"/>
+  <text x="654" y="1350" class="h2 ink">6. Debugging Order</text>
+  <text x="654" y="1393" class="small muted">Application: URL, method, headers, status code</text>
+  <text x="654" y="1427" class="small muted">TLS: certificate, HTTPS/WSS, handshake errors</text>
+  <text x="654" y="1461" class="small muted">Transport: port reachable, connection timeout</text>
+  <text x="654" y="1495" class="small muted">Network: DNS, IP, routing, ping/traceroute</text>
+
+  <rect x="90" y="1568" width="1020" height="54" rx="27" class="dark"/>
+  <text x="120" y="1603" class="body white">Cheat sheet: semantics, reliable transport, routing, local delivery, physical signals.</text>
+</svg>

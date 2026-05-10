@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600" role="img" aria-labelledby="title desc">
+  <title id="title">WebSocket Protocol Fundamentals</title>
+  <desc id="desc">A poster explaining why WebSocket exists, how HTTP Upgrade works, frames, ping/pong, close codes, and key misconceptions.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f4ee; }
+      .ink { fill: #20242a; }
+      .muted { fill: #68707b; }
+      .soft { fill: #fdfbf6; stroke: #d8d0c3; stroke-width: 3; }
+      .blue { fill: #edf5fb; stroke: #8eb5cf; stroke-width: 3; }
+      .green { fill: #eef7f0; stroke: #91bd99; stroke-width: 3; }
+      .yellow { fill: #fff7df; stroke: #d5b766; stroke-width: 3; }
+      .red { fill: #fff1ed; stroke: #d79886; stroke-width: 3; }
+      .dark { fill: #20242a; }
+      .line { stroke: #20242a; stroke-width: 4; fill: none; marker-end: url(#arrowhead); }
+      .muted-line { stroke: #68707b; stroke-width: 3; fill: none; marker-end: url(#arrowhead-muted); }
+      .dash { stroke: #9aa1aa; stroke-width: 3; stroke-dasharray: 9 10; fill: none; }
+      .title { font: 800 54px/1.1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .subtitle { font: 500 23px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .h2 { font: 800 31px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .h3 { font: 800 23px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .body { font: 500 20px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .small { font: 500 17px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .tiny { font: 600 14px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .mono { font: 800 19px/1.2 "SFMono-Regular", Consolas, monospace; letter-spacing: 0; }
+      .center { text-anchor: middle; }
+      .white { fill: #ffffff; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#20242a"/>
+    </marker>
+    <marker id="arrowhead-muted" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" fill="#68707b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="1600"/>
+  <rect x="54" y="54" width="1092" height="1492" rx="28" fill="none" stroke="#20242a" stroke-width="4"/>
+
+  <text x="90" y="126" class="title ink">WebSocket Protocol Fundamentals</text>
+  <text x="90" y="168" class="subtitle muted">Full-duplex communication over one long-lived TCP connection.</text>
+  <rect x="90" y="196" width="1020" height="54" rx="27" class="dark"/>
+  <text x="120" y="231" class="body white">WebSocket starts as HTTP, upgrades with 101, then sends frames instead of HTTP messages.</text>
+
+  <rect x="90" y="286" width="492" height="300" rx="22" class="blue"/>
+  <text x="126" y="342" class="h2 ink">1. Why WebSocket Exists</text>
+  <text x="126" y="388" class="small muted">HTTP is request-response:</text>
+  <text x="126" y="420" class="mono ink">client asks -> server replies</text>
+  <text x="126" y="468" class="small muted">That is awkward when the server needs</text>
+  <text x="126" y="494" class="small muted">to push events immediately.</text>
+  <text x="126" y="542" class="body ink">Use WebSocket for bidirectional realtime flows.</text>
+
+  <rect x="618" y="286" width="492" height="300" rx="22" class="green"/>
+  <text x="654" y="342" class="h2 ink">2. Upgrade Handshake</text>
+  <text x="654" y="386" class="small muted">Step 1: client sends HTTP Upgrade</text>
+  <rect x="654" y="408" width="370" height="46" rx="12" fill="#ffffff" stroke="#91bd99" stroke-width="2"/>
+  <text x="682" y="438" class="mono ink">GET /ws + Upgrade</text>
+  <text x="654" y="492" class="small muted">Step 2: server accepts</text>
+  <rect x="654" y="514" width="370" height="46" rx="12" fill="#ffffff" stroke="#91bd99" stroke-width="2"/>
+  <text x="682" y="544" class="mono ink">101 Switching Protocols</text>
+
+  <rect x="90" y="626" width="1020" height="278" rx="22" class="soft"/>
+  <text x="126" y="682" class="h2 ink">3. Layering: TCP Handshake vs WebSocket Handshake</text>
+  <text x="176" y="748" class="h3 ink center">Client</text>
+  <text x="1014" y="748" class="h3 ink center">Server</text>
+  <line x1="216" y1="770" x2="216" y2="850" class="dash"/>
+  <line x1="974" y1="770" x2="974" y2="850" class="dash"/>
+  <line x1="248" y1="790" x2="940" y2="790" class="muted-line"/>
+  <text x="594" y="782" class="small muted center">Transport layer first: TCP SYN / SYN-ACK / ACK</text>
+  <line x1="248" y1="838" x2="940" y2="838" class="line"/>
+  <text x="594" y="830" class="small ink center">Application layer next: HTTP Upgrade -> 101</text>
+  <text x="126" y="878" class="tiny muted">TCP three-way handshake is not the WebSocket handshake. It happens before any HTTP Upgrade request.</text>
+
+  <rect x="90" y="944" width="492" height="270" rx="22" class="yellow"/>
+  <text x="126" y="1000" class="h2 ink">4. Frames After Upgrade</text>
+  <rect x="126" y="1036" width="420" height="58" rx="14" fill="#ffffff" stroke="#d5b766" stroke-width="2"/>
+  <text x="154" y="1072" class="mono ink">FIN | Opcode | Mask | Len</text>
+  <rect x="126" y="1110" width="420" height="58" rx="14" fill="#ffffff" stroke="#d5b766" stroke-width="2"/>
+  <text x="154" y="1146" class="mono ink">Payload Data</text>
+  <text x="126" y="1190" class="small muted">Code sees messages; the protocol sends frames.</text>
+
+  <rect x="618" y="944" width="492" height="270" rx="22" class="red"/>
+  <text x="654" y="1000" class="h2 ink">5. Ping / Pong + Close</text>
+  <text x="654" y="1044" class="small muted">Ping asks: are you alive?</text>
+  <text x="654" y="1074" class="small muted">Pong answers: yes, still alive.</text>
+  <text x="654" y="1122" class="small muted">Close is a two-way goodbye using close frames.</text>
+  <text x="654" y="1164" class="body ink">1000 normal | 1006 abnormal | 4xxx app-defined</text>
+
+  <rect x="90" y="1254" width="1020" height="188" rx="22" class="soft"/>
+  <text x="126" y="1310" class="h2 ink">6. Key Truths</text>
+  <text x="126" y="1354" class="small muted">WebSocket is TCP-based, not UDP. It is stateful because the connection itself is state.</text>
+  <text x="126" y="1386" class="small muted">It improves realtime interaction, not raw per-message network speed.</text>
+  <text x="126" y="1418" class="small muted">Browsers do not reconnect automatically; application code must implement reconnect logic.</text>
+
+  <rect x="90" y="1478" width="1020" height="54" rx="27" class="dark"/>
+  <text x="120" y="1513" class="body white">Choose SSE for one-way server push; choose WebSocket for true two-way realtime interaction.</text>
+</svg>

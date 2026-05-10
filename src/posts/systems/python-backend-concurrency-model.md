@@ -5,8 +5,8 @@ description: "A Python backend concurrency note covering processes, threads, cor
 excerpt: "A Python backend concurrency cheat sheet: processes, threads, coroutines, sync versus async, the GIL, and how to choose between threads, async, and processes."
 date: 2026-05-08T12:00:00-07:00
 category: Backend
-subcategory: Python
-topic: Python Concurrency
+subcategory: Concurrency
+topic: Python Runtime
 kind: Note
 tags:
   - posts
