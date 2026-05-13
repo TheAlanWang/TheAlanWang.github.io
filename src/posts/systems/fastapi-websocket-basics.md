@@ -1,12 +1,12 @@
 ---
 layout: layouts/post.njk
-title: FastAPI WebSocket Basics
-description: A minimal FastAPI WebSocket echo endpoint and the lifecycle model behind accept, receive, send, and disconnect handling.
-excerpt: Build the smallest runnable FastAPI WebSocket echo endpoint and understand why a WebSocket handler lives as long as the connection lives.
+title: FastAPI WebSocket Handler Lifecycle
+description: A minimal FastAPI WebSocket echo endpoint focused on accept, receive loops, send operations, disconnect handling, and cleanup.
+excerpt: Understand why a FastAPI WebSocket handler lives as long as the connection lives, from accept to receive loop to disconnect cleanup.
 date: 2026-05-08T22:05:00-07:00
 category: Backend
-subcategory: Realtime Systems
-topic: WebSocket
+subcategory: WebSocket
+topic: FastAPI Handler Lifecycle
 kind: Note
 tags:
   - posts
@@ -447,4 +447,4 @@ WebSocket route characteristics:
 
 This echo endpoint proves that the protocol works, but the server still does not know who is online or how to send a message to a specific user.
 
-The next topic is connection management: tracking connected clients, cleaning them up, and sending targeted messages.
+Next note: [WebSocket Connection Manager](/posts/websocket-connection-manager/)

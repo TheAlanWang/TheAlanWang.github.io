@@ -56,7 +56,7 @@ permalink: /about.html
                         </div>
                         <ul class="about-list-points">
                             {% for point in item.points %}
-                                <li>{{ point }}</li>
+                                <li>{{ point | safe }}</li>
                             {% endfor %}
                         </ul>
                     </article>

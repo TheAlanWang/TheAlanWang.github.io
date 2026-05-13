@@ -5,8 +5,8 @@ description: A protocol-level explanation of WebSocket, HTTP Upgrade, frames, pi
 excerpt: WebSocket starts as an HTTP Upgrade request, switches to a frame-based protocol, and keeps one TCP connection open for full-duplex realtime communication.
 date: 2026-05-08T21:45:00-07:00
 category: Backend
-subcategory: Realtime Systems
-topic: WebSocket
+subcategory: WebSocket
+topic: Protocol
 kind: Note
 tags:
   - posts

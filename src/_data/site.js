@@ -30,16 +30,16 @@ module.exports = {
     projects: [
       {
         name: "Unsaid",
-        type: "A privacy-preserving anonymous campus forum for verified Northeastern users",
+        type: "Privacy-preserving anonymous campus forum for verified Northeastern students",
         period: "Apr 2026 – Present",
         url: "https://unsaidhub.xyz/feed",
         details: [
-          "Unsaid is an anonymous campus discussion platform for Northeastern students, launched at <strong>unsaidhub.xyz</strong> and now serving <strong>100+ users</strong>. It gives verified students a safer way to post honestly without exposing their real identity.",
-          "I led a small team to build the platform and was mainly responsible for the backend system. I built the backend with <strong>FastAPI</strong>, <strong>PostgreSQL</strong>, and <strong>SQLAlchemy</strong>, and designed <strong>RESTful APIs</strong> for posts, comments, replies, likes, bookmarks, notifications, tags, and categories. I also coordinated with teammates on the frontend implementation and tag/category design to keep the product structure aligned with the backend data model.",
-          "One of the most important backend decisions was separating <strong>verified access</strong> from <strong>anonymous posting identity</strong>. Users verify with a Northeastern email, but posts are attributed to anonymous personas instead of real emails or visible user identities. This preserves user privacy while still keeping the community limited to verified Northeastern members.",
-          "I also built the core interaction system, including comments, replies, likes, bookmarks, notifications, and <strong>unread count tracking</strong>. For the feed, I implemented <strong>newest</strong> and <strong>hot ranking</strong>, using signals such as likes, comments, and post age to help users discover active discussions.",
-          "The platform was deployed as a public web application with a <strong>React</strong> and <strong>TypeScript</strong> frontend, a <strong>FastAPI</strong> backend on <strong>Fly.io</strong>, and <strong>PostgreSQL</strong> on <strong>Supabase</strong>. I handled production setup including <strong>CORS</strong>, authentication, environment variables, and custom domain configuration.",
-          "The biggest engineering challenge was designing a backend that supported social interaction while protecting anonymity. Through this project, I learned how to build <strong>privacy-aware data models</strong>, structure <strong>social platform APIs</strong>, and reason about future scalability for notifications, feed ranking, <strong>Redis</strong> caching, and <strong>WebSocket</strong>-based real-time updates.",
+          "Unsaid is a discussion platform where verified Northeastern students post under anonymous personas, giving them privacy from peers without losing community trust. The product is live at <strong>unsaidhub.xyz</strong> with a full backend, real-time notifications, and ranked feeds in production.",
+          "<strong>Privacy-preserving data model</strong><br>The core design decouples <strong>identity verification</strong> from <strong>posting identity</strong>. Northeastern email verification gates access, but every post, comment, and like attaches to a user-owned <strong>persona</strong>, never directly to the real user identity. Notifications route by <code>user_id</code> internally while API responses render only the actor's persona, preserving moderation, routing, and self-action suppression without exposing verified emails.",
+          "<strong>Real-time notification system</strong><br>I built notification delivery over <strong>FastAPI WebSockets</strong> with JWT-over-query-string authentication, application-defined close codes for actionable client recovery, and a per-user multi-tab connection manager. HTTP handlers persist data, schedule pushes through <strong>BackgroundTasks</strong>, and return immediately, keeping real-time delivery off the request path.",
+          "<strong>Performance and ranking</strong><br>I built newest- and hot-ranked feeds from likes, comments, and post age, then precomputed ranked results into <strong>Redis</strong> with write-event-driven invalidation. This removed repeated sort work from the hot path and reduced feed read p50 latency by <strong>30%</strong>.",
+          "<strong>Deployment</strong><br>The platform runs with a <strong>React</strong> and <strong>TypeScript</strong> frontend, a containerized <strong>FastAPI</strong> backend on <strong>Fly.io</strong>, and <strong>PostgreSQL</strong> on <strong>Supabase</strong>. I also configured production CORS, JWT-based auth, automated Alembic migrations, environment-scoped secrets, and custom-domain setup.",
+          "<strong>Engineering takeaway</strong><br>The hardest part was <strong>preserving anonymity end-to-end</strong> across a social graph while still routing notifications to the right user. Privacy had to be a structural property of the data model, API responses, and runtime behavior; real-time push likewise needed <strong>decoupling from HTTP writes</strong> instead of being optimized after the fact.",
         ],
       },
     ],
@@ -70,9 +70,9 @@ module.exports = {
         organization: "Shanghai Securities",
         period: "Apr 2022 – Dec 2024",
         points: [
-          "Implemented and deployed integrated REST APIs across 3 enterprise systems (HR, reimbursement, project management) intoan Office Automation system serving 3K+ users, improving cross-system workflow automation and internal access efficiency.",
-          "Migrated a 500+ user system from a monolith to microservices architecture using Kafka async workflows and CI/CD pipelineswith Kubernetes, reducing deployment time by 40%.",
-          "Led cross-functional delivery for 20+ internal projects, driving deployment, testing, validation, and post-launch issue support.",
+          "Implemented and deployed <strong>integrated REST APIs</strong> across <strong>3 enterprise systems</strong> (HR, reimbursement, project management) into an Office Automation system serving <strong>3K+ users</strong>, improving cross-system workflow automation and internal access efficiency.",
+          "Migrated a <strong>500+ user</strong> system from a monolith to <strong>microservices architecture</strong> using <strong>Kafka async workflows</strong> and <strong>CI/CD pipelines with Kubernetes</strong>, reducing deployment time by <strong>40%</strong>.",
+          "Led cross-functional delivery for <strong>20+ internal projects</strong>, driving deployment, testing, validation, and post-launch issue support.",
         ],
       },
       {
@@ -80,8 +80,8 @@ module.exports = {
         organization: "Deloitte",
         period: "Dec 2021 – Apr 2022",
         points: [
-          "Engineered a Python and SQL ETL pipeline for Basel III compliance over 10K financial records, contributing to a 5%+ improvement in capital adequacy ratio.",
-          "Automated regulatory reporting workflows in Python, reducing a two-day manual process to a 30-minute pipeline with built-in validation.",
+          "Engineered a <strong>Python and SQL ETL pipeline</strong> for <strong>Basel III compliance</strong> over <strong>10K financial records</strong>, contributing to a <strong>5%+</strong> improvement in capital adequacy ratio.",
+          "Automated <strong>regulatory reporting workflows</strong> in Python, reducing a <strong>two-day manual process</strong> to a <strong>30-minute pipeline</strong> with built-in validation.",
         ],
       },
       {
@@ -89,8 +89,8 @@ module.exports = {
         organization: "Cubewise",
         period: "Feb 2020 – Dec 2021",
         points: [
-          "Developed and deployed enterprise EPM solutions for clients including Alibaba and Mercedes-Benz, including Python automation for batch report generation.",
-          "Designed ETL pipelines and SQL-based data extraction workflows, improving reporting performance by 35% through cube refactoring and query optimization on in-memory OLAP systems.",
+          "Developed and deployed <strong>enterprise EPM solutions</strong> for clients including <strong>Alibaba</strong> and <strong>Mercedes-Benz</strong>, including Python automation for batch report generation.",
+          "Designed <strong>ETL pipelines</strong> and <strong>SQL-based data extraction workflows</strong>, improving reporting performance by <strong>35%</strong> through cube refactoring and query optimization on <strong>in-memory OLAP systems</strong>.",
         ],
       },
     ],

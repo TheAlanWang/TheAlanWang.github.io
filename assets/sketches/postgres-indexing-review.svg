@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1900" viewBox="0 0 1200 1900" role="img" aria-labelledby="title desc">
+  <title id="title">Postgres Indexing Review</title>
+  <desc id="desc">A compact English poster reviewing Postgres tables, B-tree and B+ tree indexes, GIN indexes, jsonb operators, and index selection strategy.</desc>
+  <rect width="1200" height="1900" fill="#f5f7f2"/>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="58" y="52" width="1084" height="1796" rx="28" fill="#ffffff" stroke="#172326" stroke-width="4"/>
+
+    <text x="96" y="124" fill="#102025" font-size="49" font-weight="800">Postgres Indexing Review</text>
+    <text x="98" y="166" fill="#536267" font-size="23" font-weight="600">B-tree · B+ Tree · GIN · Table vs Index · Selection Strategy</text>
+
+    <text x="96" y="232" fill="#102025" font-size="28" font-weight="800">1. Table, Index, Primary Key</text>
+    <rect x="96" y="260" width="1008" height="160" rx="16" fill="#f7fbff" stroke="#8eb2d9" stroke-width="2"/>
+    <g font-size="19">
+      <text x="126" y="304" fill="#17314f" font-size="22" font-weight="800">Postgres table = heap</text>
+      <text x="126" y="336" fill="#344b58">Rows live in an unordered heap.</text>
+      <text x="126" y="368" fill="#344b58">Indexes are separate physical structures.</text>
+      <text x="126" y="400" fill="#344b58">PRIMARY KEY = UNIQUE + NOT NULL + unique B-tree index.</text>
+      <text x="768" y="304" fill="#5c3b13" font-size="22" font-weight="800">MySQL contrast</text>
+      <text x="768" y="336" fill="#604c32">InnoDB clusters the table</text>
+      <text x="768" y="368" fill="#604c32">by primary key.</text>
+      <text x="768" y="400" fill="#604c32">Heap and indexes stay separate.</text>
+    </g>
+
+    <text x="96" y="486" fill="#102025" font-size="28" font-weight="800">2. B-tree: Default General-Purpose Index</text>
+    <rect x="96" y="514" width="488" height="238" rx="16" fill="#edf7ee" stroke="#3b7f4a" stroke-width="2"/>
+    <text x="126" y="554" fill="#214b2a" font-size="23" font-weight="800">Good For</text>
+    <text x="126" y="590" fill="#344f39" font-size="19">id = 5</text>
+    <text x="126" y="622" fill="#344f39" font-size="19">amount BETWEEN 100 AND 500</text>
+    <text x="126" y="654" fill="#344f39" font-size="19">title LIKE 'Post%'</text>
+    <text x="126" y="686" fill="#344f39" font-size="19">ORDER BY created_at</text>
+    <text x="126" y="724" fill="#344f39" font-size="18">Lookup: O(log n). Range: O(log n + k).</text>
+
+    <rect x="616" y="514" width="488" height="238" rx="16" fill="#fff4df" stroke="#b66f18" stroke-width="2"/>
+    <text x="646" y="554" fill="#5c3b13" font-size="23" font-weight="800">Not Good For</text>
+    <text x="646" y="590" fill="#604c32" font-size="19">title LIKE '%index%' -> pg_trgm + GIN</text>
+    <text x="646" y="622" fill="#604c32" font-size="19">tags @&gt; ARRAY['AI'] -> use GIN</text>
+    <text x="646" y="654" fill="#604c32" font-size="19">metadata @&gt; '{...}' -> use GIN</text>
+    <text x="646" y="704" fill="#604c32" font-size="18">B means Balanced, not Binary.</text>
+    <text x="646" y="732" fill="#604c32" font-size="18">A hash index only helps equality, not range or sort.</text>
+
+    <text x="96" y="818" fill="#102025" font-size="28" font-weight="800">3. Composite B-tree: Leftmost Prefix Rule</text>
+    <rect x="96" y="846" width="1008" height="150" rx="16" fill="#fbfcfb" stroke="#c8d0ca" stroke-width="2"/>
+    <text x="126" y="890" fill="#233034" font-size="22" font-weight="800">CREATE INDEX ON events (status, created_at, region);</text>
+    <text x="126" y="928" fill="#214b2a" font-size="19">OK: status · status + created_at · status + created_at + region</text>
+    <text x="126" y="960" fill="#7b2e1b" font-size="19">Not OK: created_at alone, because it skips status.</text>
+    <text x="626" y="928" fill="#536267" font-size="18">Sorted by status, then created_at, then region.</text>
+    <text x="626" y="960" fill="#536267" font-size="18">You cannot jump straight to created_at.</text>
+
+    <text x="96" y="1064" fill="#102025" font-size="28" font-weight="800">4. B+ Tree: What Databases Usually Mean by “B-tree”</text>
+    <rect x="96" y="1092" width="1008" height="196" rx="16" fill="#e8f0ff" stroke="#2f5f9f" stroke-width="2"/>
+    <text x="126" y="1134" fill="#17314f" font-size="22" font-weight="800">Core Rules</text>
+    <text x="126" y="1166" fill="#344b58" font-size="18">1. All data lives only in leaf nodes.</text>
+    <text x="126" y="1194" fill="#344b58" font-size="18">2. All keys also appear in leaf nodes.</text>
+    <text x="126" y="1222" fill="#344b58" font-size="18">3. Internal keys are guide copies, not row data.</text>
+    <text x="612" y="1134" fill="#17314f" font-size="22" font-weight="800">Range Query</text>
+    <text x="612" y="1166" fill="#344b58" font-size="18">Seek start leaf: O(log n)</text>
+    <text x="612" y="1194" fill="#344b58" font-size="18">Scan linked leaves: O(k)</text>
+    <text x="612" y="1222" fill="#344b58" font-size="18">Total: O(log n + k)</text>
+    <text x="126" y="1262" fill="#344b58" font-size="18">Internal: [50] guides only. Leaves: [10|d,20|d] &lt;-&gt; [30|d,40|d] &lt;-&gt; [60|d,70|d]</text>
+    <text x="126" y="1278" fill="#536267" font-size="15">Memory hook: internal nodes navigate; leaf nodes store the data.</text>
+
+    <text x="96" y="1356" fill="#102025" font-size="28" font-weight="800">5. GIN: Inverted Index for “Contains” Queries</text>
+    <rect x="96" y="1384" width="488" height="238" rx="16" fill="#f7eaf0" stroke="#9c3f66" stroke-width="2"/>
+    <text x="126" y="1424" fill="#562237" font-size="23" font-weight="800">Mental Model</text>
+    <text x="126" y="1460" fill="#5d3f4c" font-size="19">B-tree: row -> whole value</text>
+    <text x="126" y="1492" fill="#5d3f4c" font-size="19">GIN: element -> rows containing it</text>
+    <text x="126" y="1536" fill="#5d3f4c" font-size="19">"tag:AI" -> [row 1, row 3]</text>
+    <text x="126" y="1568" fill="#5d3f4c" font-size="19">"tag:DB" -> [row 2]</text>
+    <text x="126" y="1604" fill="#7b2e1b" font-size="18" font-weight="800">GIN trades write speed for read speed.</text>
+
+    <rect x="616" y="1384" width="488" height="238" rx="16" fill="#e8f5f6" stroke="#21808a" stroke-width="2"/>
+    <text x="646" y="1424" fill="#124b52" font-size="23" font-weight="800">Use Cases</text>
+    <text x="646" y="1460" fill="#315d62" font-size="19">jsonb: @&gt;, ?, ?|, ?&amp;</text>
+    <text x="646" y="1492" fill="#315d62" font-size="19">array: @&gt;, &lt;@, &amp;&amp;</text>
+    <text x="646" y="1524" fill="#315d62" font-size="19">tsvector: @@</text>
+    <text x="646" y="1556" fill="#315d62" font-size="19">pg_trgm: LIKE '%text%'</text>
+    <text x="646" y="1592" fill="#315d62" font-size="17">Writes are slower: one value expands</text>
+    <text x="646" y="1615" fill="#315d62" font-size="17">into many index entries.</text>
+
+    <text x="96" y="1690" fill="#102025" font-size="28" font-weight="800">6. Index Selection Cheatsheet</text>
+    <rect x="96" y="1718" width="1008" height="86" rx="16" fill="#fbfcfb" stroke="#c8d0ca" stroke-width="2"/>
+    <text x="126" y="1754" fill="#233034" font-size="18">id = 5 -> B-tree · time range -> B-tree · prefix LIKE -> B-tree · contains jsonb/array -> GIN</text>
+    <text x="126" y="1784" fill="#233034" font-size="18">LIKE '%x%' -> pg_trgm + GIN · metadata->>'source' = 'x' -> expression index · full text -> GIN on tsvector</text>
+
+  </g>
+</svg>

@@ -585,7 +585,7 @@ select {
 .post-toc {
     position: fixed;
     top: 104px;
-    right: max(24px, calc((100vw - 1500px) / 2));
+    right: max(72px, calc((100vw - 1500px) / 2 + 48px));
     width: 190px;
     max-height: calc(100vh - 128px);
     overflow: auto;

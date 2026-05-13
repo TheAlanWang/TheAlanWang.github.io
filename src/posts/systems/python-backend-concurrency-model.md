@@ -113,6 +113,8 @@ Both models try to avoid wasting CPU while waiting on I/O. The difference is whe
 
 The GIL is a CPython interpreter-level lock. Inside one process, only one thread can execute Python bytecode at a time.
 
+For a focused explanation of why this is a threading issue rather than an `async` issue, read [Python GIL: Why Multiple Threads Do Not Mean Parallel Python](/posts/python-gil-threading-vs-async/).
+
 | What the thread is doing | Needs the GIL? |
 | --- | --- |
 | Executing Python bytecode | Yes, mutually exclusive |

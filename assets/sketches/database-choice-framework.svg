@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Database Choice Framework</title>
+  <desc id="desc">A compact diagram for choosing relational and non-relational databases based on query patterns, transactions, scale, and access model.</desc>
+  <rect width="1200" height="760" fill="#f5f7f2"/>
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="64" y="56" width="1072" height="648" rx="24" fill="#ffffff" stroke="#172326" stroke-width="4"/>
+    <text x="104" y="126" fill="#102025" font-size="48" font-weight="800">Choosing a Database</text>
+    <text x="106" y="168" fill="#536267" font-size="23" font-weight="600">Do not choose only by data relationship. Choose by workload and guarantees.</text>
+
+    <rect x="104" y="220" width="456" height="192" rx="16" fill="#e8f0ff" stroke="#2f5f9f" stroke-width="3"/>
+    <text x="134" y="262" fill="#17314f" font-size="28" font-weight="800">Relational Database</text>
+    <text x="134" y="304" fill="#344b58" font-size="21">Strong transactions and constraints</text>
+    <text x="134" y="340" fill="#344b58" font-size="21">Flexible joins and ad-hoc queries</text>
+    <text x="134" y="376" fill="#344b58" font-size="21">Good default for core business data</text>
+
+    <rect x="640" y="220" width="456" height="192" rx="16" fill="#edf7ee" stroke="#3b7f4a" stroke-width="3"/>
+    <text x="670" y="262" fill="#214b2a" font-size="28" font-weight="800">Non-relational Database</text>
+    <text x="670" y="304" fill="#344f39" font-size="21">Access pattern is known and narrow</text>
+    <text x="670" y="340" fill="#344f39" font-size="21">Scale, latency, or shape dominates</text>
+    <text x="670" y="376" fill="#344f39" font-size="21">Use document, key-value, wide-column, graph</text>
+
+    <text x="104" y="482" fill="#102025" font-size="30" font-weight="800">Decision Questions</text>
+    <rect x="104" y="512" width="992" height="112" rx="16" fill="#fbfcfb" stroke="#c8d0ca" stroke-width="2"/>
+    <text x="136" y="552" fill="#233034" font-size="21">1. What are the read and write query patterns?</text>
+    <text x="136" y="586" fill="#233034" font-size="21">2. Do writes need ACID transactions and constraints?</text>
+    <text x="620" y="552" fill="#233034" font-size="21">3. How will the data scale and partition?</text>
+    <text x="620" y="586" fill="#233034" font-size="21">4. Is schema flexibility worth weaker guarantees?</text>
+
+    <text x="104" y="666" fill="#7b2e1b" font-size="22" font-weight="800">Memory hook: data relationships matter, but workload and guarantees decide.</text>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Python GIL: Threads vs Async</title>
+  <desc id="desc">A diagram explaining that the GIL allows only one Python bytecode-running thread per CPython process, and that async/await is unrelated to the GIL.</desc>
+  <rect width="1200" height="760" fill="#f7f5ef"/>
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="64" y="56" width="1072" height="648" rx="24" fill="#fffdf8" stroke="#20242a" stroke-width="4"/>
+    <text x="104" y="128" fill="#20242a" font-size="48" font-weight="800">Python GIL: Threads vs Async</text>
+    <text x="106" y="170" fill="#65707c" font-size="23" font-weight="600">One CPython process: only one thread runs Python bytecode at a time.</text>
+
+    <rect x="104" y="230" width="456" height="214" rx="16" fill="#fff1ed" stroke="#d79886" stroke-width="3"/>
+    <text x="134" y="274" fill="#5c2517" font-size="28" font-weight="800">Threads + GIL</text>
+    <text x="134" y="318" fill="#58392f" font-size="21">Thread A wants to run Python</text>
+    <text x="134" y="354" fill="#58392f" font-size="21">Thread B wants to run Python</text>
+    <text x="134" y="390" fill="#58392f" font-size="21">GIL allows only one runnable owner</text>
+    <text x="134" y="426" fill="#7b2e1b" font-size="21" font-weight="800">CPU-heavy Python threads serialize</text>
+
+    <rect x="640" y="230" width="456" height="214" rx="16" fill="#edf5fb" stroke="#8eb5cf" stroke-width="3"/>
+    <text x="670" y="274" fill="#17314f" font-size="28" font-weight="800">Async / Await</text>
+    <text x="670" y="318" fill="#344b58" font-size="21">Coroutines share one event-loop thread</text>
+    <text x="670" y="354" fill="#344b58" font-size="21">Switching happens at await</text>
+    <text x="670" y="390" fill="#344b58" font-size="21">No OS thread competition required</text>
+    <text x="670" y="426" fill="#17314f" font-size="21" font-weight="800">Async is about waiting, not GIL bypass</text>
+
+    <text x="104" y="520" fill="#20242a" font-size="30" font-weight="800">Memory Hook</text>
+    <rect x="104" y="550" width="992" height="94" rx="16" fill="#eff8f1" stroke="#8fbd9b" stroke-width="3"/>
+    <text x="136" y="590" fill="#214b2a" font-size="23" font-weight="800">GIL limits Python bytecode execution across threads.</text>
+    <text x="136" y="624" fill="#344f39" font-size="21">Async controls coroutine scheduling on an event loop. They are different layers.</text>
+  </g>
+</svg>

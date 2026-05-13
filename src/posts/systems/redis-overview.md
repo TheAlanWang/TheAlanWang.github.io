@@ -5,8 +5,8 @@ description: A compact Redis sketch covering data types, commands, cache pattern
 excerpt: A compact Redis sketch covering data types, commands, cache patterns, and configuration notes.
 date: 2026-04-08
 category: Data Systems
-subcategory: Caching
-topic: Redis
+subcategory: Redis
+topic: Overview
 kind: Note
 tags:
   - posts

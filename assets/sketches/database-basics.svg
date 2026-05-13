@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Database Basics</title>
+  <desc id="desc">A compact diagram showing data modeling, consistency, performance, scalability, and concurrency control.</desc>
+  <rect width="1200" height="720" fill="#f6f7f2"/>
+  <rect x="72" y="70" width="1056" height="580" rx="24" fill="#ffffff" stroke="#1d2a2e" stroke-width="4"/>
+  <text x="112" y="135" fill="#132023" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700">Database Basics</text>
+  <text x="114" y="176" fill="#526064" font-family="Inter, Arial, sans-serif" font-size="22">From table design to correctness, query speed, scale, and concurrency control.</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="116" y="242" width="440" height="118" rx="14" fill="#e8f0ff" stroke="#2f5f9f" stroke-width="3"/>
+    <text x="146" y="292" fill="#17314f" font-size="29" font-weight="700">1. Data Modeling</text>
+    <text x="146" y="326" fill="#2f4254" font-size="20">How should the tables be designed?</text>
+
+    <rect x="644" y="242" width="440" height="118" rx="14" fill="#edf7ee" stroke="#3b7f4a" stroke-width="3"/>
+    <text x="674" y="292" fill="#214b2a" font-size="29" font-weight="700">2. Consistency</text>
+    <text x="674" y="326" fill="#344f39" font-size="20">How do we keep data correct?</text>
+
+    <rect x="116" y="398" width="440" height="118" rx="14" fill="#fff3df" stroke="#a96c20" stroke-width="3"/>
+    <text x="146" y="448" fill="#5c3b13" font-size="29" font-weight="700">3. Performance</text>
+    <text x="146" y="482" fill="#604c32" font-size="20">How do common queries stay fast?</text>
+
+    <rect x="644" y="398" width="440" height="118" rx="14" fill="#f7eaf0" stroke="#9c3f66" stroke-width="3"/>
+    <text x="674" y="448" fill="#562237" font-size="29" font-weight="700">4. Scalability</text>
+    <text x="674" y="482" fill="#5d3f4c" font-size="20">What happens when data gets huge?</text>
+
+    <rect x="246" y="556" width="708" height="60" rx="14" fill="#eef0f0" stroke="#5d686b" stroke-width="3"/>
+    <text x="304" y="596" fill="#233034" font-size="25" font-weight="700">Concurrency Control: Optimistic Lock vs Pessimistic Lock</text>
+  </g>
+</svg>
