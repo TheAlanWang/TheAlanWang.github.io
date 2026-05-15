@@ -1,0 +1,70 @@
+---
+layout: layouts/base.njk
+title: Knowledge Map
+description: A topic-based map of Alan Wang's technical notes, sketches, and study posts.
+navKey: knowledge-map
+---
+<div class="layout-grid">
+    <aside class="identity-rail">
+        <div class="identity-block">
+            <p class="eyebrow">Knowledge base</p>
+            <h1 class="identity-title">{{ site.name }}</h1>
+            <p class="identity-summary">{{ site.tagline }}</p>
+        </div>
+
+        <div class="identity-meta">
+            {% for category in collections.knowledgeMap %}
+                <a href="#{{ category.name | slugify }}" class="meta-pill">{{ category.name }}</a>
+            {% endfor %}
+        </div>
+    </aside>
+
+    <main class="content-column">
+        <section class="lead-panel lead-panel-archive">
+            <p class="section-kicker">Knowledge Map</p>
+            <h2 class="lead-title">Topic Index</h2>
+            <p class="lead-copy">Posts grouped by category and subcategory.</p>
+        </section>
+
+        <section class="content-section knowledge-map-section">
+            {% for category in collections.knowledgeMap %}
+                <details class="knowledge-category" id="{{ category.name | slugify }}" open>
+                    <summary class="knowledge-category-summary">
+                        <span class="knowledge-toggle" aria-hidden="true"></span>
+                        <span class="knowledge-category-copy">
+                            <span class="knowledge-category-title">{{ category.name }}</span>
+                        </span>
+                    </summary>
+
+                    <div class="knowledge-subcategory-list">
+                        {% for subcategory in category.subcategories %}
+                            <details class="knowledge-subcategory">
+                                <summary class="knowledge-subcategory-summary">
+                                    <span class="knowledge-toggle knowledge-toggle-small" aria-hidden="true"></span>
+                                    <span class="knowledge-subcategory-title">{{ subcategory.name }}</span>
+                                </summary>
+
+                                <ul class="knowledge-post-list">
+                                    {% for post in subcategory.posts %}
+                                        <li class="knowledge-post">
+                                            {% if post.data.topic %}
+                                                <span class="knowledge-post-topic">{{ post.data.topic }}</span>
+                                            {% endif %}
+                                            <h5 class="knowledge-post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h5>
+                                            <p class="knowledge-post-excerpt">{{ post.data.excerpt }}</p>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </details>
+                        {% endfor %}
+                    </div>
+                </details>
+            {% endfor %}
+        </section>
+
+        <footer class="site-footer">
+            <p>{{ site.footerText }}</p>
+            <p>&copy; 2026 {{ site.name }}</p>
+        </footer>
+    </main>
+</div>
