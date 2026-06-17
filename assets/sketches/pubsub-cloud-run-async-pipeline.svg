@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" fill="none">
+  <rect width="1600" height="1100" fill="#FAFBF8"/>
+  <rect x="54" y="48" width="1492" height="1004" rx="28" fill="#FFFFFF" stroke="#D9DED5" stroke-width="2"/>
+
+  <text x="104" y="118" fill="#68727F" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="3">GCP PUB/SUB + CLOUD RUN</text>
+  <text x="104" y="184" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="58" font-weight="850">Async Pipeline Overview</text>
+  <text x="104" y="232" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="28">Producers do not call consumers directly; Pub/Sub coordinates delivery, retry, and failure isolation.</text>
+
+  <rect x="104" y="284" width="222" height="108" rx="18" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="132" y="328" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800">PDF Upload</text>
+  <text x="132" y="362" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="22">raw document</text>
+
+  <path d="M338 338H398" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M376 318L404 338L376 358" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="416" y="284" width="238" height="108" rx="18" fill="#F1F8EE" stroke="#BBDDB5" stroke-width="2"/>
+  <text x="444" y="328" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800">Chunk Function</text>
+  <text x="444" y="362" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="22">chunk and publish</text>
+
+  <path d="M666 338H726" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M704 318L732 338L704 358" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="744" y="284" width="238" height="108" rx="18" fill="#FFF7E8" stroke="#E7C779" stroke-width="2"/>
+  <text x="772" y="328" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800">Pub/Sub Topic</text>
+  <text x="772" y="362" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="22">message pool only</text>
+
+  <path d="M994 338H1054" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1032 318L1060 338L1032 358" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1072" y="284" width="238" height="108" rx="18" fill="#F5F2FF" stroke="#CABDF2" stroke-width="2"/>
+  <text x="1100" y="328" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800">Push Subscription</text>
+  <text x="1100" y="362" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="22">delivery rules</text>
+
+  <path d="M1322 338H1382" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1360 318L1388 338L1360 358" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1400" y="284" width="96" height="108" rx="18" fill="#FDEEEF" stroke="#E9B8C1" stroke-width="2"/>
+  <text x="1426" y="328" fill="#9B3E4F" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="800">Cloud</text>
+  <text x="1428" y="360" fill="#9B3E4F" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="800">Run</text>
+
+  <rect x="104" y="446" width="430" height="222" rx="18" fill="#FBFCFA" stroke="#D9DED5" stroke-width="2"/>
+  <text x="132" y="492" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="30" font-weight="850">Core Objects</text>
+  <text x="132" y="540" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">Topic</text>
+  <text x="236" y="540" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">stores messages only</text>
+  <text x="132" y="584" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">Subscription</text>
+  <text x="132" y="618" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">push/pull, retry, DLQ, ack</text>
+  <text x="132" y="656" fill="#9B3E4F" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">Consumer</text>
+  <text x="260" y="656" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">embed and write vectors</text>
+
+  <rect x="584" y="446" width="430" height="222" rx="18" fill="#FBFCFA" stroke="#D9DED5" stroke-width="2"/>
+  <text x="612" y="492" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="30" font-weight="850">Push vs Pull</text>
+  <text x="612" y="540" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">Push</text>
+  <text x="704" y="540" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">Pub/Sub sends HTTP POST</text>
+  <text x="704" y="574" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">serverless-friendly</text>
+  <text x="612" y="622" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">Pull</text>
+  <text x="704" y="622" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">consumer pulls messages</text>
+  <text x="704" y="656" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">better for custom workers</text>
+
+  <rect x="1064" y="446" width="432" height="222" rx="18" fill="#FBFCFA" stroke="#D9DED5" stroke-width="2"/>
+  <text x="1092" y="492" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="30" font-weight="850">Ack and Retry</text>
+  <text x="1092" y="540" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">HTTP 2xx</text>
+  <text x="1224" y="540" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">ack: success</text>
+  <text x="1092" y="588" fill="#9B3E4F" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">4xx/5xx/timeout</text>
+  <text x="1300" y="588" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">retry later</text>
+  <text x="1092" y="636" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">ack-deadline</text>
+  <text x="1272" y="636" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">too short creates duplicates</text>
+
+  <rect x="104" y="716" width="430" height="236" rx="18" fill="#FBFCFA" stroke="#D9DED5" stroke-width="2"/>
+  <text x="132" y="762" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="30" font-weight="850">Business Exactly-once</text>
+  <text x="132" y="806" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">Pub/Sub</text>
+  <text x="246" y="806" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="850">at-least-once delivery</text>
+  <text x="246" y="838" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">1 time or N times</text>
+  <text x="132" y="880" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">Code</text>
+  <text x="246" y="880" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="850">must be idempotent</text>
+  <text x="246" y="912" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">N results = 1 result</text>
+  <text x="132" y="940" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="900">one business effect</text>
+
+  <rect x="584" y="716" width="430" height="236" rx="18" fill="#FBFCFA" stroke="#D9DED5" stroke-width="2"/>
+  <text x="612" y="762" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="30" font-weight="850">DLQ: Poison Isolation</text>
+  <text x="612" y="812" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="23">Bad PDF, malformed payload,</text>
+  <text x="612" y="846" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="23">or corrupted data should not retry forever.</text>
+  <text x="612" y="898" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="850">fail -> retry 5x -> still fail -> DLQ</text>
+  <text x="612" y="932" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="23">Protect quota, logs, and normal work.</text>
+
+  <rect x="1064" y="716" width="432" height="236" rx="18" fill="#FBFCFA" stroke="#D9DED5" stroke-width="2"/>
+  <text x="1092" y="762" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="30" font-weight="850">AWS Mapping</text>
+  <text x="1092" y="810" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">GCP</text>
+  <text x="1168" y="810" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">Pub/Sub -> Subscription</text>
+  <text x="1168" y="842" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">-> Cloud Run</text>
+  <text x="1092" y="884" fill="#9B3E4F" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">AWS</text>
+  <text x="1168" y="884" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">SNS -> SQS</text>
+  <text x="1168" y="916" fill="#3F4A59" font-family="Manrope, Arial, sans-serif" font-size="22">-> Lambda / ECS</text>
+  <text x="1092" y="942" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">Same idea, different product names.</text>
+
+  <rect x="104" y="986" width="1392" height="44" rx="14" fill="#151A20"/>
+  <text x="132" y="1016" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800">End-to-end rule:</text>
+  <text x="360" y="1016" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">at-least-once + idempotent code = exactly-once business semantics</text>
+</svg>
