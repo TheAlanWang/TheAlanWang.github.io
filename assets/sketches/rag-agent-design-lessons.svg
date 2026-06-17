@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#FAFBF8"/>
+  <rect x="56" y="52" width="1488" height="796" rx="28" fill="#FFFFFF" stroke="#D8DDD4" stroke-width="2"/>
+
+  <text x="112" y="126" fill="#66717F" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="3">RAG AGENT DESIGN</text>
+  <text x="112" y="194" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="58" font-weight="850">Inside A RAG Agent</text>
+  <text x="112" y="242" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="28">Five boundaries: control flow, tools, retrieval, memory, and session isolation.</text>
+
+  <rect x="112" y="304" width="292" height="136" rx="20" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="144" y="354" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Model</text>
+  <text x="144" y="392" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">decides next shape:</text>
+  <text x="144" y="424" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">final answer or tool call</text>
+
+  <path d="M416 372H488" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M462 352L490 372L462 392" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="504" y="304" width="292" height="136" rx="20" fill="#F5F2FF" stroke="#CABDF2" stroke-width="2"/>
+  <text x="536" y="354" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Framework</text>
+  <text x="536" y="392" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">executes the graph,</text>
+  <text x="536" y="424" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">tools, memory, limits</text>
+
+  <path d="M808 372H880" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M854 352L882 372L854 392" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="896" y="304" width="292" height="136" rx="20" fill="#F1F8EE" stroke="#BBDDB5" stroke-width="2"/>
+  <text x="928" y="354" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Tools</text>
+  <text x="928" y="392" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">run real code and</text>
+  <text x="928" y="424" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">return observations</text>
+
+  <path d="M1200 372H1272" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1246 352L1274 372L1246 392" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1288" y="304" width="200" height="136" rx="20" fill="#FFF7E8" stroke="#E7C779" stroke-width="2"/>
+  <text x="1320" y="354" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Answer</text>
+  <text x="1320" y="392" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">grounded in</text>
+  <text x="1320" y="424" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">state + retrieval</text>
+
+  <rect x="112" y="504" width="260" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="136" y="548" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="25" font-weight="850">1. Control Flow</text>
+  <text x="136" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">graph executes</text>
+  <text x="136" y="632" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">model decisions</text>
+  <text x="136" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">answer or tool call</text>
+
+  <rect x="388" y="504" width="260" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="412" y="548" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="25" font-weight="850">2. Safety + Tools</text>
+  <text x="412" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">check fresh</text>
+  <text x="412" y="632" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">human turns</text>
+  <text x="412" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">schemas guide calls</text>
+
+  <rect x="664" y="504" width="260" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="688" y="548" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="25" font-weight="850">3. Retrieval</text>
+  <text x="688" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">Vertex 004</text>
+  <text x="688" y="632" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">768-dim space</text>
+  <text x="688" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">threshold weak hits</text>
+
+  <rect x="940" y="504" width="260" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="964" y="548" fill="#9B3E4F" font-family="Manrope, Arial, sans-serif" font-size="25" font-weight="850">4. Memory</text>
+  <text x="964" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">PostgresSaver</text>
+  <text x="964" y="632" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">persists state</text>
+  <text x="964" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">in-memory fallback</text>
+
+  <rect x="1216" y="504" width="272" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="1240" y="548" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="25" font-weight="850">5. Isolation</text>
+  <text x="1240" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">user:&lt;id&gt;</text>
+  <text x="1240" y="632" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="21">anon:&lt;conn_id&gt;</text>
+  <text x="1240" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">identity owns history</text>
+
+  <rect x="112" y="780" width="1376" height="44" rx="14" fill="#151A20"/>
+  <text x="144" y="810" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="850">System rule:</text>
+  <text x="298" y="810" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="22">the model chooses; the graph executes; retrieval and thread identity define correctness</text>
+</svg>
