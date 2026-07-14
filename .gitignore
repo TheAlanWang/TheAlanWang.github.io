@@ -4,3 +4,10 @@ node_modules/
 _site/
 
 .obsidian
+
+# Claude Code / AI tooling
+.claude/
+CLAUDE.md
+.superpowers/
+docs/superpowers/
+.playwright-mcp/
