@@ -1222,6 +1222,38 @@ select {
     margin: 0;
 }
 
+.project-metric-table {
+    display: grid;
+    margin: 14px 0 16px;
+    border-top: 1px solid rgba(18, 24, 33, 0.12);
+}
+
+.project-metric-table [role="row"] {
+    display: grid;
+    grid-template-columns: minmax(72px, 0.75fr) minmax(112px, 1fr) minmax(148px, 1.35fr) minmax(112px, 1fr);
+    border-bottom: 1px solid rgba(18, 24, 33, 0.12);
+}
+
+.project-metric-table [role="columnheader"],
+.project-metric-table [role="cell"] {
+    padding: 12px 12px;
+    color: var(--text);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.project-metric-table [role="columnheader"] {
+    color: var(--text);
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.project-metric-table [role="cell"] {
+    color: var(--muted);
+}
+
 .project-details-toggle {
     margin: 12px 0 0;
     padding: 0;
