@@ -4,9 +4,9 @@ title: "Pub/Sub + Cloud Run: Async Pipeline"
 description: A practical note on GCP Pub/Sub, Cloud Run, ack/retry semantics, DLQ, idempotent consumers, and the AWS SNS/SQS/Lambda mapping.
 excerpt: A practical note on GCP Pub/Sub, Cloud Run, ack/retry semantics, DLQ, idempotent consumers, and the AWS SNS/SQS/Lambda mapping.
 date: 2026-05-19
-category: Cloud
-subcategory: GCP
-topic: Pub/Sub Async Pipeline
+category: Knowledge
+subcategory: Cloud
+topic: GCP
 kind: Note
 tags:
   - posts
