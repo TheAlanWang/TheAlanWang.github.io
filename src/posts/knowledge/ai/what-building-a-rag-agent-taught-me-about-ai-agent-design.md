@@ -4,9 +4,9 @@ title: "Inside a RAG Agent: Runtime, Memory, Tools, and Retrieval"
 description: "Five design boundaries inside a LangGraph RAG agent: control flow, safety and tools, retrieval compatibility, checkpointed memory, and session isolation."
 excerpt: "Five design boundaries inside a LangGraph RAG agent: control flow, safety and tools, retrieval compatibility, checkpointed memory, and session isolation."
 date: 2026-06-17
-category: AI
-subcategory: Agents
-topic: RAG Agent Design
+category: Knowledge
+subcategory: AI
+topic: Agents
 kind: Note
 tags:
   - posts
