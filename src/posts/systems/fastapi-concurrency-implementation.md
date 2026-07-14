@@ -4,9 +4,9 @@ title: FastAPI Concurrency Implementation
 description: "A FastAPI concurrency implementation note covering Uvicorn workers, event loops, AnyIO thread pools, route dispatch, database pools, and common performance traps."
 excerpt: "How FastAPI actually runs sync and async routes: Uvicorn worker processes, one event-loop thread, AnyIO's thread pool, database pool sizing, and deployment traps."
 date: 2026-05-08T13:00:00-07:00
-category: Backend
-subcategory: FastAPI
-topic: Concurrency
+category: Knowledge
+subcategory: Backend
+topic: FastAPI
 kind: Note
 tags:
   - posts

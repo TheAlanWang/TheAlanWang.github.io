@@ -4,9 +4,9 @@ title: A Practical AWS Migration Path for Mature Stateful Monoliths
 description: A practical migration note for mature stateful monoliths, using a classic RuoYi-style Spring Boot system as the concrete example.
 excerpt: A practical migration note for mature stateful monoliths, using a classic RuoYi-style Spring Boot system as the concrete example.
 date: 2026-04-19
-category: Cloud
-subcategory: AWS
-topic: Migration
+category: Projects
+subcategory: Cloud
+topic: AWS
 kind: Project
 tags:
   - posts

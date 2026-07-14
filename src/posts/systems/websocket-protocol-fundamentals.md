@@ -4,9 +4,9 @@ title: WebSocket Protocol Fundamentals
 description: A protocol-level explanation of WebSocket, HTTP Upgrade, frames, ping/pong, close codes, and common misconceptions.
 excerpt: WebSocket starts as an HTTP Upgrade request, switches to a frame-based protocol, and keeps one TCP connection open for full-duplex realtime communication.
 date: 2026-05-08T21:45:00-07:00
-category: Backend
-subcategory: WebSocket
-topic: Protocol
+category: Knowledge
+subcategory: Backend
+topic: WebSocket
 kind: Note
 tags:
   - posts

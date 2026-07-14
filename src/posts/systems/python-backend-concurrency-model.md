@@ -4,9 +4,9 @@ title: Python Backend Concurrency Model
 description: "A Python backend concurrency note covering processes, threads, coroutines, sync and async execution, the GIL, and I/O-bound versus CPU-bound workload choices."
 excerpt: "A Python backend concurrency cheat sheet: processes, threads, coroutines, sync versus async, the GIL, and how to choose between threads, async, and processes."
 date: 2026-05-08T12:00:00-07:00
-category: Backend
-subcategory: Concurrency
-topic: Python Runtime
+category: Knowledge
+subcategory: Backend
+topic: Concurrency
 kind: Note
 tags:
   - posts

@@ -4,9 +4,9 @@ title: WebSocket Connection Manager
 description: A FastAPI WebSocket connection manager for tracking online users, multiple tabs, targeted sends, broadcast, and disconnect cleanup.
 excerpt: A WebSocket connection manager lets the backend remember who is connected, push to a specific user, broadcast to everyone, and clean up disconnected sockets.
 date: 2026-05-10T15:45:00-07:00
-category: Backend
-subcategory: WebSocket
-topic: Connection Manager
+category: Knowledge
+subcategory: Backend
+topic: WebSocket
 kind: Note
 tags:
   - posts

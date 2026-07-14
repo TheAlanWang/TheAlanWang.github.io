@@ -4,9 +4,9 @@ title: Network Layering Model
 description: A visual reference for the TCP/IP five-layer model, protocol ownership, TLS placement, and network debugging order.
 excerpt: A compact poster explaining the TCP/IP five-layer model, where common protocols belong, how HTTPS travels through the stack, and how to debug network issues by layer.
 date: 2026-05-08T21:15:00-07:00
-category: Networking
-subcategory: Foundations
-topic: TCP/IP
+category: Knowledge
+subcategory: Networking
+topic: Foundations
 kind: Poster
 tags:
   - posts

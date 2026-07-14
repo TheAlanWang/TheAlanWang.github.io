@@ -4,9 +4,9 @@ title: Python Command Cheatsheet
 description: A quick command cheatsheet for checking Python, managing virtual environments, handling packages, and running files or modules.
 excerpt: A quick command cheatsheet for checking Python, managing virtual environments, handling packages, and running files or modules.
 date: 2026-04-01
-category: Languages
-subcategory: Python
-topic: Python CLI
+category: Knowledge
+subcategory: Tools
+topic: Python
 kind: Cheatsheet
 tags:
   - posts

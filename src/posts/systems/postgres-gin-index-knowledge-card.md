@@ -4,9 +4,9 @@ title: "Postgres Indexing Review: B-tree, B+ Tree, and GIN"
 description: "A compact poster and bilingual review note for Postgres indexing: table versus index, primary keys, B-tree and B+ tree behavior, GIN indexes, jsonb operators, SQL index syntax, trade-offs, and interview Q&A."
 excerpt: "A compact poster and bilingual review note for Postgres indexing: table versus index, B-tree and B+ tree behavior, GIN indexes, jsonb operator traps, and index selection strategy."
 date: 2026-05-12T12:00:00-07:00
-category: Data Systems
-subcategory: PostgreSQL
-topic: Indexing
+category: Knowledge
+subcategory: Data Systems
+topic: PostgreSQL
 kind: Note
 tags:
   - posts

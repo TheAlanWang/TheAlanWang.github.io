@@ -4,9 +4,9 @@ title: HPC + GPU + PyTorch Practical Guide
 description: A practical note for running PyTorch on Northeastern Explorer GPU nodes, from login and CUDA setup to forward compute and backpropagation.
 excerpt: A practical note for the full HPC to GPU to CUDA to PyTorch to backpropagation workflow on Northeastern Explorer.
 date: 2026-04-30
-category: HPC
-subcategory: GPU / PyTorch
-topic: PyTorch Backpropagation
+category: Knowledge
+subcategory: HPC
+topic: GPU / PyTorch
 kind: Guide
 tags:
   - posts

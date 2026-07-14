@@ -4,9 +4,9 @@ title: Building a ReAct Agent
 description: A small ReAct agent project that makes the reasoning-action-observation loop visible instead of hiding tool use behind built-in function calling.
 excerpt: A small ReAct agent project that makes the reasoning-action-observation loop visible instead of hiding tool use behind built-in function calling.
 date: 2026-04-15
-category: AI
-subcategory: Agents
-topic: ReAct Agents
+category: Projects
+subcategory: AI
+topic: Agents
 kind: Project
 tags:
   - posts

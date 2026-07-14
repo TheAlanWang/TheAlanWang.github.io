@@ -4,9 +4,9 @@ title: TCP Handshake Basics
 description: A simple poster explaining TCP three-way connection setup, SYN, ACK, FIN, and four-way connection teardown.
 excerpt: A compact note on how TCP opens with SYN, SYN-ACK, ACK and closes with FIN, ACK, FIN, ACK.
 date: 2026-05-07T12:00:00-07:00
-category: Networking
-subcategory: Protocols
-topic: TCP
+category: Knowledge
+subcategory: Networking
+topic: Protocols
 kind: Note
 tags:
   - posts

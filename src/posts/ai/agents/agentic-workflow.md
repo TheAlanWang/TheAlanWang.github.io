@@ -4,9 +4,9 @@ title: "Agentic Workflow: Reason, Act, Observe"
 description: A compact sketch of a tool-first agentic workflow, showing how reasoning, tool use, observation, memory, and human review fit together in one loop.
 excerpt: A compact sketch of a tool-first agentic workflow, showing how reasoning, tool use, observation, memory, and human review fit together in one loop.
 date: 2026-04-10
-category: AI
-subcategory: Agents
-topic: Agentic Workflow
+category: Knowledge
+subcategory: AI
+topic: Agents
 kind: Note
 tags:
   - posts

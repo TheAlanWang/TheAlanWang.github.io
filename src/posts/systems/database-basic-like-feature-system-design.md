@@ -4,9 +4,9 @@ title: "Database Basic: Designing a Like Feature"
 description: A compact database system design note covering table modeling, consistency, query performance, and scalability for a like feature.
 excerpt: A compact database system design note covering table modeling, consistency, query performance, and scalability for a like feature.
 date: 2026-05-11
-category: Data Systems
-subcategory: Database Basics
-topic: Like System Design
+category: System Design
+subcategory: Data Systems
+topic: Database Basics
 kind: Note
 tags:
   - posts

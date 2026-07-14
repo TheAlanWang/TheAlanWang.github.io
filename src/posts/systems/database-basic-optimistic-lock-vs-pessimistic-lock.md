@@ -4,9 +4,9 @@ title: "Optimistic Lock vs Pessimistic Lock"
 description: A short database concurrency note on when to use pessimistic locking, optimistic locking, and database constraints.
 excerpt: A short database concurrency note on when to use pessimistic locking, optimistic locking, and database constraints.
 date: 2026-05-11
-category: Data Systems
-subcategory: Database Basics
-topic: Concurrency Control
+category: Knowledge
+subcategory: Data Systems
+topic: Database Basics
 kind: Note
 tags:
   - posts

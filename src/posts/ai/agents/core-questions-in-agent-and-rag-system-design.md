@@ -4,9 +4,9 @@ title: "Core Questions in Agent and RAG System Design"
 description: A practical note on core question clusters in agent and RAG system design, with key answers, best practices, concrete examples, and references.
 excerpt: A practical note on core question clusters in agent and RAG system design, with key answers, best practices, concrete examples, and references.
 date: 2026-04-22
-category: AI
-subcategory: Agents
-topic: Agent Design
+category: System Design
+subcategory: AI
+topic: Agents
 kind: Note
 tags:
   - posts

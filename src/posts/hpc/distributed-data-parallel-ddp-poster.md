@@ -4,9 +4,9 @@ title: "Distributed Data Parallel"
 description: "A visual poster explaining PyTorch DDP, all-reduce, NCCL, Forge usage, and the DDP versus FSDP decision."
 excerpt: "A compact visual guide to DDP: full model copies, per-GPU batches, gradient all-reduce, NCCL, and when Forge should use DDP versus FSDP."
 date: 2026-05-01
-category: HPC
-subcategory: GPU / PyTorch
-topic: Distributed Training
+category: Knowledge
+subcategory: HPC
+topic: GPU / PyTorch
 kind: Note
 tags:
   - posts

@@ -4,9 +4,9 @@ title: "Python GIL: Why Multiple Threads Do Not Mean Parallel Python"
 description: "A Python backend concurrency note explaining the Global Interpreter Lock, why only one thread can run Python bytecode at a time in one CPython process, and why this is separate from async/await."
 excerpt: "The GIL means one CPython process can run only one Python-bytecode thread at a time. This is a threading issue, not an async/await issue."
 date: 2026-05-12T16:00:00-07:00
-category: Backend
-subcategory: Concurrency
-topic: Python Runtime
+category: Knowledge
+subcategory: Backend
+topic: Concurrency
 kind: Note
 tags:
   - posts

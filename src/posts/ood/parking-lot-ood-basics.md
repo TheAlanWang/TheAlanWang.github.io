@@ -4,8 +4,8 @@ title: Parking Lot OOD Basics
 description: An entry-level object-oriented design note for a parking lot system, focused on vehicles, spots, and simple spot assignment.
 excerpt: An entry-level object-oriented design note for a parking lot system, focused on vehicles, spots, and simple spot assignment.
 date: 2026-05-07
-category: OOD
-subcategory: System Design
+category: System Design
+subcategory: OOD
 topic: Parking Lot
 kind: Note
 tags:

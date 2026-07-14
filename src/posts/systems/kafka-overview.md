@@ -4,9 +4,9 @@ title: Kafka Overview
 description: A quick structural sketch of brokers, partitions, consumer groups, and replication.
 excerpt: A quick structural sketch of brokers, partitions, consumer groups, and replication.
 date: 2026-03-30
-category: Messaging
-subcategory: Event Streaming
-topic: Kafka
+category: Knowledge
+subcategory: Messaging
+topic: Event Streaming
 kind: Note
 tags:
   - posts

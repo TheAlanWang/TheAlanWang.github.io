@@ -4,9 +4,9 @@ title: Redis Overview
 description: A compact Redis sketch covering data types, commands, cache patterns, and configuration notes.
 excerpt: A compact Redis sketch covering data types, commands, cache patterns, and configuration notes.
 date: 2026-04-08
-category: Data Systems
-subcategory: Redis
-topic: Overview
+category: Knowledge
+subcategory: Data Systems
+topic: Redis
 kind: Note
 tags:
   - posts

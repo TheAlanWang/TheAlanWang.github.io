@@ -4,9 +4,9 @@ title: OOD Interview Answer Flow
 description: A compact interview reference for structuring object-oriented design answers and explaining the four core OOP principles.
 excerpt: A compact interview reference for structuring object-oriented design answers and explaining the four core OOP principles.
 date: 2026-05-06
-category: OOD
-subcategory: Interview Prep
-topic: Answer Flow
+category: System Design
+subcategory: OOD
+topic: Interview Prep
 kind: Cheatsheet
 tags:
   - posts

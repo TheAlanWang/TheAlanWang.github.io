@@ -4,9 +4,9 @@ title: FastAPI WebSocket Handler Lifecycle
 description: A minimal FastAPI WebSocket echo endpoint focused on accept, receive loops, send operations, disconnect handling, and cleanup.
 excerpt: Understand why a FastAPI WebSocket handler lives as long as the connection lives, from accept to receive loop to disconnect cleanup.
 date: 2026-05-08T22:05:00-07:00
-category: Backend
-subcategory: WebSocket
-topic: FastAPI Handler Lifecycle
+category: Knowledge
+subcategory: Backend
+topic: WebSocket
 kind: Note
 tags:
   - posts
