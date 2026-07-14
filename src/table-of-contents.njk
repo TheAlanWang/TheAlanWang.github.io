@@ -79,6 +79,14 @@ navKey: table-of-contents
             };
             openTarget();
             window.addEventListener("hashchange", openTarget);
+            document.querySelectorAll('a.meta-pill[href^="#"]').forEach((pill) => {
+                pill.addEventListener("click", () => {
+                    const target = document.getElementById(pill.getAttribute("href").slice(1));
+                    if (target && target.tagName === "DETAILS") {
+                        target.open = true;
+                    }
+                });
+            });
         })();
     </script>
 </div>
