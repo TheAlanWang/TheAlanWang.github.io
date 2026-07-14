@@ -1,8 +1,8 @@
 ---
 layout: layouts/base.njk
-title: Knowledge Map
-description: A topic-based map of Alan Wang's technical notes, sketches, and study posts.
-navKey: knowledge-map
+title: Table of Contents
+description: A table of contents for Alan Wang's posts, grouped by section, domain, and topic.
+navKey: table-of-contents
 ---
 <div class="layout-grid">
     <aside class="identity-rail">
@@ -13,7 +13,7 @@ navKey: knowledge-map
         </div>
 
         <div class="identity-meta">
-            {% for category in collections.knowledgeMap %}
+            {% for category in collections.tableOfContents %}
                 <a href="#{{ category.name | slugify }}" class="meta-pill">{{ category.name }}</a>
             {% endfor %}
         </div>
@@ -21,14 +21,14 @@ navKey: knowledge-map
 
     <main class="content-column">
         <section class="lead-panel lead-panel-archive">
-            <p class="section-kicker">Knowledge Map</p>
-            <h2 class="lead-title">Topic Index</h2>
-            <p class="lead-copy">Posts grouped by category and subcategory.</p>
+            <p class="section-kicker">Contents</p>
+            <h2 class="lead-title">Table of Contents</h2>
+            <p class="lead-copy">Posts grouped by section, domain, and topic.</p>
         </section>
 
         <section class="content-section knowledge-map-section">
-            {% for category in collections.knowledgeMap %}
-                <details class="knowledge-category" id="{{ category.name | slugify }}" open>
+            {% for category in collections.tableOfContents %}
+                <details class="knowledge-category" id="{{ category.name | slugify }}">
                     <summary class="knowledge-category-summary">
                         <span class="knowledge-toggle" aria-hidden="true"></span>
                         <span class="knowledge-category-copy">
@@ -67,4 +67,18 @@ navKey: knowledge-map
             <p>&copy; 2026 {{ site.name }}</p>
         </footer>
     </main>
+    <script>
+        (() => {
+            const openTarget = () => {
+                const hash = decodeURIComponent(window.location.hash.slice(1));
+                if (!hash) return;
+                const target = document.getElementById(hash);
+                if (target && target.tagName === "DETAILS") {
+                    target.open = true;
+                }
+            };
+            openTarget();
+            window.addEventListener("hashchange", openTarget);
+        })();
+    </script>
 </div>

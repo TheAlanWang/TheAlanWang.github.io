@@ -29,7 +29,7 @@ module.exports = function (eleventyConfig) {
         return collectionApi.getFilteredByTag("posts").sort((left, right) => right.date - left.date).slice(0, 5);
     });
 
-    eleventyConfig.addCollection("knowledgeMap", (collectionApi) => {
+    eleventyConfig.addCollection("tableOfContents", (collectionApi) => {
         const posts = collectionApi.getFilteredByTag("posts").sort((left, right) => {
             const categoryCompare = (left.data.category || "").localeCompare(right.data.category || "");
             if (categoryCompare) return categoryCompare;
