@@ -111,16 +111,15 @@ Rules applied:
 
 ## 3. New post: production agent lessons-learned
 
-- **File:** `src/posts/ai/agents/shipping-a-production-rag-agent.md`
+- **File:** `src/posts/ai/agents/rag-agent-for-a-public-health-app.md`
 - **Language:** English (site-wide convention).
 - **Frontmatter:**
-  - title: working title "Shipping a RAG Agent to Production: What Actually Broke"
-    (final wording adjustable at review)
+  - title: "Shipping a RAG Agent for a Public Health App: What Actually Broke"
   - date: 2026-07-13
   - category: Projects / subcategory: AI / topic: Agents / kind: Project
   - image: `/assets/sketches/ai-agent-architecture.png` (copied from
     `/Users/alanwang/MyFiles/excalidraw/ai_agent.png`), imageFit: contain
-  - permalink: `/posts/shipping-a-production-rag-agent/index.html`
+  - permalink: `/posts/rag-agent-for-a-public-health-app/index.html`
   - tags: posts
 - **Structure (per approved outline):**
   1. **Architecture overview** — one paragraph walking the diagram: WebSocket entry →
