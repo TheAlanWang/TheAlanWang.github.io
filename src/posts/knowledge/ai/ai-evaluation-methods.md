@@ -76,6 +76,12 @@ from 1-5: 5 = every claim supported, 1 = mostly unsupported.
 
 Judges scale to thousands of samples per day at API cost, which is why they carry most of the load in modern eval stacks. But a judge is itself an LLM, with known biases: it favors longer answers, favors its own model family's style, and drifts when the judge model is upgraded. Treat judge scores as relative signals — great for "did this change make things better or worse?", risky as absolute truth until calibrated against the next method.
 
+For RAG specifically, the metrics from this section and the last fit into one picture. A RAG eval sample has four artifacts — question, retrieved contexts, answer, and (optionally) a reference — and each metric is a comparison along one edge:
+
+![RAG evaluation quad: question, contexts, answer, and reference, with a metric on each edge](/assets/sketches/rag-evaluation-quad.png)
+
+The edges touching **Reference** (answer correctness, context recall and precision) need ground truth, so they belong to reference-based evaluation. Every other edge — faithfulness, answer relevancy, context relevancy — compares artifacts the system produced itself, which is why those are judge metrics and why they can run on live traffic where no reference exists. The quad also separates *retrieval* problems (the Contexts edges) from *generation* problems (the Answer edges), which is usually the first question to settle when a RAG system scores poorly.
+
 ## Human
 
 A human expert compares the AI answer against their own judgment. This is the gold standard — humans catch the subtle domain errors every automated method misses — and it is also the slowest and most expensive method, so it can't be your everyday loop.
