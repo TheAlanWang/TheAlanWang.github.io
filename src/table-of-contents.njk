@@ -33,6 +33,7 @@ navKey: table-of-contents
                         <span class="knowledge-toggle" aria-hidden="true"></span>
                         <span class="knowledge-category-copy">
                             <span class="knowledge-category-title">{{ category.name }}</span>
+                            <span class="knowledge-count">{{ category.count }}</span>
                         </span>
                     </summary>
 
@@ -42,12 +43,13 @@ navKey: table-of-contents
                                 <summary class="knowledge-subcategory-summary">
                                     <span class="knowledge-toggle knowledge-toggle-small" aria-hidden="true"></span>
                                     <span class="knowledge-subcategory-title">{{ subcategory.name }}</span>
+                                    <span class="knowledge-count">{{ subcategory.count }}</span>
                                 </summary>
 
                                 <ul class="knowledge-post-list">
                                     {% for post in subcategory.posts %}
                                         <li class="knowledge-post">
-                                            {% if post.data.topic %}
+                                            {% if post.data.topic and (loop.first or subcategory.posts[loop.index0 - 1].data.topic != post.data.topic) %}
                                                 <span class="knowledge-post-topic">{{ post.data.topic }}</span>
                                             {% endif %}
                                             <h5 class="knowledge-post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h5>
