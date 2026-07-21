@@ -120,7 +120,7 @@ select {
 
 .identity-rail {
     position: sticky;
-    top: 84px;
+    top: 72px;
     display: grid;
     gap: 24px;
     min-height: calc(100vh - 112px);
