@@ -5,6 +5,43 @@ pageShellClass: post-layout
 ---
 <main class="post-shell">
     <div class="post-frame">
+        <aside class="post-index" aria-label="Table of contents">
+            <nav class="post-index-nav">
+                <p class="post-index-label">Table of Contents</p>
+                <ul class="post-index-tree">
+                    {% for tocCategory in collections.tableOfContents %}
+                        <li class="post-index-category">
+                            <details {% if tocCategory.name == category %}open{% endif %}>
+                                <summary class="post-index-category-summary">
+                                    <span class="post-index-toggle" aria-hidden="true"></span>
+                                    {{ tocCategory.name }}
+                                </summary>
+                                <ul class="post-index-subcategory-list">
+                                    {% for tocSubcategory in tocCategory.subcategories %}
+                                        <li>
+                                            <details {% if tocCategory.name == category and tocSubcategory.name == subcategory %}open{% endif %}>
+                                                <summary class="post-index-subcategory-summary">
+                                                    <span class="post-index-toggle post-index-toggle-small" aria-hidden="true"></span>
+                                                    {{ tocSubcategory.name }}
+                                                </summary>
+                                                <ul class="post-index-post-list">
+                                                    {% for tocPost in tocSubcategory.posts %}
+                                                        <li>
+                                                            <a href="{{ tocPost.url }}"{% if tocPost.url == page.url %} class="current"{% endif %}>{{ tocPost.data.title }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </details>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </details>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </aside>
+
         <article class="post-article">
             <a href="/posts/" class="back-link">All posts</a>
 
