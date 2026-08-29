@@ -1,8 +1,8 @@
 ---
 layout: layouts/post.njk
 title: "VLM Basics: What a Model Actually Sees"
-description: A frame never reaches a vision-language model as pixels. Six facts about images, JPEG, base64, and vision encoders, checked against a real evaluation pipeline.
-excerpt: A frame never reaches a vision-language model as pixels. Six facts about images, JPEG, base64, and vision encoders, checked against a real evaluation pipeline.
+description: A frame never reaches a vision-language model as pixels. Seven facts about images, JPEG, base64, vision encoders, and where VLMs still fall short, checked against a real evaluation pipeline.
+excerpt: A frame never reaches a vision-language model as pixels. Seven facts about images, JPEG, base64, vision encoders, and where VLMs still fall short, checked against a real evaluation pipeline.
 date: 2026-08-28T12:00:00-07:00
 category: Knowledge
 subcategory: AI
@@ -125,6 +125,11 @@ The two added pieces do different jobs, and it's easy to blur them together. The
 
 ![VLM architecture: a vision encoder, an adapter, and an LLM, each with a different job](/assets/sketches/vlm-basics-architecture.svg)
 
-## The System In One Sentence
+## 7. What VLMs Still Get Wrong
 
-None of this shows up if you only count words. A 30-second video segment can look cheap on the page, one short transcript, one paragraph of description, while actually carrying 76-90 image frames underneath (the sampling density this pipeline uses). Every one of those frames gets cut into vectors that compete for the same context budget as that text, and nothing in the text itself reveals it: the real cost is a property of how many frames went in, not how many words came out.
+Knowing how the pieces fit together also explains where they fall short:
+
+- **Resolution is a token-cost lever, not just a sharpness setting.** OpenAI's high-detail mode resizes an image so its shortest side is 768px, then tiles the result into 512x512 blocks, charging a base 85 tokens plus 170 tokens per tile: a 1024x1024 image becomes a 2x2 grid of tiles, 765 tokens total. The same image sent in low-detail mode skips tiling entirely, a flat 85 tokens, regardless of size.
+- **Images get silently resized before the model ever sees them.** This pipeline's own frame extraction (`pipeline/frames.py`) caps every frame at 1024px on its longest side and never upscales, so a 4K source video is already coarsened down to that cap before a single frame reaches any API.
+- **Counting and precise position are a known weak spot.** Ask a VLM "what's in this photo" and it usually does well. Ask it "exactly how many people are in this photo" or "is the cup to the left or right of the plate" and it fails far more often, even on simple images. A likely reason: the vision encoder was mostly trained to match a whole picture to a one-line caption like "two people at a table", which teaches it *what* is in a picture, not *exactly where* things are or *how many* there are.
+- **Reading text in an image is the exception, and it's a separate skill.** VLMs are often genuinely good at reading a sign or label out of a photo, but that strength seems to come from a different, more OCR-like process for recognizing text shapes, not from the same spatial reasoning that struggles with counting and position. So a model can transcribe a paragraph off a photo perfectly while still getting "how many people are in it" wrong.
