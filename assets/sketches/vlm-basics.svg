@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#FAFBF8"/>
+  <rect x="56" y="52" width="1488" height="796" rx="28" fill="#FFFFFF" stroke="#D8DDD4" stroke-width="2"/>
+
+  <text x="112" y="126" fill="#66717F" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="3">VLM BASICS</text>
+  <text x="112" y="194" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="58" font-weight="850">How A VLM Actually Sees A Frame</text>
+  <text x="112" y="242" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="28">A picture never reaches the model as pixels: it goes through four transformations first.</text>
+
+  <rect x="112" y="304" width="296" height="136" rx="20" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="144" y="354" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">JPEG File</text>
+  <text x="144" y="392" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">compressed on disk,</text>
+  <text x="144" y="424" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">ready to transmit</text>
+
+  <path d="M420 372H460" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M436 352L464 372L436 392" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="472" y="304" width="296" height="136" rx="20" fill="#F5F2FF" stroke="#CABDF2" stroke-width="2"/>
+  <text x="504" y="354" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Base64 Text</text>
+  <text x="504" y="392" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">what crosses the</text>
+  <text x="504" y="424" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">network, inside JSON</text>
+
+  <path d="M780 372H820" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M796 352L824 372L796 392" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="832" y="304" width="296" height="136" rx="20" fill="#F1F8EE" stroke="#BBDDB5" stroke-width="2"/>
+  <text x="864" y="354" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Raw Pixels</text>
+  <text x="864" y="392" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">decoded numbers,</text>
+  <text x="864" y="424" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">server-side, fleeting</text>
+
+  <path d="M1140 372H1180" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1156 352L1184 372L1156 392" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1192" y="304" width="296" height="136" rx="20" fill="#FFF7E8" stroke="#E7C779" stroke-width="2"/>
+  <text x="1224" y="354" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Vision Vectors</text>
+  <text x="1224" y="392" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">what the transformer</text>
+  <text x="1224" y="424" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="23">actually reads</text>
+
+  <rect x="112" y="504" width="256" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="136" y="548" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">Token ≠ Char</text>
+  <text x="136" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">smallest unit is a</text>
+  <text x="136" y="630" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">meaningful chunk</text>
+  <text x="136" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">"The" is one token</text>
+
+  <rect x="392" y="504" width="256" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="416" y="548" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">No Motion</text>
+  <text x="416" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">sampled at 2fps,</text>
+  <text x="416" y="630" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">independent snapshots</text>
+  <text x="416" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">too fast: invisible</text>
+
+  <rect x="672" y="504" width="256" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="696" y="548" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">Costs Tokens</text>
+  <text x="696" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">image becomes a few</text>
+  <text x="696" y="630" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">hundred vectors</text>
+  <text x="696" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">shares budget with text</text>
+
+  <rect x="952" y="504" width="256" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="976" y="548" fill="#9B3E4F" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">Not LLM+Eyes</text>
+  <text x="976" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">separate vision encoder,</text>
+  <text x="976" y="630" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">trained and aligned</text>
+  <text x="976" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">not just plugged in</text>
+
+  <rect x="1232" y="504" width="256" height="232" rx="18" fill="#FBFCFA" stroke="#D8DDD4" stroke-width="2"/>
+  <text x="1256" y="548" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="21" font-weight="850">Overflow Bug</text>
+  <text x="1256" y="598" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">65,536-token cap,</text>
+  <text x="1256" y="630" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="20">dense 30s segments</text>
+  <text x="1256" y="682" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">47.5% unanswered</text>
+
+  <rect x="112" y="780" width="1376" height="44" rx="14" fill="#151A20"/>
+  <text x="144" y="810" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="850">System rule:</text>
+  <text x="298" y="810" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="22">a frame is never pixels to the model, it is vectors competing with text tokens for the same context window</text>
+</svg>

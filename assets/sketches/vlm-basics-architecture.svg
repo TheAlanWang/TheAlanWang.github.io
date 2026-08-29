@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="460" viewBox="0 0 1400 460" fill="none">
+  <rect width="1400" height="460" fill="#FAFBF8"/>
+  <rect x="40" y="40" width="1320" height="380" rx="24" fill="#FFFFFF" stroke="#D8DDD4" stroke-width="2"/>
+
+  <text x="80" y="96" fill="#66717F" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="2">VLM ARCHITECTURE</text>
+  <text x="80" y="140" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="32" font-weight="850">Three Pieces, Three Jobs</text>
+  <text x="80" y="170" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="17">A vision encoder, an adapter, and an LLM, stacked together.</text>
+
+  <rect x="80" y="196" width="340" height="118" rx="18" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="104" y="230" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="850">Vision Encoder</text>
+  <text x="104" y="262" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">pretrained on huge image sets,</text>
+  <text x="104" y="286" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">already knows cat from dog</text>
+
+  <path d="M430 255H470" stroke="#17202A" stroke-width="3" stroke-linecap="round"/>
+  <path d="M446 235L474 255L446 275" stroke="#17202A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="510" y="196" width="340" height="118" rx="18" fill="#F5F2FF" stroke="#CABDF2" stroke-width="2"/>
+  <text x="534" y="230" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="850">Adapter</text>
+  <text x="534" y="262" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">projects those vectors into</text>
+  <text x="534" y="286" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">the LLM's own embedding space</text>
+
+  <path d="M860 255H900" stroke="#17202A" stroke-width="3" stroke-linecap="round"/>
+  <path d="M876 235L904 255L876 275" stroke="#17202A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="940" y="196" width="340" height="118" rx="18" fill="#F1F8EE" stroke="#BBDDB5" stroke-width="2"/>
+  <text x="964" y="230" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="850">LLM</text>
+  <text x="964" y="262" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">reads translated vision vectors</text>
+  <text x="964" y="286" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">next to text, reasons over both</text>
+
+  <rect x="80" y="340" width="1200" height="44" rx="14" fill="#151A20"/>
+  <text x="104" y="368" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19" font-weight="850">In short:</text>
+  <text x="216" y="368" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19">vision encoder sees, adapter translates, LLM reasons over both together</text>
+</svg>
