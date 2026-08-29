@@ -32,9 +32,9 @@ module.exports = {
         name: "Tracker",
         type: "Real-time collaborative task management platform with live workspace updates and optimized dashboard aggregation",
         period: "Mar 2026 – Present",
-        url: "https://tracker.thealanwang.xyz",
+        url: "https://gettrackly.dev/",
         details: [
-          "Tracker is a full-stack project management system for small teams, built around Linear/Jira-style issue tracking with hierarchical OKR-style goals, sprints, task dependencies, real-time notifications, dark mode, and CSV export. The project is live at <strong>tracker.thealanwang.xyz</strong>, with source code at <strong>github.com/TheAlanWang/tracker</strong>.",
+          "Tracker is a full-stack project management system for small teams, built around Linear/Jira-style issue tracking with hierarchical OKR-style goals, sprints, task dependencies, real-time notifications, dark mode, and CSV export. The project is live at <strong>gettrackly.dev</strong>, with source code at <strong>github.com/TheAlanWang/tracker</strong>.",
           "<strong>Tech stack</strong><br><strong>TypeScript</strong> · <strong>React</strong> (<strong>Vite</strong>) · <strong>FastAPI</strong> · <strong>Postgres</strong> (<strong>Supabase</strong>) · <strong>Vercel</strong> · <strong>Fly.io</strong> · <strong>GitHub Actions</strong>",
           "<strong>Full-stack product design</strong><br>Designed and shipped a team issue tracker with hierarchical OKR-style goals, sprint planning, task dependencies with <strong>BFS cycle detection</strong>, real-time notifications, dark mode, and CSV export. The database uses an <strong>RLS-first schema</strong> across <strong>15 tables</strong> and <strong>17 migrations</strong>, with per-request user-scoped JWTs so Postgres triggers can see the real actor.",
           "<strong>Backend performance</strong><br>Profiled <code>/me/dashboard</code> latency in production with <strong>5,000 sequential requests</strong> before and after the async migration.<span class=\"project-metric-table\" role=\"table\" aria-label=\"Dashboard latency before and after async migration\"><span role=\"row\"><span role=\"columnheader\">Metric</span><span role=\"columnheader\">Before sync</span><span role=\"columnheader\">After async + gather</span><span role=\"columnheader\">Improvement</span></span><span role=\"row\"><span role=\"cell\">p50</span><span role=\"cell\">1584 ms</span><span role=\"cell\">708 ms</span><span role=\"cell\">-55% (2.2x)</span></span><span role=\"row\"><span role=\"cell\">p90</span><span role=\"cell\">1855 ms</span><span role=\"cell\">1076 ms</span><span role=\"cell\">-42%</span></span><span role=\"row\"><span role=\"cell\">p95</span><span role=\"cell\">2053 ms</span><span role=\"cell\">1114 ms</span><span role=\"cell\">-46% (1.8x)</span></span><span role=\"row\"><span role=\"cell\">p99</span><span role=\"cell\">2452 ms</span><span role=\"cell\">1298 ms</span><span role=\"cell\">-47%</span></span></span>I isolated the bottleneck to backend fan-out across <strong>15 sequential Supabase REST queries</strong>, migrated the FastAPI service and router layer from sync <code>supabase.Client</code> to async <code>AsyncClient</code>, and parallelized independent queries with <code>asyncio.gather</code>.",
@@ -79,8 +79,22 @@ module.exports = {
     ],
     experience: [
       {
+        role: "Software Engineer Intern (AI Backend)",
+        organization: "Kokun",
+        organizationUrl: "https://kokun.space/",
+        logo: "/assets/logos/companies/com_kokun.jpeg",
+        period: "May 2026 – Aug 2026",
+        points: [
+          "Shipped a production <strong>RAG agent</strong> for a public-health app (500+ users, 1,100+ papers, 1.84s TTFT); designed the architecture spanning retrieval via <strong>LangChain</strong>, tool orchestration via <strong>LangGraph</strong>, safety routing, and multi-turn memory.",
+          "Built an async embedding pipeline on <strong>GCP</strong> (Pub/Sub, Cloud Run, Vertex AI), embedding <strong>27K+</strong> chunks into <strong>pgvector</strong>.",
+          "Built an 87-case, 3 layers evaluation pipeline combining deterministic <strong>execution-trace assertions</strong>, reference-fact checks, and <strong>RAGAS</strong>-based LLM judging.",
+          "Detected and fixed a silent safety <strong>regression</strong> from tool calling, raising crisis-resource inclusion from <strong>24.1 to 29.0</strong>/30; validated the fix across multiple models (<strong>Gemini</strong>, <strong>GPT</strong>, and <strong>Claude</strong>).",
+        ],
+      },
+      {
         role: "Technical Project Manager",
         organization: "Shanghai Securities",
+        logo: "/assets/logos/companies/com_shanghaisecurities.png",
         period: "Apr 2022 – Dec 2024",
         points: [
           "Implemented and deployed <strong>integrated REST APIs</strong> across <strong>3 enterprise systems</strong> (HR, reimbursement, project management) into an Office Automation system serving <strong>3K+ users</strong>, improving cross-system workflow automation and internal access efficiency.",
@@ -91,6 +105,7 @@ module.exports = {
       {
         role: "Tech Consultant (Risk & Data Analytics) ",
         organization: "Deloitte",
+        logo: "/assets/logos/companies/demo_deloitte.png",
         period: "Dec 2021 – Apr 2022",
         points: [
           "Engineered a <strong>Python and SQL ETL pipeline</strong> for <strong>Basel III compliance</strong> over <strong>10K financial records</strong>, contributing to a <strong>5%+</strong> improvement in capital adequacy ratio.",
@@ -100,6 +115,7 @@ module.exports = {
       {
         role: "Tech Consultant ",
         organization: "Cubewise",
+        logo: "/assets/logos/companies/com_cubewise.png",
         period: "Feb 2020 – Dec 2021",
         points: [
           "Developed and deployed <strong>enterprise EPM solutions</strong> for clients including <strong>Alibaba</strong> and <strong>Mercedes-Benz</strong>, including Python automation for batch report generation.",
@@ -111,17 +127,20 @@ module.exports = {
       {
         school: "Northeastern University",
         degree: "Master of Science in Computer Science",
-        period: "Jan 2025 – May 2027",
+        period: "Jan 2025 – Dec 2027",
+        logo: "/assets/logos/universities/NEU.png",
       },
       {
         school: "University of Sydney",
         degree: "Master of Commerce, Finance & Big Data",
         period: "Jul 2017 – Jun 2019",
+        logo: "/assets/logos/universities/USDY.png",
       },
       {
         school: "Macquarie University",
         degree: "Bachelor of Commerce, Professional Accounting",
         period: "Oct 2014 – Sep 2017",
+        logo: "/assets/logos/universities/Macquarie.png",
       },
     ],
   },

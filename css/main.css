@@ -1273,6 +1273,25 @@ select {
     border-top: 1px solid var(--line);
 }
 
+.about-list-education .about-list-item + .about-list-item {
+    border-top: none;
+}
+
+.about-list-header-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.about-list-logo {
+    width: 40px;
+    height: 40px;
+    margin-top: 2px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex: 0 0 auto;
+}
+
 .about-list-header {
     display: flex;
     justify-content: space-between;
@@ -1326,6 +1345,7 @@ select {
     margin: 16px 0 0;
     padding-left: 20px;
     color: var(--muted);
+    font-size: 0.94rem;
     line-height: 1.7;
 }
 
@@ -1336,12 +1356,14 @@ select {
 .project-summary {
     margin: 16px 0 0;
     color: var(--muted);
+    font-size: 0.94rem;
     line-height: 1.7;
 }
 
 .project-details {
     margin-top: 16px;
     color: var(--muted);
+    font-size: 0.94rem;
 }
 
 .project-details-body {
