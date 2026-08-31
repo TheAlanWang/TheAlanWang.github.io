@@ -874,6 +874,44 @@ select {
     color: var(--muted);
 }
 
+.post-index-topic-list {
+    display: grid;
+    gap: 6px;
+    margin: 6px 0 6px 5px;
+    padding: 0 0 0 10px;
+    border-left: 1px solid rgba(18, 24, 33, 0.08);
+    list-style: none;
+}
+
+.post-index-topic-summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    list-style: none;
+    padding: 2px 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--soft-text);
+    transition: color var(--ease);
+}
+
+.post-index-topic-summary:hover {
+    color: var(--text);
+}
+
+.post-index-topic-summary::-webkit-details-marker {
+    display: none;
+}
+
+.post-index-topic-summary::marker {
+    content: "";
+}
+
+.post-index-topic-list li > details[open] > .post-index-topic-summary .post-index-toggle::before {
+    transform: rotate(90deg);
+}
+
 .post-index-post-list {
     display: grid;
     gap: 6px;

@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: "Database Basic: Designing a Like Feature"
+title: "Designing a Like Feature"
 description: A compact database system design note covering table modeling, consistency, query performance, and scalability for a like feature.
 excerpt: A compact database system design note covering table modeling, consistency, query performance, and scalability for a like feature.
 date: 2026-05-11

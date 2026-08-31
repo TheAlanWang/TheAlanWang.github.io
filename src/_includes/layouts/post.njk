@@ -11,7 +11,7 @@ pageShellClass: post-layout
                 <ul class="post-index-tree">
                     {% for tocCategory in collections.tableOfContents %}
                         <li class="post-index-category">
-                            <details {% if tocCategory.name == category %}open{% endif %}>
+                            <details data-index-key="{{ tocCategory.name }}" {% if tocCategory.name == category %}open{% endif %}>
                                 <summary class="post-index-category-summary">
                                     <span class="post-index-toggle" aria-hidden="true"></span>
                                     {{ tocCategory.name }}
@@ -19,15 +19,27 @@ pageShellClass: post-layout
                                 <ul class="post-index-subcategory-list">
                                     {% for tocSubcategory in tocCategory.subcategories %}
                                         <li>
-                                            <details {% if tocCategory.name == category and tocSubcategory.name == subcategory %}open{% endif %}>
+                                            <details data-index-key="{{ tocCategory.name }}/{{ tocSubcategory.name }}" {% if tocCategory.name == category and tocSubcategory.name == subcategory %}open{% endif %}>
                                                 <summary class="post-index-subcategory-summary">
                                                     <span class="post-index-toggle post-index-toggle-small" aria-hidden="true"></span>
                                                     {{ tocSubcategory.name }}
                                                 </summary>
-                                                <ul class="post-index-post-list">
-                                                    {% for tocPost in tocSubcategory.posts %}
+                                                <ul class="post-index-topic-list">
+                                                    {% for tocTopic, tocTopicPosts in tocSubcategory.posts | groupby("data.topic") %}
                                                         <li>
-                                                            <a href="{{ tocPost.url }}"{% if tocPost.url == page.url %} class="current"{% endif %}>{{ tocPost.data.title }}</a>
+                                                            <details data-index-key="{{ tocCategory.name }}/{{ tocSubcategory.name }}/{{ tocTopic }}" {% if tocCategory.name == category and tocSubcategory.name == subcategory and tocTopic == topic %}open{% endif %}>
+                                                                <summary class="post-index-topic-summary">
+                                                                    <span class="post-index-toggle post-index-toggle-small" aria-hidden="true"></span>
+                                                                    {{ tocTopic }}
+                                                                </summary>
+                                                                <ul class="post-index-post-list">
+                                                                    {% for tocPost in tocTopicPosts %}
+                                                                        <li>
+                                                                            <a href="{{ tocPost.url }}"{% if tocPost.url == page.url %} class="current"{% endif %}>{{ tocPost.data.title }}</a>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </details>
                                                         </li>
                                                     {% endfor %}
                                                 </ul>
@@ -77,6 +89,33 @@ pageShellClass: post-layout
         <p>&copy; 2026 {{ site.name }}</p>
     </footer>
 </main>
+
+<script>
+(() => {
+    try {
+        const KEY = "post-index-open";
+        const tree = document.querySelector(".post-index-tree");
+        if (!tree) return;
+
+        const detailsEls = Array.from(tree.querySelectorAll("details[data-index-key]"));
+        const stored = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+
+        detailsEls.forEach((el) => {
+            if (stored.has(el.dataset.indexKey)) el.open = true;
+        });
+
+        const persist = () => {
+            const openKeys = detailsEls.filter((el) => el.open).map((el) => el.dataset.indexKey);
+            localStorage.setItem(KEY, JSON.stringify(openKeys));
+        };
+
+        persist();
+        detailsEls.forEach((el) => el.addEventListener("toggle", persist));
+    } catch (err) {
+        // localStorage unavailable (private browsing, etc.) - fall back to server-rendered state only
+    }
+})();
+</script>
 
 <script>
 (() => {
