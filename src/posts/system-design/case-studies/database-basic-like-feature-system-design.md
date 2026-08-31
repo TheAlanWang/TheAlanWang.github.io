@@ -59,7 +59,94 @@ Consumer Group
 PostLikesCount DB
 ```
 
-## 1. Data Modeling
+## 1. Capacity Estimation
+
+Suppose the system handles:
+
+```text
+500M posts/day
+5B likes/day
+```
+
+Average like write QPS:
+
+```text
+5,000,000,000 / 86,400
+≈ 57,870
+≈ 60,000 likes/sec
+```
+
+So:
+
+```text
+Average write QPS ≈ 60K likes/sec
+```
+
+The hottest post cannot be derived exactly from total posts and likes, so we need an assumption.
+
+For example, assume the hottest post gets about 1% of all daily likes:
+
+```text
+5B × 1%
+= 50M likes/day
+```
+
+Average QPS on that one post:
+
+```text
+50,000,000 / 86,400
+≈ 579
+≈ 600 likes/sec
+```
+
+If we assume peak traffic is 5× average:
+
+```text
+600 × 5
+≈ 3,000 likes/sec
+```
+
+So:
+
+```text
+Total traffic:
+5B likes/day
+→ ~60K likes/sec average
+
+Hot post:
+50M likes/day
+→ ~600 likes/sec average on one post_id
+
+Peak assumption:
+600 × 5
+→ ~3,000 likes/sec
+```
+
+Capacity estimation numbers are often assumptions, not exact predictions.
+
+The point is to understand the order of magnitude.
+
+## 2. Storage Estimation
+
+One like corresponds to one database row.
+
+For rough system design math, assume:
+
+```text
+1 like row ≈ 100 bytes
+```
+
+Then:
+
+```text
+5B likes/day × 100 bytes
+= 500B bytes/day
+≈ 500 GB/day
+```
+
+This is a back-of-the-envelope storage estimate.
+
+## 3. Data Modeling
 
 A like is a relationship between a user and a post.
 
@@ -107,7 +194,7 @@ posts
 
 That makes uniqueness, querying, indexing, and scaling harder.
 
-## 2. Why the Composite Primary Key Matters
+## 4. Why the Composite Primary Key Matters
 
 The important part is:
 
@@ -138,7 +225,7 @@ is the primary key.
 
 `user_id` is not one primary key and `post_id` another. Together they form one composite primary key.
 
-## 3. Idempotent Like and Unlike
+## 5. Idempotent Like and Unlike
 
 Do not rely only on application-level check-then-insert logic:
 
@@ -204,7 +291,7 @@ WHERE user_id = :user_id
 
 Deleting a row that does not exist simply changes nothing.
 
-## 4. Indexes Follow Query Patterns
+## 6. Indexes Follow Query Patterns
 
 Typical queries include:
 
@@ -331,7 +418,7 @@ So the rule is:
 
 > Design indexes around real query patterns, not around every column.
 
-## 5. Counting Likes
+## 7. Counting Likes
 
 At small or medium scale:
 
@@ -371,7 +458,7 @@ precomputed like_count
 → directly read the total number of likes
 ```
 
-## 6. Precomputed Like Count
+## 8. Precomputed Like Count
 
 For read-heavy systems, maintain a separate counter:
 
@@ -425,7 +512,7 @@ post_likes contains 1001 likes
 like_count temporarily shows 1000
 ```
 
-## 7. Synchronous vs Asynchronous Counter Updates
+## 9. Synchronous vs Asynchronous Counter Updates
 
 A simpler design updates both synchronously:
 
@@ -458,93 +545,6 @@ PostLikesCount DB
 ```
 
 This introduces eventual consistency, but removes counter maintenance from the main request path.
-
-## 8. Capacity Estimation
-
-Suppose the system handles:
-
-```text
-500M posts/day
-5B likes/day
-```
-
-Average like write QPS:
-
-```text
-5,000,000,000 / 86,400
-≈ 57,870
-≈ 60,000 likes/sec
-```
-
-So:
-
-```text
-Average write QPS ≈ 60K likes/sec
-```
-
-The hottest post cannot be derived exactly from total posts and likes, so we need an assumption.
-
-For example, assume the hottest post gets about 1% of all daily likes:
-
-```text
-5B × 1%
-= 50M likes/day
-```
-
-Average QPS on that one post:
-
-```text
-50,000,000 / 86,400
-≈ 579
-≈ 600 likes/sec
-```
-
-If we assume peak traffic is 5× average:
-
-```text
-600 × 5
-≈ 3,000 likes/sec
-```
-
-So:
-
-```text
-Total traffic:
-5B likes/day
-→ ~60K likes/sec average
-
-Hot post:
-50M likes/day
-→ ~600 likes/sec average on one post_id
-
-Peak assumption:
-600 × 5
-→ ~3,000 likes/sec
-```
-
-Capacity estimation numbers are often assumptions, not exact predictions.
-
-The point is to understand the order of magnitude.
-
-## 9. Storage Estimation
-
-One like corresponds to one database row.
-
-For rough system design math, assume:
-
-```text
-1 like row ≈ 100 bytes
-```
-
-Then:
-
-```text
-5B likes/day × 100 bytes
-= 500B bytes/day
-≈ 500 GB/day
-```
-
-This is a back-of-the-envelope storage estimate.
 
 ## 10. Sharding the Likes Database
 
