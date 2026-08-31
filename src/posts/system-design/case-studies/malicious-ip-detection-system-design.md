@@ -5,7 +5,7 @@ description: "An interview-style walkthrough of a malicious IP detection system:
 excerpt: "Requirements, QPS estimation, a hot/cold path split, and three deep dives: Bloom filter sizing, blacklist propagation, and layered detection."
 date: 2026-07-20T12:00:00-07:00
 category: System Design
-subcategory: Backend
+subcategory: Case Studies
 topic: Security
 kind: Guide
 tags:
