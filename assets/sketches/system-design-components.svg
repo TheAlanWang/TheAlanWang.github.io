@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="860" viewBox="0 0 1600 860" fill="none">
+  <rect width="1600" height="860" fill="#FAFBF8"/>
+  <rect x="56" y="52" width="1488" height="752" rx="28" fill="#FFFFFF" stroke="#D8DDD4" stroke-width="2"/>
+
+  <text x="112" y="126" fill="#66717F" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="3">SYSTEM DESIGN</text>
+  <text x="112" y="194" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="58" font-weight="850">Nine Components, One Toolkit</text>
+  <text x="112" y="228" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="20">The building blocks nearly every system design interview draws from.</text>
+
+  <rect x="112" y="254" width="442" height="136" rx="18" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="132" y="330" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="850">DNS</text>
+
+  <rect x="579" y="254" width="442" height="136" rx="18" fill="#F5F2FF" stroke="#CABDF2" stroke-width="2"/>
+  <text x="599" y="330" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="850">Load Balancer</text>
+
+  <rect x="1046" y="254" width="442" height="136" rx="18" fill="#F1F8EE" stroke="#BBDDB5" stroke-width="2"/>
+  <text x="1066" y="330" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="850">API Gateway</text>
+
+  <rect x="112" y="410" width="442" height="136" rx="18" fill="#FFF7E8" stroke="#E7C779" stroke-width="2"/>
+  <text x="132" y="486" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="850">Application Server</text>
+
+  <rect x="579" y="410" width="442" height="136" rx="18" fill="#FDECEC" stroke="#F3B8B8" stroke-width="2"/>
+  <text x="599" y="486" fill="#9B3E4F" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="850">Database</text>
+
+  <rect x="1046" y="410" width="442" height="136" rx="18" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="1066" y="486" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="850">Cache</text>
+
+  <rect x="112" y="566" width="442" height="136" rx="18" fill="#F5F2FF" stroke="#CABDF2" stroke-width="2"/>
+  <text x="132" y="642" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="850">Message Queue</text>
+
+  <rect x="579" y="566" width="442" height="136" rx="18" fill="#F1F8EE" stroke="#BBDDB5" stroke-width="2"/>
+  <text x="599" y="642" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="850">CDN</text>
+
+  <rect x="1046" y="566" width="442" height="136" rx="18" fill="#FFF7E8" stroke="#E7C779" stroke-width="2"/>
+  <text x="1066" y="642" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="850">Object / Blob Storage</text>
+
+  <rect x="112" y="730" width="1376" height="44" rx="14" fill="#151A20"/>
+  <text x="136" y="758" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19" font-weight="850">System rule:</text>
+  <text x="272" y="758" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19">most designs are assembly, not invention, know what each piece solves and its one real trade-off</text>
+</svg>
