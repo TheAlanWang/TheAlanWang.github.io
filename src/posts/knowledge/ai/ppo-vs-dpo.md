@@ -15,9 +15,9 @@ imageFit: contain
 permalink: /posts/ppo-vs-dpo/index.html
 ---
 
-Both methods aim to make the model's responses better aligned with what we want.
-
 ![PPO vs DPO: two ways to align a model's responses](/assets/sketches/ppo-vs-dpo.svg)
+
+Both methods aim to better align the model's responses with user's preferences.
 
 - **PPO** (Proximal Policy Optimization) is a traditional **reinforcement learning** approach. First, we train a reward model using human preference data. Then we use the reward model to score the model's responses and optimize the model.
 
