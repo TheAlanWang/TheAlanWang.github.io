@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="650" viewBox="0 0 1600 650" fill="none">
+  <rect width="1600" height="650" fill="#FAFBF8"/>
+  <rect x="56" y="52" width="1488" height="546" rx="28" fill="#FFFFFF" stroke="#D8DDD4" stroke-width="2"/>
+
+  <text x="112" y="126" fill="#66717F" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="3">ALIGNMENT</text>
+  <text x="112" y="194" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="58" font-weight="850">PPO vs DPO</text>
+  <text x="112" y="228" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="20">Two ways to align a model's responses with what we want.</text>
+
+  <rect x="112" y="260" width="668" height="230" rx="18" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="140" y="300" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="850">PPO</text>
+  <text x="140" y="330" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="17">Proximal Policy Optimization: reinforcement learning</text>
+  <text x="140" y="368" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">1. Train a reward model from human preference data</text>
+  <text x="140" y="402" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">2. Reward model scores the response</text>
+  <text x="140" y="436" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">3. Optimize the model against that score</text>
+
+  <rect x="820" y="260" width="668" height="230" rx="18" fill="#F5F2FF" stroke="#CABDF2" stroke-width="2"/>
+  <text x="848" y="300" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="850">DPO</text>
+  <text x="848" y="330" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="17">Direct Preference Optimization</text>
+  <text x="848" y="368" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">1. Take preference pairs: preferred vs rejected answer</text>
+  <text x="848" y="402" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="16">2. Optimize the model directly on that comparison</text>
+
+  <rect x="112" y="516" width="1376" height="44" rx="14" fill="#151A20"/>
+  <text x="136" y="544" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19" font-weight="850">In short:</text>
+  <text x="234" y="544" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19">PPO learns from a reward score, DPO learns from a preference comparison</text>
+</svg>
