@@ -1116,6 +1116,14 @@ select {
     padding-left: 20px;
 }
 
+.prose ol ol {
+    list-style-type: lower-alpha;
+}
+
+.prose ol ol ol {
+    list-style-type: lower-roman;
+}
+
 .prose li + li {
     margin-top: 3px;
 }
