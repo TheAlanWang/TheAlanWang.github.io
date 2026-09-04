@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" fill="none">
+  <rect width="1600" height="760" fill="#FAFBF8"/>
+  <rect x="56" y="52" width="1488" height="656" rx="28" fill="#FFFFFF" stroke="#D8DDD4" stroke-width="2"/>
+
+  <text x="112" y="126" fill="#66717F" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="3">PROJECT · YOUDESCRIBE</text>
+  <text x="112" y="192" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="50" font-weight="850">AI Audio Description Pipeline</text>
+  <text x="112" y="228" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="19">Turning raw video into precisely-timed audio descriptions, in eight stages.</text>
+
+  <rect x="112" y="270" width="310" height="108" rx="18" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="134" y="314" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">1. Fetch Video</text>
+  <text x="134" y="348" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="14">mp4 + json metadata + captions</text>
+
+  <path d="M422 324H452" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M434 304L462 324L434 344" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="462" y="270" width="310" height="108" rx="18" fill="#F1F8EE" stroke="#BBDDB5" stroke-width="2"/>
+  <text x="484" y="314" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">2. Scene Detect</text>
+  <text x="484" y="348" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="14">CLIP embeddings cut scenes</text>
+
+  <path d="M772 324H802" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M784 304L812 324L784 344" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="812" y="270" width="310" height="108" rx="18" fill="#FFF7E8" stroke="#E7C779" stroke-width="2"/>
+  <text x="834" y="314" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">3. Transcribe</text>
+  <text x="834" y="348" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="14">Whisper + Google STT cross-check</text>
+
+  <path d="M1122 324H1152" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1134 304L1162 324L1134 344" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1162" y="270" width="310" height="108" rx="18" fill="#F5F2FF" stroke="#CABDF2" stroke-width="2"/>
+  <text x="1184" y="314" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">4. Caption (Gemini)</text>
+  <text x="1184" y="348" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="14">generate audio_clips per scene</text>
+
+  <path d="M1317 378V428" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1297 410L1317 438L1337 410" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1162" y="460" width="310" height="108" rx="18" fill="#FDECEC" stroke="#F3B8B8" stroke-width="2"/>
+  <text x="1184" y="504" fill="#9B3E4F" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">5. Dedup</text>
+  <text x="1184" y="538" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="14">cluster + pick best per scene</text>
+
+  <path d="M1162 514H1132" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1150 494L1122 514L1150 534" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="812" y="460" width="310" height="108" rx="18" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="834" y="504" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">6. Analyze</text>
+  <text x="834" y="538" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="14">re-check against video frames</text>
+
+  <path d="M812 514H782" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M800 494L772 514L800 534" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="462" y="460" width="310" height="108" rx="18" fill="#F1F8EE" stroke="#BBDDB5" stroke-width="2"/>
+  <text x="484" y="504" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">7. Optimize Timing</text>
+  <text x="484" y="538" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="14">fit into speech gaps</text>
+
+  <path d="M462 514H432" stroke="#17202A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M450 494L422 514L450 534" stroke="#17202A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="112" y="460" width="310" height="108" rx="18" fill="#FFF7E8" stroke="#E7C779" stroke-width="2"/>
+  <text x="134" y="504" fill="#946200" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="850">8. Final Data</text>
+  <text x="134" y="538" fill="#334155" font-family="Manrope, Arial, sans-serif" font-size="14">package final_data.json</text>
+
+  <rect x="112" y="612" width="1376" height="44" rx="14" fill="#151A20"/>
+  <text x="136" y="640" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19" font-weight="850">In short:</text>
+  <text x="234" y="640" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19">Two independent transcripts and a frame-level re-check keep every description honest before it ships</text>
+</svg>
