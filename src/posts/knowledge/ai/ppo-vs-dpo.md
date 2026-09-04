@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: "PPO vs DPO"
 description: A short note on PPO and DPO, two ways to align a model's responses with human preferences.
 excerpt: A short note on PPO and DPO, two ways to align a model's responses with human preferences.
-date: 2026-09-04T12:00:00-07:00
+date: 2026-09-03T12:00:00-07:00
 category: Knowledge
 subcategory: AI
 topic: ML
