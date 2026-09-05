@@ -6,7 +6,7 @@ excerpt: "Requirements, short code generation strategies, caching, and scaling r
 date: 2026-09-05T12:00:00-07:00
 category: System Design
 subcategory: Case Studies
-topic: URL Shortener
+topic: System Design Questions
 kind: Guide
 tags:
   - posts

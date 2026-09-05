@@ -6,7 +6,7 @@ excerpt: "Requirements, QPS estimation, a hot/cold path split, and three deep di
 date: 2026-07-20T12:00:00-07:00
 category: System Design
 subcategory: Case Studies
-topic: Security
+topic: System Design Questions
 kind: Guide
 tags:
   - posts
