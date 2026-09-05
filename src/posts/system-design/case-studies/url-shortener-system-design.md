@@ -15,9 +15,13 @@ imageFit: contain
 permalink: /posts/url-shortener-system-design/index.html
 ---
 
+## Q:
+
 Bit.ly is a URL shortening service that converts long URLs into shorter, manageable links.
 
 ie. `www.mylongurl.com/long/is/annoying` -> `www.bit.ly/GHJ23`
+
+## A:
 
 ### Functional Requirements
 
