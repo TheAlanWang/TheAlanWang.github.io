@@ -2,7 +2,7 @@
 layout: layouts/post.njk
 title: "URL Shortener"
 description: "Interview notes on a Bit.ly-style URL shortener: requirements, short code generation strategies, caching, and scaling reads and writes."
-excerpt: "Requirements, short code generation strategies, cache-aside reads, and scaling reads and writes with a batched counter."
+excerpt: "Requirements, short code generation strategies, caching, and scaling reads and writes with separate read/write services."
 date: 2026-09-05T12:00:00-07:00
 category: System Design
 subcategory: Case Studies
@@ -58,8 +58,7 @@ GET /{shortUrl} -> Redirect to OriginalUrl
 
 ### High-level Design
 
-- 302 redirect - temporary (prefer)
-- 301 redirect - permanent
+See the diagram above.
 
 ### Dive Deep
 
@@ -71,41 +70,41 @@ GET /{shortUrl} -> Redirect to OriginalUrl
 
 System-generated short code
 
-1. ❌ prefix of the long url
+1. prefix of the long url
+   - two different long URLs commonly share a prefix
 2. random number generate (1B url, 1,000,000,000)
    - base62 encoding, characters: 0-9, A-Z, a-z
    - 62^6 = 56B
-   - may still collision
-   - -> we just need to check for collision first
+   - collision happen
+   - -> we need to check for **collision** first
 3. Hash the long url
    - hash function: MD5 (long URL)
    - 128-bit hash (32 hex characters), characters: 0-9, a-f
    - base62(hash), characters: 0-9, A-Z, a-z
    - `[:6]`
+   - -> we need to check for **collision** first
 4. Counter
    - incrementing a counter -> base62
    - predictability which is bad for security
      - "Warning, shorten private urls"
-     - rate limiting
+     - rate liming
 
 #### Non-functional
 
 Low latency
 
 - add cache (redis)
-  - cache-aside
-  - LRU cache
-  - key: shortCode
-  - value: longUrl
 
 Scale
 
-- DAU 10^8 / 10^5 = 10^3 per second
+- DAU 10^8 / 10^5 = 10^3 pre second
   - peak: `*10 or *100` = 10k - 100k rps
 - Scale horizontally
   - read need to scale
-- microservice: split into read service / write service behind an api gateway
-- database scale
+- Microservice
+  - **read service** talks to Redis first, falling through to the database on a cache miss
+  - **write service** owns short-code creation.
+- Database scale
 
 ```text
 URL Table:
@@ -116,10 +115,9 @@ URL Table:
   - userId: ~8 bytes
 ```
 
-~500 bytes * 1B = 500 bytes * 10^9 url = 500 GB
-
-Write service and the counter: a shared global counter is requested in batches (may request 1k at a time) so write-service instances don't serialize on a single counter per write.
+~ 500bytes * 1B = 500 bytes * 10^9 url = 500 GB
 
 High Availability
 
 - replication + failover + redundancy
+- The database has a **replica** for read availability
