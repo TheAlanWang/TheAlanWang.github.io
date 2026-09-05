@@ -23,27 +23,27 @@ ie. `www.mylongurl.com/long/is/annoying` -> `www.bit.ly/GHJ23`
 
 ## A:
 
-### Functional Requirements
+## Functional Requirements
 
 - Users can **create** a short url from a long url
   - optionally support custom alias
   - optionally support an expiration time
 - Users can be **redirected** to the original url from the short url
 
-### Non-Functional Requirements
+## Non-Functional Requirements
 
 - Low latency on redirects (~200ms)
 - Scale to support 100M DAU and 1B urls
 - Ensure uniqueness of short code
 - High Availability: redirects remain accessible (CAP)
 
-### Core Entities
+## Core Entities
 
 - Original url
 - Short url
 - User
 
-### API
+## API
 
 ```text
 // shorten a url
@@ -58,13 +58,13 @@ POST /urls -> shortUrl
 GET /{shortUrl} -> Redirect to OriginalUrl
 ```
 
-### High-level Design
+## High-level Design
 
 ![URL shortener system design: primary server with Redis and database, split read/write services, and a global counter for write scaling](/assets/sketches/url-shortener-system-design.png)
 
-### Dive Deep
+## Dive Deep
 
-#### Functional
+### Functional
 
 - fast
 - unique
@@ -91,7 +91,7 @@ System-generated short code
      - "Warning, shorten private urls"
      - rate liming
 
-#### Non-functional
+### Non-functional
 
 Low latency
 
