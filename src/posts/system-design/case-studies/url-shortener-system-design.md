@@ -19,8 +19,6 @@ Bit.ly is a URL shortening service that converts long URLs into shorter, managea
 
 ie. `www.mylongurl.com/long/is/annoying` -> `www.bit.ly/GHJ23`
 
-![URL shortener system design: primary server with Redis and database, split read/write services, and a global counter for write scaling](/assets/sketches/url-shortener-system-design.png)
-
 ### Functional Requirements
 
 - Users can **create** a short url from a long url
@@ -58,7 +56,7 @@ GET /{shortUrl} -> Redirect to OriginalUrl
 
 ### High-level Design
 
-See the diagram above.
+![URL shortener system design: primary server with Redis and database, split read/write services, and a global counter for write scaling](/assets/sketches/url-shortener-system-design.png)
 
 ### Dive Deep
 
