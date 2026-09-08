@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" fill="none">
+  <rect width="1600" height="700" fill="#FAFBF8"/>
+  <rect x="56" y="52" width="1488" height="596" rx="28" fill="#FFFFFF" stroke="#D8DDD4" stroke-width="2"/>
+
+  <text x="112" y="126" fill="#66717F" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="3">LLM BASICS</text>
+  <text x="112" y="192" fill="#151A20" font-family="Manrope, Arial, sans-serif" font-size="50" font-weight="850">Transformer Architectures</text>
+  <text x="112" y="228" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="19">Three ways to arrange encoder and decoder blocks for a task.</text>
+
+  <rect x="112" y="270" width="440" height="270" rx="18" fill="#EEF6FF" stroke="#B7D7F5" stroke-width="2"/>
+  <text x="138" y="310" fill="#2B5F96" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Encoder</text>
+  <text x="138" y="342" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="15">Outputs a dense embedding of the input.</text>
+  <text x="138" y="384" font-family="Manrope, Arial, sans-serif" font-size="15"><tspan fill="#2B5F96" font-weight="800">Example </tspan><tspan fill="#334155">BERT (Google)</tspan></text>
+  <text x="138" y="416" font-family="Manrope, Arial, sans-serif" font-size="15"><tspan fill="#2B5F96" font-weight="800">Use cases </tspan><tspan fill="#334155">classification, search, NER</tspan></text>
+  <text x="138" y="448" font-family="Manrope, Arial, sans-serif" font-size="15"><tspan fill="#2B5F96" font-weight="800">Size </tspan><tspan fill="#334155">millions of parameters</tspan></text>
+
+  <rect x="580" y="270" width="440" height="270" rx="18" fill="#F5F2FF" stroke="#CABDF2" stroke-width="2"/>
+  <text x="606" y="310" fill="#5D4BA3" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Decoder</text>
+  <text x="606" y="342" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="15">Generates new tokens one at a time.</text>
+  <text x="606" y="384" font-family="Manrope, Arial, sans-serif" font-size="15"><tspan fill="#5D4BA3" font-weight="800">Example </tspan><tspan fill="#334155">Llama (Meta)</tspan></text>
+  <text x="606" y="416" font-family="Manrope, Arial, sans-serif" font-size="15"><tspan fill="#5D4BA3" font-weight="800">Use cases </tspan><tspan fill="#334155">generation, chatbots, code</tspan></text>
+  <text x="606" y="448" font-family="Manrope, Arial, sans-serif" font-size="15"><tspan fill="#5D4BA3" font-weight="800">Size </tspan><tspan fill="#334155">billions of parameters</tspan></text>
+
+  <rect x="1048" y="270" width="440" height="270" rx="18" fill="#F1F8EE" stroke="#BBDDB5" stroke-width="2"/>
+  <text x="1074" y="310" fill="#2F6E3F" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="850">Seq2Seq</text>
+  <text x="1074" y="342" fill="#596474" font-family="Manrope, Arial, sans-serif" font-size="15">Encoder encodes, decoder generates output.</text>
+  <text x="1074" y="384" font-family="Manrope, Arial, sans-serif" font-size="15"><tspan fill="#2F6E3F" font-weight="800">Example </tspan><tspan fill="#334155">T5, BART</tspan></text>
+  <text x="1074" y="416" font-family="Manrope, Arial, sans-serif" font-size="15"><tspan fill="#2F6E3F" font-weight="800">Use cases </tspan><tspan fill="#334155">translation, summarization</tspan></text>
+  <text x="1074" y="448" font-family="Manrope, Arial, sans-serif" font-size="15"><tspan fill="#2F6E3F" font-weight="800">Size </tspan><tspan fill="#334155">millions of parameters</tspan></text>
+
+  <rect x="112" y="566" width="1376" height="44" rx="14" fill="#151A20"/>
+  <text x="136" y="594" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19" font-weight="850">In short:</text>
+  <text x="234" y="594" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="19">Encoders understand, decoders generate, seq2seq chains both together</text>
+</svg>
