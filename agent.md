@@ -4,7 +4,9 @@
 
 Use this workflow when the user asks to add, publish, or post a learning note, guide, or poster-style note to this Eleventy site.
 
-### 1. Add The Visual Asset
+### 1. Add A Visual Asset (Optional)
+
+Posts do not need an image. Only add one when a diagram actually helps; it is embedded in the post body, not shown on the homepage or archive.
 
 - Put learning-note poster assets under `assets/notes/`.
 - Use `assets/projects/` when the image belongs to a project case study or system architecture post.
@@ -26,8 +28,6 @@ type: Note
 topic: HPC
 tags:
   - posts
-image: /assets/notes/note-file.svg
-imageFit: contain
 permalink: /posts/note-title/index.html
 ---
 
@@ -49,8 +49,7 @@ Short intro text explaining what the note covers.
 - Use `type: Note` for learning notes, guides, and poster-style summaries.
 - Choose `topic` by the main subject area, for example `HPC`, `AI`, `RAG`, `AWS`, or `PyTorch`.
 - `date` controls homepage and archive sorting.
-- `image` should point to the poster asset with a site-root path like `/assets/notes/example.svg`.
-- `imageFit: contain` is usually best for diagrams and posters.
+- No `image` / `imageFit` fields are needed; the homepage and archive are text-only.
 - `permalink` should match the slug: `/posts/<slug>/index.html`.
 
 ### 4. Validate Locally
@@ -72,7 +71,7 @@ Then open `http://localhost:8080`.
 Check:
 
 - the post page renders
-- the poster image loads
+- any embedded images load
 - the homepage/archive entry appears
 - title, excerpt, topic, and date look correct
 

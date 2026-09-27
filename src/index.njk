@@ -57,9 +57,6 @@ navKey: home
                                 <a href="{{ post.url }}" class="text-link">Read post</a>
                             </div>
                         </div>
-                        <a href="{{ post.url }}" class="stream-preview{% if post.data.imageFit == 'contain' %} stream-preview-contain{% endif %}" aria-label="Open {{ post.data.title }}">
-                            <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="stream-preview-image">
-                        </a>
                     </article>
                 {% endfor %}
             </div>

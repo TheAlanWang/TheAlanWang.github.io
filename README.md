@@ -73,8 +73,6 @@ date: 2026-04-06
 type: Sketch
 topic: AI
 excerpt: Short summary shown on the homepage.
-image: /assets/sketches/example.svg
-imageFit: contain
 tags:
   - posts
 permalink: /posts/example-post/index.html
