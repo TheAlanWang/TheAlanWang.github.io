@@ -11,3 +11,5 @@ CLAUDE.md
 .superpowers/
 docs/superpowers/
 .playwright-mcp/
+# Obsidian image preview (symlink to /assets)
+src/posts/assets
