@@ -347,8 +347,6 @@ def transfer_credits(self, timestamp, source_workspace_id, target_workspace_id, 
 
 ```python
 def accept_credits(self, timestamp, workspace_id, transfer_id) -> bool:
-    PERIOD = 86400000
-
     if transfer_id not in self.transfers:
         return False
 
@@ -362,7 +360,7 @@ def accept_credits(self, timestamp, workspace_id, transfer_id) -> bool:
     if workspace_id != target:
         return False
 
-    if timestamp > transfer["time"] + PERIOD:
+    if timestamp > transfer["time"] + self.PERIOD:
         self.workspaces[source] += amount
         transfer["status"] = "expired"
         return False
@@ -376,7 +374,7 @@ def accept_credits(self, timestamp, workspace_id, transfer_id) -> bool:
 
 ### 24 小时过期边界
 
-24 小时：`86400000`。如果 transfer 创建时间是 5，那么：`5 + 86400000 = 86400005`。题目说 expiration period 结束后的下一个 millisecond 才过期，所以：
+24 小时：`PERIOD = 86400000`，写成 class 常量。如果 transfer 创建时间是 5，那么：`5 + 86400000 = 86400005`。题目说 expiration period 结束后的下一个 millisecond 才过期，所以：
 
 ```text
 86400005 还能 accept
@@ -391,13 +389,11 @@ def accept_credits(self, timestamp, workspace_id, transfer_id) -> bool:
 
 ```python
 def _expire_transfers(self, timestamp):
-    PERIOD = 86400000
-
     for transfer in self.transfers.values():
         if transfer["status"] != "pending":
             continue
 
-        expire_time = transfer["time"] + PERIOD + 1
+        expire_time = transfer["time"] + self.PERIOD + 1
 
         if timestamp >= expire_time:
             source = transfer["source"]
@@ -644,6 +640,9 @@ from compute_credits_system import ComputeCreditsSystem
 
 class ComputeCreditsSystemImpl(ComputeCreditsSystem):
 
+    # transfer 过期时间：24 小时（毫秒）
+    PERIOD = 86400000
+
     def __init__(self):
         # 当前余额
         self.workspaces = {}
@@ -668,14 +667,12 @@ class ComputeCreditsSystemImpl(ComputeCreditsSystem):
 
     # 自动处理已经过期的 transfer
     def _expire_transfers(self, timestamp):
-        PERIOD = 86400000
-
         for transfer in self.transfers.values():
 
             if transfer["status"] != "pending":
                 continue
 
-            expire_time = transfer["time"] + PERIOD + 1
+            expire_time = transfer["time"] + self.PERIOD + 1
 
             if timestamp >= expire_time:
                 source = transfer["source"]
