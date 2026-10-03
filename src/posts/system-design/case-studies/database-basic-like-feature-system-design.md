@@ -4,8 +4,8 @@ title: "Designing a Like Feature"
 description: A practical system design note for a post like feature, covering data modeling, idempotency, indexing, capacity estimation, sharding, CDC, Kafka, counters, and consistency.
 excerpt: A practical system design note for a post like feature, from database modeling to large-scale asynchronous like-count aggregation.
 date: 2026-08-31T12:00:00-07:00
-category: System Design
-subcategory: Case Studies
+category: System Design & Algorithms
+subcategory: System Design
 topic: Database Basics
 kind: Note
 tags:

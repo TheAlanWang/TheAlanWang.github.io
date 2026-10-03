@@ -4,8 +4,8 @@ title: "Malicious IP Detection"
 description: "An interview-style walkthrough of a malicious IP detection system: hot-path filtering with a Bloom filter and Redis blacklist, and a Kafka/Flink cold path that feeds detections back."
 excerpt: "Requirements, QPS estimation, a hot/cold path split, and three deep dives: Bloom filter sizing, blacklist propagation, and layered detection."
 date: 2026-07-20T12:00:00-07:00
-category: System Design
-subcategory: Case Studies
+category: System Design & Algorithms
+subcategory: System Design
 topic: System Design Questions
 kind: Guide
 tags:
