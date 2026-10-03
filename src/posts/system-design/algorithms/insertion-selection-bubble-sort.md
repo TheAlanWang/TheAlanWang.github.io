@@ -25,9 +25,11 @@ permalink: /posts/insertion-selection-bubble-sort/index.html
 
 | Sorting            | Best  | Average | Worst |
 | ------------------ | ----- | ------- | ----- |
-| **Insertion Sort** | Θ(n)  | Θ(n²) | Θ(n²) |
-| **Selection Sort** | Θ(n²) | Θ(n²) | Θ(n²) |
-| **Bubble Sort**    | Θ(n)* | Θ(n²) | Θ(n²) |
+| **Insertion Sort** | Θ(n)  | Θ(n²)   | Θ(n²) |
+| **Selection Sort** | Θ(n²) | Θ(n²)   | Θ(n²) |
+| **Bubble Sort**    | Θ(n)* | Θ(n²)   | Θ(n²) |
+
+\* Bubble sort is Θ(n) in the best case only with an early exit:
 
 ## Code
 
@@ -67,9 +69,15 @@ def bubble_sort(nums):
     n = len(nums)
 
     for i in range(n - 1):
+        swapped = False
+
         for j in range(n - 1 - i):
             if nums[j] > nums[j + 1]:
                 nums[j], nums[j + 1] = nums[j + 1], nums[j]
+                swapped = True
+
+        if not swapped:
+            break
 
     return nums
 ```
