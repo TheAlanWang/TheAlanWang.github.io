@@ -4,7 +4,7 @@ title: Compute Credits System
 description: A four-level OOD coding question for a cloud compute credits system, covering balances, transaction ranking, pending transfers with expiration, workspace merges, and historical balance queries.
 excerpt: A four-level OOD coding question covering balances, transaction ranking, pending transfers with expiration, workspace merges, and historical balance queries.
 date: 2026-09-27T12:00:00-07:00
-category: System Design
+category: System Design & Algorithms
 subcategory: OOD
 topic: OOD Questions
 kind: Note

@@ -4,9 +4,9 @@ title: "System Design Components"
 description: Nine components that show up in nearly every system design interview, what each one actually solves, and the one trade-off worth knowing for each.
 excerpt: Nine components that show up in nearly every system design interview, what each one actually solves, and the one trade-off worth knowing for each.
 date: 2026-08-30T12:00:00-07:00
-category: System Design
-subcategory: Fundamentals
-topic: Components
+category: System Design & Algorithms
+subcategory: System Design
+topic: Fundamentals
 kind: Guide
 tags:
   - posts

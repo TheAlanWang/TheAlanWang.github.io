@@ -4,8 +4,8 @@ title: "URL Shortener"
 description: "Interview notes on a Bit.ly-style URL shortener: requirements, short code generation strategies, caching, and scaling reads and writes."
 excerpt: "Requirements, short code generation strategies, caching, and scaling reads and writes with separate read/write services."
 date: 2026-09-05T12:00:00-07:00
-category: System Design
-subcategory: Case Studies
+category: System Design & Algorithms
+subcategory: System Design
 topic: System Design Questions
 kind: Guide
 tags:
