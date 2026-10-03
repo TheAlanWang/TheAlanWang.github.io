@@ -29,6 +29,9 @@ permalink: /posts/insertion-selection-bubble-sort/index.html
 | **Selection Sort** | Θ(n²) | Θ(n²) | Θ(n²) |
 | **Bubble Sort**    | Θ(n)* | Θ(n²) | Θ(n²) |
 
+\* Bubble sort is Θ(n) in the best case only with an early exit: if a full pass makes no swaps, the array is already sorted and it can stop. The code below has no early exit, so it is Θ(n²) even on sorted input.<br>
+只有加了提前退出才是 Θ(n)：某一轮没有发生任何交换，说明已经有序，可以直接停止。下面的代码没有这个优化，所以已排好序的输入也是 Θ(n²)。
+
 ## Code
 
 ### Insertion Sort
