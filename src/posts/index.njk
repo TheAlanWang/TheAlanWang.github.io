@@ -7,7 +7,7 @@ navKey: posts
 <div class="layout-grid">
     <aside class="identity-rail">
         <div class="identity-block">
-            <p class="eyebrow">Personal website</p>
+            <p class="eyebrow">Applied AI Engineer</p>
             <h1 class="identity-title">{{ site.name }}</h1>
             <p class="identity-summary">{{ site.tagline }}</p>
         </div>
@@ -21,7 +21,6 @@ navKey: posts
 
     <main class="content-column">
         <section class="lead-panel lead-panel-archive">
-            <p class="section-kicker">Posts</p>
             <h2 class="lead-title">{{ site.postsPageIntroTitle }}</h2>
             <p class="lead-copy">{{ site.postsPageIntroText }}</p>
         </section>
@@ -60,25 +59,27 @@ navKey: posts
                             </div>
                             <h3 class="stream-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
                             <p class="stream-excerpt">{{ post.data.excerpt }}</p>
-                            <div class="stream-actions">
-                                <a href="{{ post.url }}" class="text-link">Read post</a>
-                            </div>
                         </div>
                     </article>
                 {% endfor %}
             </div>
+            <div class="show-more" hidden>
+                <button type="button" class="show-more-button" data-show-more></button>
+            </div>
         </section>
 
-        <footer class="site-footer">
-            <p>{{ site.footerText }}</p>
-            <p>&copy; 2026 {{ site.name }}</p>
-        </footer>
+        {% include "partials/site-footer.njk" %}
     </main>
 </div>
 <script>
     (() => {
         const posts = Array.from(document.querySelectorAll(".post-item"));
         if (!posts.length) return;
+
+        const pageSize = 10;
+        let limit = pageSize;
+        const showMore = document.querySelector(".show-more");
+        const showMoreButton = document.querySelector("[data-show-more]");
 
         const groups = ["category", "subcategory", "topic"];
         const state = Object.fromEntries(groups.map((group) => [group, "all"]));
@@ -161,12 +162,21 @@ navKey: posts
                 selects[group].value = state[group];
             });
 
+            // With a filter on, show every match; otherwise show the first `limit` posts.
+            const filtering = groups.some((group) => state[group] !== "all");
+            const matching = posts.filter((post) =>
+                groups.every((group) => state[group] === "all" || post.dataset[group] === state[group])
+            );
+
             posts.forEach((post) => {
-                const matches = groups.every((group) => state[group] === "all" || post.dataset[group] === state[group]);
-                post.hidden = !matches;
+                post.hidden = !matching.includes(post) || (!filtering && matching.indexOf(post) >= limit);
                 post.classList.remove("post-item-first-visible");
                 post.classList.remove("post-item-last-visible");
             });
+
+            const remaining = filtering ? 0 : matching.length - limit;
+            showMore.hidden = remaining <= 0;
+            showMoreButton.textContent = `Show ${Math.min(pageSize, remaining)} more`;
 
             const visiblePosts = posts.filter((post) => !post.hidden);
             const firstVisible = visiblePosts[0];
@@ -178,6 +188,11 @@ navKey: posts
                 lastVisible.classList.add("post-item-last-visible");
             }
         };
+
+        showMoreButton.addEventListener("click", () => {
+            limit += pageSize;
+            update();
+        });
 
         groups.forEach(renderGroup);
         update();

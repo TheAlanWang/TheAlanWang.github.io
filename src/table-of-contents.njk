@@ -7,7 +7,7 @@ navKey: table-of-contents
 <div class="layout-grid">
     <aside class="identity-rail">
         <div class="identity-block">
-            <p class="eyebrow">Knowledge base</p>
+            <p class="eyebrow">Applied AI Engineer</p>
             <h1 class="identity-title">{{ site.name }}</h1>
             <p class="identity-summary">{{ site.tagline }}</p>
         </div>
@@ -21,7 +21,6 @@ navKey: table-of-contents
 
     <main class="content-column">
         <section class="lead-panel lead-panel-archive">
-            <p class="section-kicker">Contents</p>
             <h2 class="lead-title">Table of Contents</h2>
             <p class="lead-copy">Posts grouped by section, domain, and topic.</p>
         </section>
@@ -64,10 +63,7 @@ navKey: table-of-contents
             {% endfor %}
         </section>
 
-        <footer class="site-footer">
-            <p>{{ site.footerText }}</p>
-            <p>&copy; 2026 {{ site.name }}</p>
-        </footer>
+        {% include "partials/site-footer.njk" %}
     </main>
     <script>
         (() => {
