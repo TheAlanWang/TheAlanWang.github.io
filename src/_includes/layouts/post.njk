@@ -84,10 +84,7 @@ pageShellClass: post-layout
         </aside>
     </div>
 
-    <footer class="site-footer">
-        <p>{{ site.footerText }}</p>
-        <p>&copy; 2026 {{ site.name }}</p>
-    </footer>
+    {% include "partials/site-footer.njk" %}
 </main>
 
 <script>

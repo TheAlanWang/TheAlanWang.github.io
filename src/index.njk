@@ -1,7 +1,35 @@
 ---
 layout: layouts/base.njk
 navKey: home
+bodyClass: page-home
 ---
+<script>
+    try {
+        if (sessionStorage.getItem("titleCardSeen") || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            document.documentElement.classList.add("title-card-skip");
+        }
+    } catch (e) {}
+</script>
+<div class="title-card" aria-hidden="true">
+    <p class="title-card-name">{{ site.name }}</p>
+    <p class="title-card-line">{{ site.tagline }}</p>
+</div>
+<script>
+    (function () {
+        var card = document.querySelector(".title-card");
+        if (!card || document.documentElement.classList.contains("title-card-skip")) return;
+        try { sessionStorage.setItem("titleCardSeen", "1"); } catch (e) {}
+        function skip() {
+            card.classList.add("is-skipped");
+            ["click", "keydown", "wheel", "touchstart"].forEach(function (type) {
+                window.removeEventListener(type, skip);
+            });
+        }
+        ["click", "keydown", "wheel", "touchstart"].forEach(function (type) {
+            window.addEventListener(type, skip, { passive: true });
+        });
+    })();
+</script>
 <div class="layout-grid">
     <aside class="identity-rail">
         <div class="identity-block">
@@ -31,7 +59,7 @@ navKey: home
             <div class="section-heading">
                 <div>
                     <p class="section-kicker">{{ site.postsIntroTitle }}</p>
-                    <h2 class="section-title">Recent writing, sketches, and project notes.</h2>
+                    <h2 class="section-title">Recent writing and project notes.</h2>
                 </div>
                 {% if site.postsIntroText %}
                     <p class="section-description">{{ site.postsIntroText }}</p>
@@ -53,9 +81,6 @@ navKey: home
                             </div>
                             <h3 class="stream-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
                             <p class="stream-excerpt">{{ post.data.excerpt }}</p>
-                            <div class="stream-actions">
-                                <a href="{{ post.url }}" class="text-link">Read post</a>
-                            </div>
                         </div>
                     </article>
                 {% endfor %}
@@ -65,7 +90,6 @@ navKey: home
         <section id="contact" class="content-section">
             <div class="section-heading">
                 <div>
-                    <p class="section-kicker">Contact</p>
                     <h2 class="section-title">Contact</h2>
                 </div>
             </div>
@@ -84,9 +108,6 @@ navKey: home
             </div>
         </section>
 
-        <footer class="site-footer">
-            <p>{{ site.footerText }}</p>
-            <p>&copy; 2026 {{ site.name }}</p>
-        </footer>
+        {% include "partials/site-footer.njk" %}
     </main>
 </div>
