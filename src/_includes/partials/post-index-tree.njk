@@ -1,6 +1,9 @@
 <nav class="post-index-nav">
     <p class="post-index-label">Table of Contents</p>
     <ul class="post-index-tree">
+        <li class="post-index-category">
+            <a href="/posts/" class="post-index-all" data-index-all>All posts</a>
+        </li>
         {% for tocCategory in collections.tableOfContents %}
             <li class="post-index-category">
                 <details data-index-key="{{ tocCategory.name }}" {% if tocCategory.name == category %}open{% endif %}>
@@ -68,5 +71,22 @@
     } catch (err) {
         // localStorage unavailable (private browsing, etc.) - fall back to server-rendered state only
     }
+})();
+
+// Outside the Posts page (which filters in place), clicking a name opens the
+// Posts page filtered to it; the triangle still only opens or closes.
+(() => {
+    const tree = document.querySelector(".post-index .post-index-tree");
+    if (!tree) return;
+    const levels = ["category", "subcategory", "topic"];
+    tree.querySelectorAll("details[data-index-key]").forEach((group) => {
+        group.querySelector(":scope > summary").addEventListener("click", (event) => {
+            if (event.target.closest(".post-index-toggle")) return;
+            event.preventDefault();
+            const params = new URLSearchParams();
+            group.dataset.indexKey.split("/").forEach((value, index) => params.set(levels[index], value));
+            location.href = `/posts/?${params}`;
+        });
+    });
 })();
 </script>
