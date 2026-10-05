@@ -1,7 +1,7 @@
 module.exports = {
   name: "Alan Wang",
   url: "https://thealanwang.github.io",
-  assetVersion: "2026-10-04-cinematic-v1",
+  assetVersion: "2026-10-04-home-cleanup-v1",
   socialImage:
     "https://thealanwang.github.io/assets/social/linkedin-preview.png",
   tagline: "Building applied AI with a systems mindset.",
@@ -13,7 +13,7 @@ module.exports = {
   ],
   homeIntroText:
     "I build AI applications with a systems mindset and use this site to share projects and technical notes on applied AI, backend systems, and cloud infrastructure.",
-  postsIntroTitle: "Recent Posts",
+  postsIntroTitle: "Recent posts",
   postsIntroText: "",
   postsPageIntroTitle: "All Posts",
   postsPageIntroText:
