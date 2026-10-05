@@ -1,7 +1,7 @@
 module.exports = {
   name: "Alan Wang",
   url: "https://thealanwang.github.io",
-  assetVersion: "2026-05-08-project-spacing-v1",
+  assetVersion: "2026-10-04-cinematic-v1",
   socialImage:
     "https://thealanwang.github.io/assets/social/linkedin-preview.png",
   tagline: "Building applied AI with a systems mindset.",
@@ -12,12 +12,12 @@ module.exports = {
     "and reliable engineering.",
   ],
   homeIntroText:
-    "I build AI applications with a systems mindset and use this site to share projects, technical notes, and visual sketches on applied AI, backend systems, and cloud infrastructure.",
+    "I build AI applications with a systems mindset and use this site to share projects and technical notes on applied AI, backend systems, and cloud infrastructure.",
   postsIntroTitle: "Recent Posts",
   postsIntroText: "",
   postsPageIntroTitle: "All Posts",
   postsPageIntroText:
-    "A chronological archive of projects, sketches, and technical notes.",
+    "A chronological archive of projects and technical notes.",
   footerText: "Thanks for reading.",
   about: {
     headline:
@@ -79,6 +79,18 @@ module.exports = {
     ],
     experience: [
       {
+        role: "Research Assistant",
+        organization: "YouDescribe",
+        organizationUrl: "https://youdescribe.org/",
+        logo: "/assets/logos/companies/com_youdescribe.png",
+        period: "May 2026 – Present",
+        points: [
+          "Built a <strong>multimodal evaluation pipeline</strong> where leading <strong>VLMs</strong> score AI-generated audio descriptions per <strong>20-second window</strong>, benchmarked against <strong>human raters</strong> to test whether VLMs can replace manual review.",
+          "Improved production AI pipeline reliability and observability on <strong>AWS</strong> (EC2, S3, CloudWatch): rebuilt the job queue from <strong>MongoDB</strong> on startup and added a <strong>self-healing</strong>, status-aware sweeper that triages and auto-recovers stuck jobs.",
+          "Added a <strong>single-flight guard</strong> to the homepage videos endpoint, preventing <strong>cache stampede</strong> under concurrent load.",
+        ],
+      },
+      {
         role: "Software Engineer Intern (AI Backend)",
         organization: "Kokun",
         organizationUrl: "https://kokun.space/",
@@ -87,7 +99,7 @@ module.exports = {
         points: [
           "Shipped a production <strong>RAG agent</strong> for a public-health app (500+ users, 1,100+ papers, 1.84s TTFT); designed the architecture spanning retrieval via <strong>LangChain</strong>, tool orchestration via <strong>LangGraph</strong>, safety routing, and multi-turn memory.",
           "Built an async embedding pipeline on <strong>GCP</strong> (Pub/Sub, Cloud Run, Vertex AI), embedding <strong>27K+</strong> chunks into <strong>pgvector</strong>.",
-          "Built an 87-case, 3 layers evaluation pipeline combining deterministic <strong>execution-trace assertions</strong>, reference-fact checks, and <strong>RAGAS</strong>-based LLM judging.",
+          "Built an 87-case, 3-layer evaluation pipeline combining deterministic <strong>execution-trace assertions</strong>, reference-fact checks, and <strong>RAGAS</strong>-based LLM judging.",
           "Detected and fixed a silent safety <strong>regression</strong> from tool calling, raising crisis-resource inclusion from <strong>24.1 to 29.0</strong>/30; validated the fix across multiple models (<strong>Gemini</strong>, <strong>GPT</strong>, and <strong>Claude</strong>).",
         ],
       },
