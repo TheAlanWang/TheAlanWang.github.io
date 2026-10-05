@@ -1,44 +1,20 @@
 ---
 layout: layouts/base.njk
 title: Posts
-description: Posts archive for Alan Wang.
+description: Posts archive for Alan Wang, browsable by section, domain, and topic.
 navKey: posts
 ---
 <div class="layout-grid">
-    <aside class="identity-rail">
-        <div class="identity-block">
-            <p class="eyebrow">Applied AI Engineer</p>
-            <h1 class="identity-title">{{ site.name }}</h1>
-            <p class="identity-summary">{{ site.tagline }}</p>
-        </div>
-
-        <div class="identity-meta">
-            {% for fact in site.quickFacts %}
-                <span class="meta-pill">{{ fact }}</span>
-            {% endfor %}
-        </div>
+    <aside class="identity-rail topic-rail" id="topic-rail">
+        <button type="button" class="topic-rail-toggle" data-topic-toggle aria-expanded="false" aria-controls="topic-rail">Browse by topic</button>
+        {% include "partials/post-index-tree.njk" %}
     </aside>
 
     <main class="content-column">
         <section class="lead-panel lead-panel-archive">
-            <h2 class="lead-title">{{ site.postsPageIntroTitle }}</h2>
+            <h1 class="lead-title">{{ site.postsPageIntroTitle }}</h1>
             <p class="lead-copy">{{ site.postsPageIntroText }}</p>
         </section>
-
-        <div class="posts-filters posts-filters-archive posts-filters-archive-bordered" aria-label="Post filters">
-            <label class="posts-filter-inline">
-                <span class="posts-filter-label">Category</span>
-                <select class="posts-filter-select" data-filter-group="category" aria-label="Filter posts by category"></select>
-            </label>
-            <label class="posts-filter-inline">
-                <span class="posts-filter-label">Subcategory</span>
-                <select class="posts-filter-select" data-filter-group="subcategory" aria-label="Filter posts by subcategory"></select>
-            </label>
-            <label class="posts-filter-inline">
-                <span class="posts-filter-label">Topic</span>
-                <select class="posts-filter-select" data-filter-group="topic" aria-label="Filter posts by topic"></select>
-            </label>
-        </div>
 
         <section class="content-section content-section-archive">
             <div class="list-stream">
@@ -46,8 +22,7 @@ navKey: posts
                     <article class="stream-item post-item"
                              data-category="{{ post.data.category }}"
                              data-subcategory="{{ post.data.subcategory }}"
-                             data-topic="{{ post.data.topic or '' }}"
-                             data-kind="{{ post.data.kind or '' }}">
+                             data-topic="{{ post.data.topic or '' }}">
                         <div class="stream-copy">
                             <div class="stream-meta">
                                 <span class="stream-topic">{{ post.data.category }}</span>
@@ -57,7 +32,7 @@ navKey: posts
                                 {% endif %}
                                 <span class="stream-date">{{ post.date | displayDate }}</span>
                             </div>
-                            <h3 class="stream-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+                            <h2 class="stream-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
                             <p class="stream-excerpt">{{ post.data.excerpt }}</p>
                         </div>
                     </article>
@@ -74,127 +49,33 @@ navKey: posts
 <script>
     (() => {
         const posts = Array.from(document.querySelectorAll(".post-item"));
-        if (!posts.length) return;
-
-        const pageSize = 10;
-        let limit = pageSize;
         const showMore = document.querySelector(".show-more");
         const showMoreButton = document.querySelector("[data-show-more]");
+        const rail = document.getElementById("topic-rail");
+        const railToggle = document.querySelector("[data-topic-toggle]");
+        const pageSize = 10;
+        let limit = pageSize;
 
-        const groups = ["category", "subcategory", "topic"];
-        const state = Object.fromEntries(groups.map((group) => [group, "all"]));
-        const selects = Object.fromEntries(
-            groups.map((group) => [group, document.querySelector(`[data-filter-group="${group}"]`)])
-        );
-        const allValues = Object.fromEntries(
-            groups.map((group) => [
-                group,
-                Array.from(new Set(posts.map((post) => post.dataset[group]).filter(Boolean))).sort(),
-            ])
-        );
-
-        const acronymMap = {
-            ai: "AI",
-            rag: "RAG",
-            aws: "AWS",
-            api: "API",
-            apis: "APIs",
-            db: "DB",
-            llm: "LLM",
-            gpu: "GPU",
-            hpc: "HPC",
-        };
-
-        const formatLabel = (value) =>
-            value
-                .split(/([\s/-]+)/)
-                .map((part) => acronymMap[part] || (part.charAt(0).toUpperCase() + part.slice(1)))
-                .join("");
-
-        const setOptions = (group, values) => {
-            const select = selects[group];
-            if (!select) return;
-            const options = ["all", ...values];
-            select.innerHTML = "";
-
-            options.forEach((value) => {
-                const option = document.createElement("option");
-                option.value = value;
-                option.textContent = value === "all" ? "All" : formatLabel(value);
-                select.appendChild(option);
+        const render = () => {
+            posts.forEach((post, index) => {
+                post.hidden = index >= limit;
+                post.classList.toggle("post-item-last-visible", index === Math.min(limit, posts.length) - 1);
             });
-        };
-
-        const renderGroup = (group) => {
-            const select = selects[group];
-            if (!select) return;
-            setOptions(group, allValues[group]);
-            select.value = "all";
-            select.addEventListener("change", () => {
-                state[group] = select.value;
-                update();
-            });
-        };
-
-        const availableValues = (group) => {
-            return Array.from(
-                new Set(
-                    posts
-                        .filter((post) =>
-                            groups.every((candidate) =>
-                                candidate === group || state[candidate] === "all" || post.dataset[candidate] === state[candidate]
-                            )
-                        )
-                        .map((post) => post.dataset[group])
-                        .filter(Boolean)
-                )
-            ).sort();
-        };
-
-        const update = () => {
-            groups.forEach((group) => {
-                const values = availableValues(group);
-                const current = state[group];
-                setOptions(group, values);
-                if (current !== "all" && !values.includes(current)) {
-                    state[group] = "all";
-                }
-                selects[group].value = state[group];
-            });
-
-            // With a filter on, show every match; otherwise show the first `limit` posts.
-            const filtering = groups.some((group) => state[group] !== "all");
-            const matching = posts.filter((post) =>
-                groups.every((group) => state[group] === "all" || post.dataset[group] === state[group])
-            );
-
-            posts.forEach((post) => {
-                post.hidden = !matching.includes(post) || (!filtering && matching.indexOf(post) >= limit);
-                post.classList.remove("post-item-first-visible");
-                post.classList.remove("post-item-last-visible");
-            });
-
-            const remaining = filtering ? 0 : matching.length - limit;
+            const remaining = posts.length - limit;
             showMore.hidden = remaining <= 0;
             showMoreButton.textContent = `Show ${Math.min(pageSize, remaining)} more`;
-
-            const visiblePosts = posts.filter((post) => !post.hidden);
-            const firstVisible = visiblePosts[0];
-            if (firstVisible) {
-                firstVisible.classList.add("post-item-first-visible");
-            }
-            const lastVisible = visiblePosts[visiblePosts.length - 1];
-            if (lastVisible) {
-                lastVisible.classList.add("post-item-last-visible");
-            }
         };
 
         showMoreButton.addEventListener("click", () => {
             limit += pageSize;
-            update();
+            render();
         });
 
-        groups.forEach(renderGroup);
-        update();
+        railToggle.addEventListener("click", () => {
+            const open = rail.classList.toggle("is-open");
+            railToggle.setAttribute("aria-expanded", String(open));
+        });
+
+        render();
     })();
 </script>

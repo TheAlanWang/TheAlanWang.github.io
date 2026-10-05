@@ -1,90 +1,17 @@
 ---
-layout: layouts/base.njk
-title: Table of Contents
-description: A table of contents for Alan Wang's posts, grouped by section, domain, and topic.
-navKey: table-of-contents
+permalink: /table-of-contents/index.html
+eleventyExcludeFromCollections: true
 ---
-<div class="layout-grid">
-    <aside class="identity-rail">
-        <div class="identity-block">
-            <p class="eyebrow">Applied AI Engineer</p>
-            <h1 class="identity-title">{{ site.name }}</h1>
-            <p class="identity-summary">{{ site.tagline }}</p>
-        </div>
-
-        <div class="identity-meta">
-            {% for category in collections.tableOfContents %}
-                <a href="#{{ category.name | slugify }}" class="meta-pill">{{ category.name }}</a>
-            {% endfor %}
-        </div>
-    </aside>
-
-    <main class="content-column">
-        <section class="lead-panel lead-panel-archive">
-            <h2 class="lead-title">Table of Contents</h2>
-            <p class="lead-copy">Posts grouped by section, domain, and topic.</p>
-        </section>
-
-        <section class="content-section knowledge-map-section">
-            {% for category in collections.tableOfContents %}
-                <details class="knowledge-category" id="{{ category.name | slugify }}">
-                    <summary class="knowledge-category-summary">
-                        <span class="knowledge-toggle" aria-hidden="true"></span>
-                        <span class="knowledge-category-copy">
-                            <span class="knowledge-category-title">{{ category.name }}</span>
-                            <span class="knowledge-count">{{ category.count }}</span>
-                        </span>
-                    </summary>
-
-                    <div class="knowledge-subcategory-list">
-                        {% for subcategory in category.subcategories %}
-                            <details class="knowledge-subcategory">
-                                <summary class="knowledge-subcategory-summary">
-                                    <span class="knowledge-toggle knowledge-toggle-small" aria-hidden="true"></span>
-                                    <span class="knowledge-subcategory-title">{{ subcategory.name }}</span>
-                                    <span class="knowledge-count">{{ subcategory.count }}</span>
-                                </summary>
-
-                                <ul class="knowledge-post-list">
-                                    {% for post in subcategory.posts %}
-                                        <li class="knowledge-post">
-                                            {% if post.data.topic and (loop.first or subcategory.posts[loop.index0 - 1].data.topic != post.data.topic) %}
-                                                <span class="knowledge-post-topic">{{ post.data.topic }}</span>
-                                            {% endif %}
-                                            <h5 class="knowledge-post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h5>
-                                            <p class="knowledge-post-excerpt">{{ post.data.excerpt }}</p>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </details>
-                        {% endfor %}
-                    </div>
-                </details>
-            {% endfor %}
-        </section>
-
-        {% include "partials/site-footer.njk" %}
-    </main>
-    <script>
-        (() => {
-            const openTarget = () => {
-                const hash = decodeURIComponent(window.location.hash.slice(1));
-                if (!hash) return;
-                const target = document.getElementById(hash);
-                if (target && target.tagName === "DETAILS") {
-                    target.open = true;
-                }
-            };
-            openTarget();
-            window.addEventListener("hashchange", openTarget);
-            document.querySelectorAll('a.meta-pill[href^="#"]').forEach((pill) => {
-                pill.addEventListener("click", () => {
-                    const target = document.getElementById(pill.getAttribute("href").slice(1));
-                    if (target && target.tagName === "DETAILS") {
-                        target.open = true;
-                    }
-                });
-            });
-        })();
-    </script>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts | {{ site.name }}</title>
+    <link rel="canonical" href="{{ site.url }}/posts/">
+    <meta http-equiv="refresh" content="0; url=/posts/">
+    <script>location.replace("/posts/");</script>
+</head>
+<body>
+    <p>The table of contents is now part of <a href="/posts/">Posts</a>.</p>
+</body>
+</html>
