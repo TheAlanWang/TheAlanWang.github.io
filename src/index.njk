@@ -56,18 +56,9 @@ bodyClass: page-home
         </section>
 
         <section id="posts" class="content-section">
-            <div class="section-heading">
-                <div>
-                    <p class="section-kicker">{{ site.postsIntroTitle }}</p>
-                    <h2 class="section-title">Recent writing and project notes.</h2>
-                </div>
-                {% if site.postsIntroText %}
-                    <p class="section-description">{{ site.postsIntroText }}</p>
-                {% endif %}
-            </div>
-
-            <div class="section-footer-link section-footer-link-top no-divider">
-                <a href="/posts/" class="browse-link">Browse all posts</a>
+            <div class="section-row">
+                <h2 class="section-row-title">{{ site.postsIntroTitle }}</h2>
+                <a href="/posts/" class="section-row-link">Browse all posts</a>
             </div>
 
             <div class="list-stream">
@@ -75,7 +66,6 @@ bodyClass: page-home
                     <article class="stream-item post-item">
                         <div class="stream-copy">
                             <div class="stream-meta">
-                                <span class="stream-topic">{{ post.data.category }}</span>
                                 <span class="stream-subtopic">{{ post.data.subcategory }}</span>
                                 <span class="stream-date">{{ post.date | displayDate }}</span>
                             </div>
@@ -88,10 +78,8 @@ bodyClass: page-home
         </section>
 
         <section id="contact" class="content-section">
-            <div class="section-heading">
-                <div>
-                    <h2 class="section-title">Contact</h2>
-                </div>
+            <div class="section-row">
+                <h2 class="section-row-title">Contact</h2>
             </div>
 
             <div class="contact-panel">

@@ -1314,11 +1314,11 @@ select {
 }
 
 .about-list-item + .about-list-item {
-    border-top: 1px solid var(--line);
+    padding-top: 30px;
 }
 
 .about-list-education .about-list-item + .about-list-item {
-    border-top: none;
+    padding-top: 22px;
 }
 
 .about-list-header-main {
@@ -1901,6 +1901,44 @@ select {
 .theme-toggle:focus-visible {
     outline: 2px solid var(--muted);
     outline-offset: 3px;
+}
+
+/* Homepage section headings: one quiet row instead of label + headline + link */
+
+.section-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.section-row-title {
+    margin: 0;
+    color: var(--text);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.section-row-link {
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: color var(--ease);
+}
+
+.section-row-link:hover,
+.section-row-link:focus-visible {
+    color: var(--text);
+}
+
+/* Post meta: one tone for every item */
+
+.stream-meta .stream-topic,
+.stream-meta .stream-subtopic,
+.stream-meta .stream-date {
+    color: var(--soft-text);
+    font-size: 0.88rem;
 }
 
 /* Posts page: show more */
