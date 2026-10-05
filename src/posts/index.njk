@@ -12,8 +12,8 @@ navKey: posts
 
     <main class="content-column">
         <section class="lead-panel lead-panel-archive">
-            <h1 class="lead-title">{{ site.postsPageIntroTitle }}</h1>
-            <p class="lead-copy">{{ site.postsPageIntroText }}</p>
+            <h1 class="lead-title" data-posts-title>{{ site.postsPageIntroTitle }}</h1>
+            <p class="lead-copy" data-posts-copy>{{ site.postsPageIntroText }}</p>
         </section>
 
         <section class="content-section content-section-archive">
@@ -49,22 +49,106 @@ navKey: posts
 <script>
     (() => {
         const posts = Array.from(document.querySelectorAll(".post-item"));
+        const tree = document.querySelector(".topic-rail .post-index-tree");
+        const allLink = tree.querySelector("[data-index-all]");
+        const groups = Array.from(tree.querySelectorAll("details[data-index-key]"));
+        const title = document.querySelector("[data-posts-title]");
+        const copy = document.querySelector("[data-posts-copy]");
+        const defaultTitle = title.textContent;
+        const defaultCopy = copy.textContent;
         const showMore = document.querySelector(".show-more");
         const showMoreButton = document.querySelector("[data-show-more]");
         const rail = document.getElementById("topic-rail");
         const railToggle = document.querySelector("[data-topic-toggle]");
+        const levels = ["category", "subcategory", "topic"];
         const pageSize = 10;
         let limit = pageSize;
 
+        // The filter lives in the URL (?category=…&subcategory=…&topic=…) and maps
+        // to a tree key like "Knowledge/AI/LLM".
+        const readKey = () => {
+            const params = new URLSearchParams(location.search);
+            const parts = [];
+            for (const level of levels) {
+                const value = params.get(level);
+                if (!value) break;
+                parts.push(value);
+            }
+            return parts.join("/");
+        };
+
+        const urlFor = (key) => {
+            if (!key) return "/posts/";
+            const params = new URLSearchParams();
+            key.split("/").forEach((value, index) => params.set(levels[index], value));
+            return `/posts/?${params}`;
+        };
+
         const render = () => {
-            posts.forEach((post, index) => {
-                post.hidden = index >= limit;
-                post.classList.toggle("post-item-last-visible", index === Math.min(limit, posts.length) - 1);
+            const key = readKey();
+            const path = key ? key.split("/") : [];
+            const matching = posts.filter((post) =>
+                path.every((value, index) => post.dataset[levels[index]] === value)
+            );
+
+            // Unfiltered: page through the list. Filtered: show every match.
+            posts.forEach((post) => {
+                const index = matching.indexOf(post);
+                post.hidden = index === -1 || (!key && index >= limit);
+                post.classList.remove("post-item-first-visible", "post-item-last-visible");
             });
-            const remaining = posts.length - limit;
+            const visible = posts.filter((post) => !post.hidden);
+            visible[0]?.classList.add("post-item-first-visible");
+            visible[visible.length - 1]?.classList.add("post-item-last-visible");
+
+            const remaining = key ? 0 : matching.length - limit;
             showMore.hidden = remaining <= 0;
             showMoreButton.textContent = `Show ${Math.min(pageSize, remaining)} more`;
+
+            title.textContent = key ? path[path.length - 1] : defaultTitle;
+            copy.textContent = key
+                ? `${matching.length} ${matching.length === 1 ? "post" : "posts"}${path.length > 1 ? ` in ${path.slice(0, -1).join(" / ")}` : ""}`
+                : defaultCopy;
+
+            allLink.classList.toggle("is-active", !key);
+            groups.forEach((group) => {
+                const active = group.dataset.indexKey === key;
+                group.querySelector(":scope > summary").classList.toggle("is-active", active);
+                if (active || key.startsWith(group.dataset.indexKey + "/")) group.open = true;
+            });
         };
+
+        const go = (key) => {
+            history.pushState(null, "", urlFor(key));
+            limit = pageSize;
+            rail.classList.remove("is-open");
+            railToggle.setAttribute("aria-expanded", "false");
+            render();
+        };
+
+        // Clicking a name filters the list; clicking the triangle only opens or closes.
+        groups.forEach((group) => {
+            const summary = group.querySelector(":scope > summary");
+            summary.addEventListener("click", (event) => {
+                if (event.target.closest(".post-index-toggle")) return;
+                event.preventDefault();
+                const key = group.dataset.indexKey;
+                if (readKey() === key) {
+                    group.open = !group.open;
+                    return;
+                }
+                group.open = true;
+                go(key);
+            });
+        });
+
+        allLink.addEventListener("click", (event) => {
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+            event.preventDefault();
+            go("");
+        });
+
+        window.addEventListener("popstate", render);
 
         showMoreButton.addEventListener("click", () => {
             limit += pageSize;

@@ -70,6 +70,18 @@
         {{ content | safe }}
     </div>
     <script>
+        // When the page shows the large name, hide the header name until it scrolls away.
+        (function () {
+            var name = document.querySelector(".identity-title");
+            var brand = document.querySelector(".site-brand");
+            if (!name || !brand || !("IntersectionObserver" in window)) return;
+            brand.classList.add("site-brand-deferred");
+            new IntersectionObserver(function (entries) {
+                brand.classList.toggle("is-visible", !entries[0].isIntersecting);
+            }, { rootMargin: "-56px 0px 0px 0px" }).observe(name);
+        })();
+    </script>
+    <script>
         (function () {
             var root = document.documentElement;
             var button = document.querySelector("[data-theme-toggle]");
