@@ -153,15 +153,7 @@ permalink: /about.html
 
             <div class="contact-panel">
                 <p class="contact-copy">{{ site.contact.blurb }}</p>
-                <div class="contact-links">
-                    {% for link in site.contact.links %}
-                        <a href="{{ link.url }}"
-                           {% if link.external %}target="_blank" rel="noreferrer"{% endif %}
-                           class="contact-link">
-                            {{ link.label }}
-                        </a>
-                    {% endfor %}
-                </div>
+                {% include "partials/contact-links.njk" %}
             </div>
         </section>
 
