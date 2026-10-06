@@ -476,22 +476,33 @@ select {
 .contact-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 12px;
     margin-top: 14px;
 }
 
 .contact-link {
-    display: inline-block;
-    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
     color: var(--muted);
-    border-bottom: 1px solid rgba(var(--ink-rgb), 0.16);
-    transition: color var(--ease), border-color var(--ease);
+    border: 1px solid rgba(var(--ink-rgb), 0.16);
+    border-radius: 50%;
+    transition: color var(--ease), border-color var(--ease), transform var(--ease);
 }
 
 .contact-link:hover,
 .contact-link:focus-visible {
     color: var(--text);
     border-color: rgba(var(--ink-rgb), 0.36);
+    transform: translateY(-1px);
+}
+
+.contact-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
 }
 
 .site-footer {
@@ -1430,8 +1441,7 @@ select {
     }
 
     .meta-pill,
-    .stream-topic,
-    .contact-link {
+    .stream-topic {
         width: fit-content;
     }
 
@@ -1862,12 +1872,13 @@ select {
 /* Credits footer */
 
 .site-footer {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding-top: 40px;
-    text-align: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 4px 10px;
+    padding-top: 24px;
+    text-align: left;
 }
 
 .credits-role {
@@ -1885,6 +1896,7 @@ select {
 
 .site-footer .credits-fine {
     margin-top: 0;
+    margin-left: auto;
     color: var(--soft-text);
     font-size: 0.78rem;
     letter-spacing: 0.08em;
