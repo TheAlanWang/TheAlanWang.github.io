@@ -1872,13 +1872,12 @@ select {
 /* Credits footer */
 
 .site-footer {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: flex-start;
-    gap: 4px 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     padding-top: 24px;
-    text-align: left;
+    text-align: center;
 }
 
 .credits-role {
@@ -1896,7 +1895,6 @@ select {
 
 .site-footer .credits-fine {
     margin-top: 0;
-    margin-left: auto;
     color: var(--soft-text);
     font-size: 0.78rem;
     letter-spacing: 0.08em;
