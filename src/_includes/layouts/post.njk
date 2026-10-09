@@ -127,3 +127,54 @@ pageShellClass: post-layout
     updateCurrentFromScroll();
 })();
 </script>
+<script type="module">
+(async () => {
+    const blocks = Array.from(document.querySelectorAll("[data-prose] pre.language-mermaid"));
+    if (!blocks.length) return;
+
+    const { default: mermaid } = await import("https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs");
+    // Mermaid sizes boxes by measuring label text, so the web font must be ready first.
+    await Promise.all([document.fonts.load("14px Manrope"), document.fonts.ready]);
+    const diagrams = blocks.map((pre) => ({ pre, source: pre.textContent, figure: null }));
+    let renderCount = 0;
+
+    const render = async () => {
+        const css = getComputedStyle(document.documentElement);
+        const token = (name) => css.getPropertyValue(name).trim();
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: "base",
+            fontFamily: token("--font-sans"),
+            themeVariables: {
+                fontFamily: token("--font-sans"),
+                fontSize: "14px",
+                background: token("--code-bg"),
+                primaryColor: token("--bg-soft"),
+                primaryTextColor: token("--text"),
+                primaryBorderColor: token("--soft-text"),
+                lineColor: token("--muted"),
+                textColor: token("--text"),
+                edgeLabelBackground: token("--code-bg")
+            }
+        });
+
+        for (const diagram of diagrams) {
+            try {
+                renderCount += 1;
+                const { svg } = await mermaid.render(`mermaid-${renderCount}`, diagram.source);
+                if (!diagram.figure) {
+                    diagram.figure = document.createElement("figure");
+                    diagram.figure.className = "mermaid-diagram";
+                    diagram.pre.replaceWith(diagram.figure);
+                }
+                diagram.figure.innerHTML = svg;
+            } catch (error) {
+                console.error("Mermaid render failed", error);
+            }
+        }
+    };
+
+    await render();
+    new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+})();
+</script>

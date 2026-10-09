@@ -937,6 +937,29 @@ select {
     background: var(--code-bg);
 }
 
+.prose .mermaid-diagram {
+    margin: 18px 0 22px;
+    padding: 20px 16px;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--code-bg);
+    text-align: center;
+}
+
+.prose .mermaid-diagram svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mermaid sizes labels without .prose styles; keep them out so text isn't clipped. */
+.prose .mermaid-diagram p {
+    margin: 0;
+    font-size: inherit;
+    line-height: 1.5;
+    color: inherit;
+}
+
 .prose pre[data-language]::before {
     content: attr(data-language);
     position: absolute;
