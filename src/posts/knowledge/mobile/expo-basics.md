@@ -41,16 +41,22 @@ React (components, state)
 ```
 
 ## 2. Development Architecture
-```
-On the computer
-  Node.js   ── runs ─────────────────▶ Expo CLI, Metro
-  Your code (TypeScript + React + React Native) ──▶ Metro
-  Expo CLI  ── expo start: starts ───▶ Metro
-  Expo CLI  ── expo run:ios: calls ──▶ Xcode
+```mermaid
+flowchart TD
+    Node["Node.js<br/>runtime on the computer"]
+    Code["Your code<br/>TypeScript + React + React Native"]
+    Expo["Expo CLI<br/>dev command-line tool"]
+    Metro["Metro<br/>transforms and bundles JS"]
+    Xcode["Xcode<br/>builds the native iOS app"]
+    App["App on phone / simulator"]
 
-On the phone / simulator
-  Metro ── serves JS during development ──▶ App
-  Xcode ── builds and installs locally ───▶ App
+    Node -->|"runs"| Expo
+    Node -->|"runs"| Metro
+    Code --> Metro
+    Expo -->|"expo start: starts"| Metro
+    Expo -->|"expo run:ios: calls the build tool"| Xcode
+    Metro -->|"serves JS during development"| App
+    Xcode -->|"builds and installs locally"| App
 ```
 
 A mobile app has two halves:
