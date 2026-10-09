@@ -106,11 +106,11 @@ Result    [1, 2, 3, 4, 5, 6, 7, 8]
 | **Quick Sort** | Θ(n log n) | Θ(n log n) | **Θ(n²)** | Θ(log n) expected |
 
 - Best: the pivot splits evenly, so `T(n) = 2T(n/2) + Θ(n) = Θ(n log n)`.
-- Worst: see Worst Case below. 每次都抽到最小或最大，Θ(n²)
+- Worst: see [Worst Case](#worst-case). 每次都抽到最小或最大，Θ(n²)
 - Random pivot makes the worst case very unlikely, so the expected time is Θ(n log n) on any input.<br>随机选 pivot，最坏情况几乎不会发生，任何输入的期望都是 Θ(n log n)
 - In-place: only the recursion stack uses extra space.
 
-### Worst Case
+<h3 id="worst-case">Worst Case</h3>
 
 - Running time depends on how well the **pivot** splits the array.
 - Worst pivot: the smallest or the largest element. Then one side has n−1 and the other side has 0.<br>最坏的 pivot 是最小或最大的数，一边 n−1 个，另一边 0 个
