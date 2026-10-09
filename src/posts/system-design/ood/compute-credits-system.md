@@ -403,15 +403,6 @@ def _expire_transfers(self, timestamp):
 ```
 
 然后每个 query 开头调用：`self._expire_transfers(timestamp)`
-
-### Level 3 Debug 记录
-
-- `transfer.status` 错，dictionary 应该写 `transfer["status"]`
-- `self.workspace` 错，应该是 `self.workspaces`
-- `expirted` 拼错，应该是 `expired`
-- `transfer[1]` 格式错，应该是 `transfer1`
-- `accept_credits` 不能缩进在 `transfer_credits` 里面，两者必须是 class 下同一级方法
-
 ## Level 4 做法 - History
 
 ### 为什么需要 history
@@ -630,7 +621,7 @@ self.history      -> 历史余额
 - workspace 删除以后历史仍要保留
 - `get_credits` 查的是过去，不是现在
 
-## 完整代码
+## Full Code
 
 余额每次变化都调用 `_record_balance`，过期的 transfer 由 `_expire_transfers` 自动退款。
 
