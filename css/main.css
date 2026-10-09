@@ -846,6 +846,10 @@ select {
     margin: 0 0 12px;
 }
 
+.prose strong {
+    color: var(--quote-accent);
+}
+
 .prose blockquote {
     position: relative;
     margin: 22px 0 26px;
