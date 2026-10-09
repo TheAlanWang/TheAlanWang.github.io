@@ -1044,7 +1044,7 @@ select {
 }
 
 .prose td {
-    color: var(--muted);
+    color: var(--prose-text);
     line-height: 1.65;
 }
 
@@ -1484,7 +1484,7 @@ select {
     --soft-text: #6e7880;
     --shadow-soft: none;
     --header-bg: rgba(15, 20, 24, 0.55);
-    --prose-text: #c9cdd0;
+    --prose-text: #f7f8f7;
     --quote-accent: #4fb3cf;
     --code-bg: #131a1f;
     --code-text: #d6d9d4;
