@@ -1,7 +1,7 @@
 ---
 layout: layouts/post.njk
 title: Modules Basics
-description: Splitting a React Native app into files with ES Modules, named vs. default exports and when each is used, import paths and the @/ alias, and how to organize folders.
+description: When and how to split a React Native app into files, ES Modules, named vs. default exports and when each is used, import paths and the @/ alias, and how to organize folders.
 excerpt: How to split an Expo app into files, why only pages use export default, and how import paths and folders are organized.
 date: 2026-10-11T12:00:00-07:00
 category: Knowledge
@@ -18,8 +18,6 @@ templateEngineOverride: md
 With all the code in `App.tsx`, the file grows to hundreds of lines once you have a few components, and things get hard to find.
 Splitting files means: **one component per file, imported wherever it's used.**
 
-When to split: a component is longer than one screen, or two places need the same piece of UI.
-
 ## Overview
 | Concept | In one line | Example |
 | --- | --- | --- |
@@ -30,7 +28,53 @@ When to split: a component is longer than one screen, or two places need the sam
 | Path | Tells import which file to look in | `./`, `../`, `@/` |
 | Folders | Group files by purpose | `components/`, `api/`, `theme.ts` |
 
-## 1. The first split: move a component out
+## 1. When to split
+You don't have to plan it up front. Write everything in `App.tsx` first and get it running. Split once one of these signals shows up.
+
+**1. The same UI is written twice**: the clearest signal. You copy-pasted a block of JSX and only changed the text or data inside. Turn it into a component and pass the parts that differ as props.
+```tsx
+// Before: two nearly identical blocks
+<View style={styles.card}>
+  <Text>{videoA.title}</Text>
+  <Text>{videoA.duration}</Text>
+</View>
+<View style={styles.card}>
+  <Text>{videoB.title}</Text>
+  <Text>{videoB.duration}</Text>
+</View>
+
+// After
+<VideoCard video={videoA} />
+<VideoCard video={videoB} />
+```
+
+**2. You can give the block a name**: look at the JSX in `return`. If you'd want to put a comment above a block saying what it is (`// search bar at the top`, `// video list`, `// playback controls at the bottom`), that block is basically a component, and the comment is its name: `SearchBar`, `VideoList`, `PlayerControls`.
+
+**3. The file is too long**: a component is longer than one screen and you have to scroll around to read it. Move the blocks you can name out, and the main file is left as a skeleton that shows at a glance which pieces the page is made of:
+```tsx
+export default function App() {
+  return (
+    <View>
+      <SearchBar />
+      <VideoList />
+      <PlayerControls />
+    </View>
+  );
+}
+```
+
+**4. The block has its own state**: for example, a text input that keeps what's typed in a `useState`, and nothing else on the page cares about that value. Move it out along with its state, and the main file loses a pile of code that has nothing to do with it.
+
+**Don't split yet**:
+- **Small and used once**: for example, a one-line title `<Text>Settings</Text>`. Moving it out just means jumping to one more file
+- **It would need a pile of props**: the block uses five or six of the page's variables and functions, which means it's tightly tied to the page. Forcing it out only moves the code somewhere else and makes it harder to read
+- **"It might be reused later"**: wait until it's actually used a second time. Reuse that hasn't happened yet is easy to guess wrong
+
+## 2. How to split
+1. Cut the whole block out into `components/xxx.tsx`, and put `export` in front of the function
+2. Turn the variables it uses into props passed in
+3. Back in `App.tsx`, import it and write it as `<Xxx />`
+
 Before splitting, `App.tsx`:
 ```tsx
 import { Text, View } from 'react-native';
@@ -73,7 +117,7 @@ export default function App() {
 - Each file stands on its own: `greeting.tsx` uses `Text`, so it imports `Text` at the top of its own file; `App.tsx` no longer uses `Text`, so that import can go
 - The function needs `export` in front, or other files can't get it and you get the error "declares 'Greeting' locally, but it is not exported". If the name is misspelled and doesn't exist in the file at all, the error is "has no exported member"
 
-## 2. Named vs. default exports
+## 3. Named vs. default exports
 > **Bottom line**: everything you write and import yourself (components, utility functions, `theme.ts`, `auth-context.tsx`, …) uses `export` (a named export). Only files the framework loads on its own use `export default` (a default export), and in practice the only time you write one yourself is **when you add a new page**.
 
 ### When to use which
@@ -134,7 +178,8 @@ Expo Router pages work the same way: you never call any page. Wherever the user 
 
 ### What `default` is
 **Where it comes from**: `export` / `import` / `default` are built-in JavaScript syntax called **ES Modules**.
-- **ES** = ECMAScript, JavaScript's official standard name; **Module** = each file is a module. What's inside is only usable within that file by default; to let others use it you `export` it, and to use someone else's you `import` it
+- **ES** = ECMAScript, JavaScript's official standard name
+- **Module** = each file is a module. What's inside is only usable within that file by default; to let others use it you `export` it, and to use someone else's you `import` it
 - Added to JavaScript in 2015. Before that there was no official way, so Node.js invented its own system, CommonJS: `require('./x')`, `module.exports = ...`
 - You'll see both in an Expo project: the `.ts` / `.tsx` files you write are all ES Modules; config files like `eslint.config.js` often still use `require` / `module.exports`
 - React Native also uses `require` for local images: `<Image source={require('./logo.png')} />`
@@ -189,7 +234,7 @@ import { useState } from 'react';                     // this library uses named
 
 **Exercise**: create `utils.ts` that exports `APP_NAME` and `double`, import both in `App.tsx` with one import line, and display `{APP_NAME}` and `{double(21)}`.
 
-## 3. Writing paths
+## 4. Writing paths
 | Form | Meaning | Example |
 | --- | --- | --- |
 | `./` | The folder the current file is in | `./components/greeting` in `App.tsx` |
@@ -243,7 +288,7 @@ import { usePalette } from '@/theme';
 import { AuthProvider } from '@/auth/auth-context';
 ```
 
-## 4. Organizing folders
+## 5. Organizing folders
 A common layout:
 
 | Folder | What goes in it |
