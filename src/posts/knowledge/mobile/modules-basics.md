@@ -7,6 +7,7 @@ date: 2026-10-11T12:00:00-07:00
 category: Knowledge
 subcategory: Mobile
 topic: React Native
+order: 3
 kind: Note
 tags:
   - posts
@@ -135,7 +136,8 @@ Expo Router pages work the same way: you never call any page. Wherever the user 
 **Where it comes from**: `export` / `import` / `default` are built-in JavaScript syntax called **ES Modules**.
 - **ES** = ECMAScript, JavaScript's official standard name; **Module** = each file is a module. What's inside is only usable within that file by default; to let others use it you `export` it, and to use someone else's you `import` it
 - Added to JavaScript in 2015. Before that there was no official way, so Node.js invented its own system, CommonJS: `require('./x')`, `module.exports = ...`
-- You'll see both in an Expo project: the `.ts` / `.tsx` files you write are all ES Modules; config files like `metro.config.js` and `babel.config.js` often still use `module.exports`
+- You'll see both in an Expo project: the `.ts` / `.tsx` files you write are all ES Modules; config files like `eslint.config.js` often still use `require` / `module.exports`
+- React Native also uses `require` for local images: `<Image source={require('./logo.png')} />`
 
 **What it is**: everything a file exports has a name, and other files take it by that name.
 - `export function Greeting` → the exported name is `Greeting`

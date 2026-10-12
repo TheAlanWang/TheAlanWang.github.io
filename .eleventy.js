@@ -40,6 +40,15 @@ module.exports = function (eleventyConfig) {
             const topicCompare = (left.data.topic || "").localeCompare(right.data.topic || "");
             if (topicCompare) return topicCompare;
 
+            // Posts with an explicit `order` (reading sequence) come first, ascending.
+            const leftOrder = left.data.order;
+            const rightOrder = right.data.order;
+            if (leftOrder != null || rightOrder != null) {
+                if (leftOrder == null) return 1;
+                if (rightOrder == null) return -1;
+                if (leftOrder !== rightOrder) return leftOrder - rightOrder;
+            }
+
             return right.date - left.date;
         });
 
