@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: "Database Basic: Choosing Relational vs Non-relational Databases"
+title: "Relational vs Non-relational Databases"
 description: "A practical database selection note explaining when to use relational databases, when to use non-relational databases, and why the decision should be based on workload and guarantees rather than only data relationships."
 excerpt: "A practical note on choosing relational vs non-relational databases based on query patterns, transactions, consistency, scale, and access model rather than only data relationships."
 date: 2026-05-12T15:00:00-07:00
