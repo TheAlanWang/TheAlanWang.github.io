@@ -1,11 +1,11 @@
 ---
 layout: layouts/post.njk
-title: "YouDescribe: AI Audio Description Pipeline"
+title: AI Audio Description Pipeline
 description: A pipeline that turns raw video into scene-segmented, cross-checked, precisely-timed audio descriptions.
 excerpt: A pipeline that turns raw video into scene-segmented, cross-checked, precisely-timed audio descriptions.
 date: 2026-09-04T12:00:00-07:00
 category: Projects
-subcategory: AI
+subcategory: YouDescribe
 topic: VLM
 kind: Project
 tags:
