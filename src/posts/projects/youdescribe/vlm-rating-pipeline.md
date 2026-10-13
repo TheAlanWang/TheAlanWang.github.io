@@ -97,6 +97,7 @@ Each call has three parts:
 - The last AD before the segment and the first AD after it are attached as context: otherwise a segment whose first 20 seconds have no description looks like missing description, when the previous segment's description may still be playing
 
 <h3 id="why-inline-and-extended-must-be-kept-apart">Why inline and extended must be kept apart</h3>
+
 - **Inline**: plays over the running video. `[start, end]` is real video time, so overlapping dialogue is a real conflict
 - **Extended**: the video pauses at `start_time` and resumes after the description finishes, so `end_time` is just bookkeeping and "overlap" with dialogue means nothing
 - Evidence from the data: inline descriptions never overlap each other (0/135), while extended ones overlap in 39/76 cases, which shows extended `end_time` isn't real video time. 66% of extended descriptions nominally overlap dialogue, versus only 6% of inline ones; treating that as conflict would wrongly flag about 65 descriptions that are fine
@@ -117,6 +118,7 @@ Each call has three parts:
 	2. The human review data is also "timestamped flags". With the same output shape, both sides go through the same assignment logic, which keeps the comparison fair
 
 <h3 id="the-5-categories">The 5 categories</h3>
+
 **What they are**: the 5 kinds of problems AD can have. Every issue the model finds must carry one of them.
 
 **Where they live**: all 5 definitions and examples are written in the system prompt (`SYSTEM_PROMPT` in `prompts.py`) and sent with every call. The text is the same every time, so it's part of the cacheable fixed prefix.
