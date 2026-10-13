@@ -719,8 +719,9 @@ select {
 .post-toc {
     position: fixed;
     top: 104px;
-    right: max(72px, calc((100vw - 1500px) / 2 + 48px));
-    width: 190px;
+    /* Anchored 72px right of the centered 760px article; grows into the spare margin on wide screens. */
+    left: calc(50% + var(--content-width) / 2 + 72px);
+    width: clamp(190px, calc(50% - var(--content-width) / 2 - 120px), 320px);
     max-height: calc(100vh - 128px);
     overflow: auto;
     scrollbar-width: none;
