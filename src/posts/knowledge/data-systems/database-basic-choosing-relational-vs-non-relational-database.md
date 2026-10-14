@@ -16,7 +16,7 @@ permalink: /posts/database-basic-choosing-relational-vs-non-relational-database/
 
 > I would start with the application's requirements: the data structure, query patterns, and consistency needs.
 > 
-> I'd choose a relational database, like PostgreSQL, when we need **joins, constraints, or transactions (ACID)**. For example, in an online shopping system, creating an order and updating inventory should happen together, so a relational database would be a strong choice.
+> I'd choose a relational database, like PostgreSQL, when we need **joins, constraints, or transactions ([ACID](#acid))**. For example, in an online shopping system, creating an order and updating inventory should happen together, so a relational database would be a strong choice.
 > 
 > I'd consider a non-relational database when **one access pattern dominates**, or when its data model fits the workload better. For example, a document database can work well for flexible product information, a key-value store can support fast cache lookups, and a wide-column store like Cassandra fits chat messages at scale.
 > 
@@ -36,7 +36,7 @@ Choose it when correctness and flexible querying matter most:
 
 Typical: orders, payments, inventory, accounts, bookings, permissions.
 
-### ACID
+<h3 id="acid">ACID</h3>
 
 Relational databases guarantee ACID on every transaction:
 
