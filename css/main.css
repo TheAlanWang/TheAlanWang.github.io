@@ -870,6 +870,10 @@ select {
     line-height: 1.58;
 }
 
+.prose blockquote p + p {
+    margin-top: 0.8em;
+}
+
 .prose .requirements-quote {
     margin: 8px 0 18px;
     padding: 14px 18px 14px 24px;
