@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: "Relational vs Non-relational Databases"
 description: "A practical database selection note explaining when to use relational databases, when to use non-relational databases, and why the decision should be based on workload and guarantees rather than only data relationships."
 excerpt: "A practical note on choosing relational vs non-relational databases based on query patterns, transactions, consistency, scale, and access model rather than only data relationships."
-date: 2026-05-12T15:00:00-07:00
+date: 2026-10-14T12:00:00-07:00
 category: Knowledge
 subcategory: Data Systems
 topic: Database Basics
@@ -16,11 +16,11 @@ permalink: /posts/database-basic-choosing-relational-vs-non-relational-database/
 
 > I would start with the application's requirements: the data structure, query patterns, and consistency needs.
 > 
-> I'd choose a relational database, like PostgreSQL, when we need **joins, constraints, or transactions (ACID)**. For example, in an online shopping system, creating an order and updating inventory should happen together, so a relational database would be a strong choice.
+> I'd choose a relational database, like PostgreSQL, when we need **joins, constraints, or transactions ([ACID](#acid))**. For example, in an online shopping system, creating an order and updating inventory should happen together, so a relational database would be a strong choice.
 > 
 > I'd consider a non-relational database when **one access pattern dominates**, or when its data model fits the workload better. For example, a document database can work well for flexible product information, a key-value store can support fast cache lookups, and a wide-column store like Cassandra fits chat messages at scale.
 > 
-> I would also consider scalability, maintenance, and the team's experience. I wouldn't assume that NoSQL is always faster or that SQL cannot scale. My default would usually be relational, unless there's a specific requirement that makes another database a better fit. In practice, many systems use both: relational as the source of truth, with specialized stores for specific parts.
+> I would also consider **scalability**, **maintenance**, and the team's experience. I wouldn't assume that NoSQL is always faster or that SQL cannot scale. My default would usually be relational, unless there's a specific requirement that makes another database a better fit. In practice, many systems use both: relational as the source of truth, with specialized stores for specific parts.
 
 **One access pattern dominates**: almost every request on that data is the same kind of query. For example, chat messages are almost all "append + read latest". Orders are queried many different ways, so no single pattern dominates, and relational fits better.
 
@@ -36,7 +36,7 @@ Choose it when correctness and flexible querying matter most:
 
 Typical: orders, payments, inventory, accounts, bookings, permissions.
 
-### ACID
+<h3 id="acid">ACID</h3>
 
 Relational databases guarantee ACID on every transaction:
 
