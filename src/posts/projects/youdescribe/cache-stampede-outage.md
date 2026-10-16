@@ -221,7 +221,7 @@ C comes in later
 | **stale-while-revalidate** | After expiry, return the old data first and rebuild in the background | Still needs single-flight; the difference is that nobody has to wait |
 | **Refresh ahead of time** | A scheduled job rebuilds before the cache expires | The cache is normally never empty, so requests don't trigger rebuilds; right after a restart, single-flight still covers it |
 | **Query and index tuning** | Start from the descriptions table, pick the 50 videos first, then join; add a `{status: 1, updated_at: -1}` index on the descriptions table | Makes the rebuild itself cheaper; you can't simply "paginate first, then join", because filtering and sorting need the descriptions data |
-| **App-level monitoring** | Add metrics and alerts for cache hit rate and event loop lag | The current CloudWatch alarms only watch server CPU and the health check |
+| **App-level monitoring** | Add metrics and alerts for cache hit rate and event loop lag |  |
 
 **Why single-flight at the time**:
 - Production was down, so we needed the **smallest, safest** fix
@@ -271,4 +271,4 @@ C comes in later
 ## References
 - [PR #111](https://github.com/youdescribe-sfsu/YouDescribeX-api/pull/111): single-flight guard for `getHomePageVideos`, merged to `dev` (2026-06-25)
 - [PR #112](https://github.com/youdescribe-sfsu/YouDescribeX-api/pull/112): the same fix as a hotfix to `main` (2026-06-25)
-- Related: [PR #142](https://github.com/youdescribe-sfsu/YouDescribeX-api/pull/142): health monitor for the **AI service** (2026-08-27), separate from the API outage
+- Related: [PR #142](https://github.com/youdescribe-sfsu/YouDescribeX-api/pull/142): health monitor for the **AI service** (2026-08-27)
