@@ -12,8 +12,6 @@ tags:
   - posts
 permalink: /posts/cache-stampede-outage/index.html
 ---
-> This post describes the 2026-06-25 YouDescribe homepage outage and its fix.
-
 ## Overview
 > **[What it is](#how-the-homepage-endpoint-works).** The YouDescribe homepage asks the API for a list of videos. The API keeps that list in an **in-memory cache** for 5 minutes, because building it is slow: a big MongoDB query with three joins, plus YouTube data for 50 videos.
 >
@@ -269,8 +267,6 @@ C comes in later
 10. Why did it last **9 hours**?
 	- There were no alerts, so the team didn't know the service was down; and traffic kept coming, so the rebuilds never got written back to the cache, and it couldn't recover on its own
 	- **Afterward I set up CloudWatch alarms**: when CPU stays high or the health check fails, they email the team, so it's caught within minutes
-	- ⚠️ But that is only **server-level** monitoring; **app-level** metrics (event loop lag, cache hit rate) still don't exist, which works as a "next improvement" to mention
-	- Also, #142 added a health check for the **AI service**, which is unrelated to this API outage
 
 ## References
 - [PR #111](https://github.com/youdescribe-sfsu/YouDescribeX-api/pull/111): single-flight guard for `getHomePageVideos`, merged to `dev` (2026-06-25)
