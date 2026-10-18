@@ -1,0 +1,21 @@
+---
+pagination:
+    data: redirects
+    size: 1
+    alias: redirect
+permalink: "{{ redirect.from }}index.html"
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ redirect.title }} | {{ site.name }}</title>
+    <link rel="canonical" href="{{ site.url }}{{ redirect.to }}">
+    <meta http-equiv="refresh" content="0; url={{ redirect.to }}">
+    <script>location.replace("{{ redirect.to }}");</script>
+</head>
+<body>
+    <p>{{ redirect.message | safe }}</p>
+</body>
+</html>
