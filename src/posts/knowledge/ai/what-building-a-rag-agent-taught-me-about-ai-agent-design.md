@@ -6,7 +6,7 @@ excerpt: "Five design boundaries inside a LangGraph RAG agent: control flow, saf
 date: 2026-06-17
 category: Knowledge
 subcategory: AI
-topic: Agents
+topic: "Agents & RAG"
 kind: Note
 tags:
   - posts

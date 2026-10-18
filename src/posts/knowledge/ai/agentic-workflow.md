@@ -6,7 +6,7 @@ excerpt: A compact sketch of a tool-first agentic workflow, showing how reasonin
 date: 2026-04-10
 category: Knowledge
 subcategory: AI
-topic: Agents
+topic: "Agents & RAG"
 kind: Note
 tags:
   - posts

@@ -6,7 +6,7 @@ excerpt: A sketch of how agent systems split responsibilities between the model 
 date: 2026-04-14
 category: Knowledge
 subcategory: AI
-topic: Agents
+topic: "Agents & RAG"
 kind: Note
 tags:
   - posts

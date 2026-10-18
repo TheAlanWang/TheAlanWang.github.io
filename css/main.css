@@ -836,6 +836,10 @@ select {
     font-size: 1.12rem;
 }
 
+.prose h4 {
+    scroll-margin-top: 84px;
+}
+
 .prose p,
 .prose li {
     color: var(--prose-text);

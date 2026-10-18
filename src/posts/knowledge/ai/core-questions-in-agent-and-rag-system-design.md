@@ -6,7 +6,7 @@ excerpt: A simple overview of agent system architecture, the orchestrator and it
 date: 2026-04-22
 category: Knowledge
 subcategory: AI
-topic: Agents
+topic: "Agents & RAG"
 kind: Note
 tags:
   - posts

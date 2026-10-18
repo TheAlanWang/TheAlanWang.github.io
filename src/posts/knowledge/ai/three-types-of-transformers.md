@@ -6,7 +6,7 @@ excerpt: "Encoder, decoder, and seq2seq transformers compared by what they outpu
 date: 2026-09-08T12:00:00-07:00
 category: Knowledge
 subcategory: AI
-topic: LLM
+topic: "Models & Training"
 kind: Note
 tags:
   - posts

@@ -6,7 +6,7 @@ excerpt: A visual overview of retrieval, ranking, and generation flow in a RAG p
 date: 2026-03-31
 category: Knowledge
 subcategory: AI
-topic: RAG
+topic: "Agents & RAG"
 kind: Note
 tags:
   - posts

@@ -6,7 +6,7 @@ excerpt: A compact sketch of ReLU activations, neural network structure, and bac
 date: 2026-04-09
 category: Knowledge
 subcategory: AI
-topic: ML
+topic: Foundations
 kind: Note
 tags:
   - posts

@@ -6,7 +6,7 @@ excerpt: A frame never reaches a vision-language model as pixels. Seven facts ab
 date: 2026-08-28T12:00:00-07:00
 category: Knowledge
 subcategory: AI
-topic: VLM
+topic: "Models & Training"
 kind: Guide
 tags:
   - posts
