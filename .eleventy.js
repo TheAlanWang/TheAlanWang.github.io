@@ -29,6 +29,16 @@ module.exports = function (eleventyConfig) {
         return collectionApi.getFilteredByTag("posts").sort((left, right) => right.date - left.date).slice(0, 5);
     });
 
+    // Reading order for topics within a subcategory; unlisted topics follow, alphabetically.
+    const topicOrder = {
+        "Knowledge/AI": ["Foundations", "Models & Training", "Agents & RAG", "Evals & Production"]
+    };
+    const topicRank = (post) => {
+        const order = topicOrder[`${post.data.category}/${post.data.subcategory}`] || [];
+        const index = order.indexOf(post.data.topic);
+        return index === -1 ? order.length : index;
+    };
+
     eleventyConfig.addCollection("tableOfContents", (collectionApi) => {
         const posts = collectionApi.getFilteredByTag("posts").sort((left, right) => {
             const categoryCompare = (left.data.category || "").localeCompare(right.data.category || "");
@@ -36,6 +46,9 @@ module.exports = function (eleventyConfig) {
 
             const subcategoryCompare = (left.data.subcategory || "").localeCompare(right.data.subcategory || "");
             if (subcategoryCompare) return subcategoryCompare;
+
+            const topicRankCompare = topicRank(left) - topicRank(right);
+            if (topicRankCompare) return topicRankCompare;
 
             const topicCompare = (left.data.topic || "").localeCompare(right.data.topic || "");
             if (topicCompare) return topicCompare;

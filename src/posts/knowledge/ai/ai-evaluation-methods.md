@@ -6,7 +6,7 @@ excerpt: "Deterministic checks, reference-based metrics, LLM-as-judge, human rev
 date: 2026-07-20T12:00:00-07:00
 category: Knowledge
 subcategory: AI
-topic: Evals
+topic: "Evals & Production"
 kind: Guide
 tags:
   - posts

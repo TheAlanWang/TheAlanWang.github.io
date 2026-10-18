@@ -6,7 +6,7 @@ excerpt: "Notes on the three transformer architectures, chat templates and speci
 date: 2026-09-07T12:00:00-07:00
 category: Knowledge
 subcategory: AI
-topic: LLM
+topic: "Models & Training"
 kind: Guide
 tags:
   - posts
