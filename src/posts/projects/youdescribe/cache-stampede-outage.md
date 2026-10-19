@@ -13,19 +13,17 @@ tags:
 permalink: /posts/cache-stampede-outage/index.html
 ---
 ## Overview
-> **What it does.** The YouDescribe homepage uses a backend API to fetch video listings. The results are cached for 5 minutes because rebuilding them requires an expensive MongoDB aggregation across three collections, followed by fetching YouTube metadata for 50 videos.
+> **[What it is](#how-the-homepage-endpoint-works).** The YouDescribe homepage asks the API for a list of videos. The API keeps that list in an **in-memory cache** for 5 minutes, because building it is slow: a big MongoDB query with three joins, plus YouTube data for 50 videos.
 >
-> **What happened.** The production API became unresponsive for approximately 9 hours and only recovered after a server restart. During the outage, EC2 CPU utilization increased from around 1% to 70% and remained elevated.
+> **[What happened](#the-outage-a-cache-stampede).** The whole API stopped answering for about **9 hours**, until the server was rebooted. CPU jumped from 1% to 70% and stayed there.
 >
-> **Investigation.** I started by checking the AWS metrics and application logs. I noticed 16 homepage cache misses within the same second, just before the API stopped responding.
+> **[How I found it](#the-outage-a-cache-stampede).** The last logs before the server went silent were **16 homepage cache misses** in the same second. That's a cache stampede: when the cache expired, every request that came in at that moment missed, and each one rebuilt the list on its own. Node runs the code on one thread, so all those rebuilds blocked it, and nothing else got through, not even health checks.
 >
-> This led me to suspect a cache stampede. When the cache expired, multiple concurrent requests triggered the same expensive data rebuild independently, putting excessive load on the backend.
+> **[Proof](#the-outage-a-cache-stampede).** I reproduced it on dev. 40 requests at once gave 40 rebuilds and one CPU core at 101%. 80 at once froze the dev server, just like production.
 >
-> **Reproduction.** To validate my hypothesis, I simulated concurrent requests in the development environment. With 40 concurrent requests, the API triggered 40 separate rebuilds, and CPU utilization reached roughly 100% of one core. At 80 concurrent requests, the development server became unresponsive, reproducing the production symptoms.
+> **[The fix](#the-fix-single-flight-guard).** A single-flight guard. The first request that misses starts the rebuild and saves it in a map as a **[promise](#the-fix-single-flight-guard)**. Other requests for the same page wait on that promise instead of starting their own. In a [test](#verification-unit-tests), 30 requests at once ran the rebuild only once. It was merged to main as a hotfix the same day.
 >
-> **Solution.** I implemented a single-flight mechanism to prevent redundant rebuilds. The first request starts the rebuild, while subsequent requests share the same in-flight Promise. Unit tests confirmed that 30 concurrent requests triggered only one rebuild. The fix was merged and deployed as a production hotfix the same day.
->
-> **Prevention.** I also configured CloudWatch alarms for sustained high CPU utilization and failed health checks, allowing the team to detect similar incidents sooner.
+> **After.** I also set up **CloudWatch** alarms that email the team when CPU stays high or the health check fails, so next time the team knows in minutes, not hours.
 
 ## ① How the homepage endpoint works
 `getHomePageVideos(page)` returns the video list for the homepage. Every visitor to the YouDescribe homepage calls it.
