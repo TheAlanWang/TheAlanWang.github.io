@@ -45,13 +45,11 @@ flowchart LR
 
 ## ② The problems: a fixed timeout and an in-memory queue
 ### Failing jobs that were still running
-YOUD-35
 - Old logic: before dispatching a new job, the backend checked the jobs already sent to the AI service and failed any job in `processing` for over 30 minutes. This was a hard-coded timeout; the backend did not know whether the AI service was still running the job
 - But most videos take longer than 30 minutes on the CPU machine (about 1 hour typical, up to 6), so there was no callback yet
 - The result: the user got a failure email and the record was deleted, **while the AI service kept running the job**, which left the queue state out of sync
 
 ### Losing jobs on every deploy
-YOUD-31
 - The queue lived only in memory (`videoProcessingQueue`), so every deploy or restart emptied it
 - Requests that were accepted but not yet dispatched were never picked up again, and `pending` jobs were stuck forever
 
