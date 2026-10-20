@@ -6,7 +6,7 @@ excerpt: A pipeline that turns raw video into scene-segmented, cross-checked, pr
 date: 2026-09-04T12:00:00-07:00
 category: Projects
 subcategory: YouDescribe
-topic: VLM
+topic: AI Pipelines
 kind: Project
 tags:
   - posts
