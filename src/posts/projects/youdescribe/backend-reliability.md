@@ -6,7 +6,7 @@ excerpt: Replacing a hard-coded 30-minute timeout with a status check, a sweeper
 date: 2026-10-19T12:00:00-07:00
 category: Projects
 subcategory: YouDescribe
-topic: Reliability
+topic: Backend
 kind: Project
 tags:
   - posts

@@ -6,7 +6,7 @@ excerpt: Having a VLM review audio descriptions segment by segment and return ti
 date: 2026-10-12T12:00:00-07:00
 category: Projects
 subcategory: YouDescribe
-topic: VLM
+topic: AI Pipelines
 kind: Project
 tags:
   - posts

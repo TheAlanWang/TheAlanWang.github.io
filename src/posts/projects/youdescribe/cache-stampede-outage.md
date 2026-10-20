@@ -6,7 +6,7 @@ excerpt: A 9-hour API outage caused by a cache stampede, and the single-flight g
 date: 2026-10-15T12:00:00-07:00
 category: Projects
 subcategory: YouDescribe
-topic: Concurrency
+topic: Backend
 kind: Project
 tags:
   - posts
