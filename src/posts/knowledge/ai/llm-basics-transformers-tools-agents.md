@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: "LLM Basics: Transformers, Tools, and Agents"
+title: LLM Basics
 description: "Notes on the three transformer architectures, chat templates and special tokens, tool calling and MCP, and the agent Thought/Action/Observation loop."
 excerpt: "Notes on the three transformer architectures, chat templates and special tokens, tool calling and MCP, and the agent Thought/Action/Observation loop."
 date: 2026-09-07T12:00:00-07:00

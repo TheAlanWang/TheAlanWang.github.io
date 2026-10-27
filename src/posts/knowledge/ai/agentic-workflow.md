@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: "Agentic Workflow: Reason, Act, Observe"
+title: Agentic Workflow
 description: A compact sketch of a tool-first agentic workflow, showing how reasoning, tool use, observation, memory, and human review fit together in one loop.
 excerpt: A compact sketch of a tool-first agentic workflow, showing how reasoning, tool use, observation, memory, and human review fit together in one loop.
 date: 2026-04-10

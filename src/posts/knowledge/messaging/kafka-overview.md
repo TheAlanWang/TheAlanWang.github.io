@@ -6,7 +6,7 @@ excerpt: A quick structural sketch of brokers, partitions, consumer groups, and 
 date: 2026-03-30
 category: Knowledge
 subcategory: Messaging
-topic: Event Streaming
+topic: Queues & Streaming
 kind: Note
 tags:
   - posts

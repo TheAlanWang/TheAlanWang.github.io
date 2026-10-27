@@ -6,7 +6,7 @@ excerpt: A compact note on how TCP opens with SYN, SYN-ACK, ACK and closes with 
 date: 2026-05-07T12:00:00-07:00
 category: Knowledge
 subcategory: Networking
-topic: Protocols
+topic: Networking Basics
 kind: Note
 tags:
   - posts

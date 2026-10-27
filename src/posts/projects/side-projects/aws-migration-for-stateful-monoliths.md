@@ -1,11 +1,11 @@
 ---
 layout: layouts/post.njk
-title: A Practical AWS Migration Path for Mature Stateful Monoliths
+title: Migrating a Stateful Monolith to AWS
 description: A practical migration note for mature stateful monoliths, using a classic RuoYi-style Spring Boot system as the concrete example.
 excerpt: A practical migration note for mature stateful monoliths, using a classic RuoYi-style Spring Boot system as the concrete example.
 date: 2026-04-19
 category: Projects
-subcategory: Cloud
+subcategory: Side Projects
 topic: AWS
 kind: Project
 tags:

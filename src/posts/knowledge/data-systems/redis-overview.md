@@ -6,7 +6,7 @@ excerpt: A compact Redis sketch covering data types, commands, cache patterns, a
 date: 2026-04-08
 category: Knowledge
 subcategory: Data Systems
-topic: Redis
+topic: Deep Dives
 kind: Note
 tags:
   - posts

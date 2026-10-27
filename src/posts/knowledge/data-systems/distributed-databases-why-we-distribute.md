@@ -1,12 +1,12 @@
 ---
 layout: layouts/post.njk
-title: "Distributed Databases: Why We Distribute, and What Gets Hard"
+title: Distributed Database Basics
 description: A systems note on why databases get distributed, how scaling paths differ, and why partitioning, joins, and consistency become harder once data leaves a single machine.
 excerpt: A systems note on why databases get distributed, how scaling paths differ, and why partitioning, joins, and consistency become harder once data leaves a single machine.
 date: 2026-04-21
 category: Knowledge
 subcategory: Data Systems
-topic: Distributed Databases
+topic: Deep Dives
 kind: Note
 tags:
   - posts

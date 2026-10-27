@@ -6,7 +6,7 @@ excerpt: A compact interview reference for structuring object-oriented design an
 date: 2026-05-06
 category: System Design & Algorithms
 subcategory: OOD
-topic: Interview Prep
+topic: OOD Interviews
 kind: Cheatsheet
 tags:
   - posts

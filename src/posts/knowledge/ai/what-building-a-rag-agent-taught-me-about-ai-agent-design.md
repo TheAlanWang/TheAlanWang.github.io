@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: "Inside a RAG Agent: Runtime, Memory, Tools, and Retrieval"
+title: Inside a RAG Agent
 description: "Five design boundaries inside a LangGraph RAG agent: control flow, safety and tools, retrieval compatibility, checkpointed memory, and session isolation."
 excerpt: "Five design boundaries inside a LangGraph RAG agent: control flow, safety and tools, retrieval compatibility, checkpointed memory, and session isolation."
 date: 2026-06-17
