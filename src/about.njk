@@ -9,7 +9,7 @@ permalink: /about.html
 <div class="layout-grid">
     <aside class="identity-rail">
         <div class="identity-block">
-            <p class="eyebrow">Applied AI Engineer</p>
+            <p class="eyebrow">Software Engineer</p>
             <h1 class="identity-title">{{ site.name }}</h1>
             <p class="identity-summary">{{ site.tagline }}</p>
         </div>
@@ -25,15 +25,10 @@ permalink: /about.html
         <section class="about-hero lead-panel">
             <p class="section-kicker">About Me</p>
             <h2 class="about-title">{{ site.about.headline }}</h2>
-            <p class="about-hero-note">Backend, cloud, and applied AI.</p>
         </section>
 
         <section class="about-panel">
             <p class="about-copy">{{ site.about.intro }}</p>
-            <p class="about-copy">{{ site.about.shortBio }}</p>
-            {% if site.about.quote %}
-                <p class="pull-quote">{{ site.about.quote }}</p>
-            {% endif %}
         </section>
 
         <section class="content-section">
@@ -94,7 +89,7 @@ permalink: /about.html
                                         <p class="about-list-period">{{ item.period }}</p>
                                     {% endif %}
                                     {% if item.url %}
-                                        <a href="{{ item.url }}" target="_blank" rel="noreferrer" class="project-url">Visit website</a>
+                                        <a href="{{ item.url }}" target="_blank" rel="noreferrer" class="project-url">{{ item.urlLabel or "Visit website" }}</a>
                                     {% endif %}
                                 </div>
                             </div>

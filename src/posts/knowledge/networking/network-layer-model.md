@@ -6,7 +6,7 @@ excerpt: A compact poster explaining the TCP/IP five-layer model, where common p
 date: 2026-05-08T21:15:00-07:00
 category: Knowledge
 subcategory: Networking
-topic: Foundations
+topic: Networking Basics
 kind: Poster
 tags:
   - posts

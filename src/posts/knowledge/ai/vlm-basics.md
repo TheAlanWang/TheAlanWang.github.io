@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: "VLM Basics: What a Model Actually Sees"
+title: VLM Basics
 description: A frame never reaches a vision-language model as pixels. Seven facts about images, JPEG, base64, vision encoders, and where VLMs still fall short, checked against a real evaluation pipeline.
 excerpt: A frame never reaches a vision-language model as pixels. Seven facts about images, JPEG, base64, vision encoders, and where VLMs still fall short, checked against a real evaluation pipeline.
 date: 2026-08-28T12:00:00-07:00

@@ -1,18 +1,18 @@
 module.exports = {
   name: "Alan Wang",
   url: "https://thealanwang.github.io",
-  assetVersion: "2026-10-17-h4-anchor-v1",
+  assetVersion: "2026-10-26-projects-v1",
   socialImage:
     "https://thealanwang.github.io/assets/social/linkedin-preview.png",
-  tagline: "Building applied AI with a systems mindset.",
+  tagline: "AI that works beyond the demo.",
   quickFacts: ["San Jose, California", "M.S. Computer Science"],
   homeIntroLines: [
-    "Applied AI,",
-    "backend systems,",
-    "and reliable engineering.",
+    "AI systems,",
+    "distributed pipelines,",
+    "and the backend beneath them.",
   ],
   homeIntroText:
-    "I build AI applications with a systems mindset and use this site to share projects and technical notes on applied AI, backend systems, and cloud infrastructure.",
+    "I use this site to share what I build and learn: projects and technical notes on AI systems, distributed data, backend, and cloud infrastructure.",
   postsIntroTitle: "Recent posts",
   postsIntroText: "",
   postsPageIntroTitle: "All Posts",
@@ -20,25 +20,36 @@ module.exports = {
     "A chronological archive of projects and technical notes.",
   footerText: "Thanks for reading.",
   about: {
-    headline:
-      "Software engineer building applied AI with strong backend and cloud foundations.",
+    headline: "Software engineer focused on AI and distributed systems.",
     intro:
-      "I am a software engineer with experience in backend platforms, data-heavy systems, and cloud infrastructure. My recent work focuses on applied AI, especially retrieval-based systems, agent workflows, and the engineering needed to make LLM features reliable in practice.",
-    shortBio:
-      "My background is in backend engineering, distributed workflows, and data systems. I am now focusing that foundation on applied AI, with particular interest in retrieval systems, agentic workflows, evaluation, and building LLM features that behave reliably beyond a demo.",
-    quote: "I build reliable systems on strong backend foundations.",
+      "I started in finance technology, building ETL pipelines and reporting systems as a consultant, then moved into backend work: integrating enterprise systems and migrating a monolith to microservices. Now, during my MS in Computer Science at Northeastern, I build AI systems, including RAG agents, VLM evaluation, and AI-native products. What I care about most is the engineering around the model: clean data flow, evaluation that catches regressions, and services that stay reliable in production.",
     projects: [
       {
-        name: "Tracker",
-        type: "Real-time collaborative task management platform with live workspace updates and optimized dashboard aggregation",
+        name: "Trackly",
+        type: "AI-native task management platform with a built-in assistant, an MCP server, and real-time workspace updates",
         period: "Mar 2026 – Present",
         url: "https://gettrackly.dev/",
         details: [
-          "Tracker is a full-stack project management system for small teams, built around Linear/Jira-style issue tracking with hierarchical OKR-style goals, sprints, task dependencies, real-time notifications, dark mode, and CSV export. The project is live at <strong>gettrackly.dev</strong>, with source code at <strong>github.com/TheAlanWang/tracker</strong>.",
-          "<strong>Tech stack</strong><br><strong>TypeScript</strong> · <strong>React</strong> (<strong>Vite</strong>) · <strong>FastAPI</strong> · <strong>Postgres</strong> (<strong>Supabase</strong>) · <strong>Vercel</strong> · <strong>Fly.io</strong> · <strong>GitHub Actions</strong>",
-          "<strong>Full-stack product design</strong><br>Designed and shipped a team issue tracker with hierarchical OKR-style goals, sprint planning, task dependencies with <strong>BFS cycle detection</strong>, real-time notifications, dark mode, and CSV export. The database uses an <strong>RLS-first schema</strong> across <strong>15 tables</strong> and <strong>17 migrations</strong>, with per-request user-scoped JWTs so Postgres triggers can see the real actor.",
+          "Trackly is a full-stack project management system for small teams, built around Linear/Jira-style issue tracking with hierarchical OKR-style goals, sprints, task dependencies, real-time notifications, dark mode, and CSV export. The project is live at <strong>gettrackly.dev</strong>, with source code at <strong>github.com/TheAlanWang/tracker</strong>.",
+          "<strong>Tech stack</strong><br><strong>TypeScript</strong> · <strong>React</strong> (<strong>Vite</strong>) · <strong>FastAPI</strong> · <strong>Postgres</strong> (<strong>Supabase</strong>) · <strong>Claude API</strong> · <strong>MCP</strong> · <strong>Vercel</strong> · <strong>Railway</strong>",
+          "<strong>Full-stack product design</strong><br>Designed and shipped a team issue tracker with hierarchical OKR-style goals, sprint planning, task dependencies with <strong>BFS cycle detection</strong>, real-time notifications, dark mode, and CSV export. The database uses an <strong>RLS-first schema</strong> across <strong>18 tables</strong> and <strong>46 migrations</strong>, with per-request user-scoped JWTs so Postgres triggers can see the real actor.",
+          "<strong>AI assistant and MCP server</strong><br>Every board has a built-in assistant: a server-side <strong>Claude tool-use loop</strong> (no framework) that sees a snapshot of the board, proposes tasks before creating them, and acts through the same services and <strong>Row Level Security</strong> as the human UI, so it can never touch anything the user cannot. A hosted <strong>MCP server</strong> (<code>mcp.gettrackly.dev</code>, OAuth 2.1 with Dynamic Client Registration) lets Claude Code, Cursor, or Claude Desktop drive the same board, with tool names kept in parity with the in-app agent.",
           "<strong>Backend performance</strong><br>Profiled <code>/me/dashboard</code> latency in production with <strong>5,000 sequential requests</strong> before and after the async migration.<span class=\"project-metric-table\" role=\"table\" aria-label=\"Dashboard latency before and after async migration\"><span role=\"row\"><span role=\"columnheader\">Metric</span><span role=\"columnheader\">Before sync</span><span role=\"columnheader\">After async + gather</span><span role=\"columnheader\">Improvement</span></span><span role=\"row\"><span role=\"cell\">p50</span><span role=\"cell\">1584 ms</span><span role=\"cell\">708 ms</span><span role=\"cell\">-55% (2.2x)</span></span><span role=\"row\"><span role=\"cell\">p90</span><span role=\"cell\">1855 ms</span><span role=\"cell\">1076 ms</span><span role=\"cell\">-42%</span></span><span role=\"row\"><span role=\"cell\">p95</span><span role=\"cell\">2053 ms</span><span role=\"cell\">1114 ms</span><span role=\"cell\">-46% (1.8x)</span></span><span role=\"row\"><span role=\"cell\">p99</span><span role=\"cell\">2452 ms</span><span role=\"cell\">1298 ms</span><span role=\"cell\">-47%</span></span></span>I isolated the bottleneck to backend fan-out across <strong>15 sequential Supabase REST queries</strong>, migrated the FastAPI service and router layer from sync <code>supabase.Client</code> to async <code>AsyncClient</code>, and parallelized independent queries with <code>asyncio.gather</code>.",
-          "<strong>Production reliability</strong><br>Replaced per-request <code>PyJWKClient</code> instantiation with a process-wide <strong>LRU cache</strong> keyed by issuer URL. This removed repeated TLS round-trips to Supabase JWKS, eliminated intermittent SSL EOF-driven 500s on <code>/workspaces</code>, and kept Fly.io health checks stable under authenticated traffic.",
+          "<strong>Production reliability</strong><br>Replaced per-request <code>PyJWKClient</code> instantiation with a process-wide <strong>LRU cache</strong> keyed by issuer URL. This removed repeated TLS round-trips to Supabase JWKS, eliminated intermittent SSL EOF-driven 500s on <code>/workspaces</code>, and kept health checks stable under authenticated traffic.",
+        ],
+      },
+      {
+        name: "LedgerFlow",
+        type: "Batch and streaming fraud-detection pipeline over 6.3M payment transactions",
+        period: "Sep 2026",
+        url: "https://github.com/TheAlanWang/ledgerflow",
+        urlLabel: "View code",
+        details: [
+          "LedgerFlow is a batch + streaming pipeline for payment transactions on the PaySim dataset (6,362,620 rows), running locally on Docker. Source code at <strong>github.com/TheAlanWang/ledgerflow</strong>.",
+          "<strong>Tech stack</strong><br><strong>Python</strong> · <strong>Go</strong> · <strong>Kafka</strong> · <strong>Spark Structured Streaming</strong> · <strong>Airflow</strong> · <strong>PostgreSQL</strong> · <strong>Docker</strong>",
+          "<strong>Ingestion</strong><br>A Go producer (<strong>franz-go</strong>, idempotent) streams all 6.3M events to Kafka in 11–16 s (<strong>~390K events/s, ~22× the Python producer</strong>) with zero delivery failures, emitting the same schema and keys as the Python version.",
+          "<strong>Data-driven fraud rules</strong><br>The first intuition-based rules failed on real data (e.g. 0.5% precision for large transfers). PySpark analysis found two reconciliation signals, exact balance drains and ghost transfers, which together reach <strong>98.7% precision / 99.4% recall</strong>.",
+          "<strong>Batch and reliability</strong><br>Airflow schedules a daily PySpark ETL job (<strong>31-day backfill, 124/124 data-quality checks</strong>). Streaming sinks write to a staging table and upsert by primary key, so after a mid-stream <code>docker kill</code> the job recovered from its checkpoint with <strong>zero duplicates</strong>.",
         ],
       },
       {
@@ -64,7 +75,7 @@ module.exports = {
       {
         label: "Current focus",
         value:
-          "Backend systems, cloud infrastructure, and AI retrieval applications",
+          "AI systems (agents, RAG, VLM evaluation) and distributed data pipelines",
       },
       {
         label: "Background",
@@ -79,15 +90,16 @@ module.exports = {
     ],
     experience: [
       {
-        role: "Research Assistant",
-        organization: "YouDescribe",
+        role: "Software Engineer, Research Assistant",
+        organization: "YouDescribe · Northeastern University × Smith-Kettlewell",
         organizationUrl: "https://youdescribe.org/",
         logo: "/assets/logos/companies/com_youdescribe.png",
-        period: "May 2026 – Present",
+        period: "Apr 2026 – Present",
         points: [
-          "Built a <strong>multimodal evaluation pipeline</strong> where leading <strong>VLMs</strong> score AI-generated audio descriptions per <strong>20-second window</strong>, benchmarked against <strong>human raters</strong> to test whether VLMs can replace manual review.",
-          "Improved production AI pipeline reliability and observability on <strong>AWS</strong> (EC2, S3, CloudWatch): rebuilt the job queue from <strong>MongoDB</strong> on startup and added a <strong>self-healing</strong>, status-aware sweeper that triages and auto-recovers stuck jobs.",
-          "Added a <strong>single-flight guard</strong> to the homepage videos endpoint, preventing <strong>cache stampede</strong> under concurrent load.",
+          "Evaluated whether <strong>VLMs</strong> can replace human reviewers of AI audio descriptions, benchmarking multiple models against human raters, including blind users.",
+          "Served open-weight VLMs with <strong>vLLM</strong> on an <strong>NVIDIA H200</strong>, so local and hosted models share one evaluation harness.",
+          "Hardened the production AI job pipeline on <strong>AWS</strong> with health checks and a self-recovering job sweeper.",
+          "Diagnosed a production outage as a <strong>cache stampede</strong> and fixed it with a <strong>single-flight guard</strong>.",
         ],
       },
       {
@@ -97,10 +109,9 @@ module.exports = {
         logo: "/assets/logos/companies/com_kokun.jpeg",
         period: "May 2026 – Aug 2026",
         points: [
-          "Shipped a production <strong>RAG agent</strong> for a public-health app (500+ users, 1,100+ papers, 1.84s TTFT); designed the architecture spanning retrieval via <strong>LangChain</strong>, tool orchestration via <strong>LangGraph</strong>, safety routing, and multi-turn memory.",
-          "Built an async embedding pipeline on <strong>GCP</strong> (Pub/Sub, Cloud Run, Vertex AI), embedding <strong>27K+</strong> chunks into <strong>pgvector</strong>.",
-          "Built an 87-case, 3-layer evaluation pipeline combining deterministic <strong>execution-trace assertions</strong>, reference-fact checks, and <strong>RAGAS</strong>-based LLM judging.",
-          "Detected and fixed a silent safety <strong>regression</strong> from tool calling, raising crisis-resource inclusion from <strong>24.1 to 29.0</strong>/30; validated the fix across multiple models (<strong>Gemini</strong>, <strong>GPT</strong>, and <strong>Claude</strong>).",
+          "Shipped a production <strong>RAG agent</strong> for a public-health app with <strong>500+ users</strong>, covering retrieval (<strong>LangChain</strong>), tool orchestration (<strong>LangGraph</strong>), safety routing, and multi-turn memory.",
+          "Built an async embedding pipeline on <strong>GCP</strong> (Pub/Sub, Cloud Run, Vertex AI) that loads research papers into <strong>pgvector</strong>.",
+          "Designed a layered evaluation suite (execution-trace assertions, reference-fact checks, <strong>RAGAS</strong> LLM judging) that caught and helped fix a silent safety regression introduced by tool calling.",
         ],
       },
       {
@@ -109,9 +120,9 @@ module.exports = {
         logo: "/assets/logos/companies/com_shanghaisecurities.png",
         period: "Apr 2022 – Dec 2024",
         points: [
-          "Implemented and deployed <strong>integrated REST APIs</strong> across <strong>3 enterprise systems</strong> (HR, reimbursement, project management) into an Office Automation system serving <strong>3K+ users</strong>, improving cross-system workflow automation and internal access efficiency.",
-          "Migrated a <strong>500+ user</strong> system from a monolith to <strong>microservices architecture</strong> using <strong>Kafka async workflows</strong> and <strong>CI/CD pipelines with Kubernetes</strong>, reducing deployment time by <strong>40%</strong>.",
-          "Led cross-functional delivery for <strong>20+ internal projects</strong>, driving deployment, testing, validation, and post-launch issue support.",
+          "Led the integration of HR, reimbursement, and project-management systems into an Office Automation platform through <strong>REST APIs</strong>, serving <strong>3K+ users</strong>.",
+          "Moved a monolith to <strong>microservices</strong> with <strong>Kafka</strong> async workflows and <strong>Kubernetes</strong> CI/CD, making deployments noticeably faster.",
+          "Coordinated delivery across engineering and business teams, from deployment and testing to post-launch support.",
         ],
       },
       {
@@ -120,8 +131,8 @@ module.exports = {
         logo: "/assets/logos/companies/demo_deloitte.png",
         period: "Dec 2021 – Apr 2022",
         points: [
-          "Engineered a <strong>Python and SQL ETL pipeline</strong> for <strong>Basel III compliance</strong> over <strong>10K financial records</strong>, contributing to a <strong>5%+</strong> improvement in capital adequacy ratio.",
-          "Automated <strong>regulatory reporting workflows</strong> in Python, reducing a <strong>two-day manual process</strong> to a <strong>30-minute pipeline</strong> with built-in validation.",
+          "Built a <strong>Python and SQL ETL pipeline</strong> for <strong>Basel III</strong> regulatory reporting, automating rating mapping and risk-weighted asset calculations.",
+          "Turned a <strong>two-day manual</strong> reporting process into an automated pipeline with built-in validation.",
         ],
       },
       {
@@ -130,8 +141,8 @@ module.exports = {
         logo: "/assets/logos/companies/com_cubewise.png",
         period: "Feb 2020 – Dec 2021",
         points: [
-          "Developed and deployed <strong>enterprise EPM solutions</strong> for clients including <strong>Alibaba</strong> and <strong>Mercedes-Benz</strong>, including Python automation for batch report generation.",
-          "Designed <strong>ETL pipelines</strong> and <strong>SQL-based data extraction workflows</strong>, improving reporting performance by <strong>35%</strong> through cube refactoring and query optimization on <strong>in-memory OLAP systems</strong>.",
+          "Delivered <strong>enterprise performance management</strong> solutions on IBM TM1, with Python automation for batch reporting.",
+          "Built <strong>ETL</strong> and SQL extraction workflows and improved reporting performance through <strong>OLAP</strong> data-model and query optimization.",
         ],
       },
     ],
@@ -144,7 +155,7 @@ module.exports = {
       },
       {
         school: "University of Sydney",
-        degree: "Master of Commerce, Finance & Big Data",
+        degree: "Master of Commerce, Big Data & Finance",
         period: "Jul 2017 – Jun 2019",
         logo: "/assets/logos/universities/USDY.png",
       },

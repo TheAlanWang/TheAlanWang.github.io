@@ -5,8 +5,8 @@ description: A two-stage RAG project that starts with a local LangChain baseline
 excerpt: A two-stage RAG project that moves from a local baseline to an agentic workflow with grading, routing, retries, and web fallback.
 date: 2026-04-07
 category: Projects
-subcategory: AI
-topic: RAG
+subcategory: Side Projects
+topic: Agents & RAG
 kind: Project
 tags:
   - posts

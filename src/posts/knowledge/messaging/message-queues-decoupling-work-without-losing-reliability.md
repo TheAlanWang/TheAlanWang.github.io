@@ -1,12 +1,12 @@
 ---
 layout: layouts/post.njk
-title: "Message Queues: Decoupling Work Without Losing Reliability"
+title: Message Queue Basics
 description: A systems note on why asynchronous messaging exists, how queues decouple producers and consumers, and why acknowledgments, persistence, and failover matter.
 excerpt: A systems note on why asynchronous messaging exists, how queues decouple producers and consumers, and why acknowledgments, persistence, and failover matter.
 date: 2026-04-21
 category: Knowledge
 subcategory: Messaging
-topic: Queueing
+topic: Queues & Streaming
 kind: Note
 tags:
   - posts

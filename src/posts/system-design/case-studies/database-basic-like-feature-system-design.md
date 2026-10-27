@@ -6,7 +6,7 @@ excerpt: A practical system design note for a post like feature, from database m
 date: 2026-08-31T12:00:00-07:00
 category: System Design & Algorithms
 subcategory: System Design
-topic: Database Basics
+topic: System Design Questions
 kind: Note
 tags:
   - posts

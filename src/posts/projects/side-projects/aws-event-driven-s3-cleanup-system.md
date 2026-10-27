@@ -1,11 +1,11 @@
 ---
 layout: layouts/post.njk
-title: AWS Event-Driven S3 Cleanup System
+title: S3 Size-Triggered Cleanup
 description: A serverless workflow that tracks S3 bucket size over time, triggers cleanup when thresholds are reached, and generates a final plot from workflow history.
 excerpt: A serverless workflow that tracks S3 bucket size over time, triggers cleanup when thresholds are reached, and generates a final plot from workflow history.
 date: 2026-03-29
 category: Projects
-subcategory: Cloud
+subcategory: Side Projects
 topic: AWS
 kind: Project
 tags:

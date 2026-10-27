@@ -6,7 +6,7 @@ excerpt: A four-level OOD coding question covering balances, transaction ranking
 date: 2026-09-27T12:00:00-07:00
 category: System Design & Algorithms
 subcategory: OOD
-topic: OOD Questions
+topic: OOD Interviews
 kind: Note
 tags:
   - posts

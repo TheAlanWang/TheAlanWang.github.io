@@ -1,12 +1,12 @@
 ---
 layout: layouts/post.njk
-title: "RabbitMQ in Python: Exchanges, Routing Keys, and Bindings"
+title: RabbitMQ Routing in Python
 description: "A practical RabbitMQ note in Python focused on the routing model: what an exchange does, what a routing key carries, and how bindings decide which queues receive a message."
 excerpt: "A practical RabbitMQ note in Python focused on the routing model: what an exchange does, what a routing key carries, and how bindings decide which queues receive a message."
 date: 2026-04-21
 category: Knowledge
 subcategory: Messaging
-topic: Message Brokers
+topic: Queues & Streaming
 kind: Note
 tags:
   - posts

@@ -6,7 +6,7 @@ excerpt: "How FastAPI actually runs sync and async routes: Uvicorn worker proces
 date: 2026-05-08T13:00:00-07:00
 category: Knowledge
 subcategory: Backend
-topic: FastAPI
+topic: Concurrency
 kind: Note
 tags:
   - posts

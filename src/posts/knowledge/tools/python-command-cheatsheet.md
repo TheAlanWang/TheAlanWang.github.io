@@ -6,7 +6,7 @@ excerpt: A quick command cheatsheet for checking Python, managing virtual enviro
 date: 2026-04-01
 category: Knowledge
 subcategory: Tools
-topic: Python
+topic: Cheatsheets
 kind: Cheatsheet
 tags:
   - posts

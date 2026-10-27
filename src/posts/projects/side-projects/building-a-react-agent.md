@@ -5,8 +5,8 @@ description: A small ReAct agent project that makes the reasoning-action-observa
 excerpt: A small ReAct agent project that makes the reasoning-action-observation loop visible instead of hiding tool use behind built-in function calling.
 date: 2026-04-15
 category: Projects
-subcategory: AI
-topic: Agents
+subcategory: Side Projects
+topic: Agents & RAG
 kind: Project
 tags:
   - posts

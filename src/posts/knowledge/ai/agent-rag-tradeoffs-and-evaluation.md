@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: "Agent and RAG Tradeoffs: Cost, Latency, Quality, and Evaluation"
+title: Agent and RAG Tradeoffs
 description: A practical note on cost-latency-quality tradeoffs in agent and RAG systems, how to evaluate RAG by separating retrieval quality from answer quality, and how to structure a project narrative.
 excerpt: A practical note on cost-latency-quality tradeoffs in agent and RAG systems, how to evaluate RAG by separating retrieval quality from answer quality, and how to structure a project narrative.
 date: 2026-08-31T12:00:00-07:00
