@@ -10,32 +10,14 @@ topic: Concurrency
 kind: Note
 tags:
   - posts
-image: /assets/notes/python-gil-threading-vs-async.svg
-imageFit: contain
 permalink: /posts/python-gil-threading-vs-async/index.html
 ---
 
-The GIL is one of the most misunderstood parts of Python backend concurrency.
+The GIL is a lock in CPython. In the same process, threads share the same memory, so the GIL exists to stop multiple threads from writing the interpreter's memory at the same time and corrupting it. Because of that, only one **thread** in a **process** can run Python **bytecode** at a time.
 
-The short version:
+For **I/O tasks**, threads still work well: when one thread waits on I/O, it releases the GIL and another thread can run.
 
-```text
-Inside one CPython process,
-multiple threads can exist,
-but only one thread can execute Python bytecode at a time.
-```
-
-That is a thread-level constraint. It is not the reason `async` code runs one coroutine at a time.
-
-中文记忆：
-
-```text
-GIL 管的是“多线程谁能执行 Python bytecode”。
-async/await 管的是“协程什么时候让出 event loop”。
-它们不是同一层问题。
-```
-
-![Python GIL: Threads vs Async](/assets/notes/python-gil-threading-vs-async.svg)
+For **CPU tasks**, threads don't help. They just take turns holding the GIL, so there's no real parallelism. For CPU-heavy work, I'd use multiple processes, because each process has its own memory and its own GIL.
 
 ## What the GIL Is
 
@@ -60,220 +42,127 @@ execute Python bytecode
 
 Threads can still exist. They can still be scheduled by the operating system. They can still wait on I/O. But if they are doing CPU-heavy Python work, they compete for one interpreter lock.
 
-## The Most Important Rule
+## Processes, Threads, and Coroutines
 
-Inside one CPython process:
-
-```text
-many threads can be alive
-many threads can be waiting
-but only one thread can be running Python bytecode
-```
-
-中文记忆：
+<div class="gil-anim" data-gil-diagram></div>
+<script src="/assets/notes/gil-diagram.js" defer></script>
 
 ```text
-多线程不是不能创建。
-是同一个 CPython 进程里，同一时刻只有一个线程能真正跑 Python bytecode。
+Process     own memory, own interpreter, own GIL
+└── Thread      shares the process memory and its one GIL
+    └── Coroutine   an async def function, run by the event loop on that thread
 ```
 
-That is why CPU-heavy Python code does not become faster just because you add more threads.
+A thread is under a process. A thread can have `async` functions and `await`, and uses the event loop to control them.
 
-Example:
+## How the GIL Works
+
+### Why CPython Has a GIL
+
+Threads in one process share the same memory. If two threads wrote the interpreter's internal data at the same time, they could corrupt it.
+
+For example, Python keeps a count on every object of how many variables are using it. If two threads change the same count at the same time, it can come out wrong. One lock for the whole interpreter prevents this. That lock is the GIL.
+
+### When the GIL Switches
+
+| Case | Who triggers it | Example |
+|---|---|---|
+| Voluntary release | The thread itself | It is about to wait on I/O: network, file, `time.sleep` |
+| Forced release | A thread waiting for the GIL | It has waited about 5 ms and asks the holder to drop the lock |
 
 ```python
-def cpu_work():
-    total = 0
-    for i in range(50_000_000):
-        total += i
-    return total
+import sys
+sys.getswitchinterval()   # 0.005, in seconds = 5 ms
 ```
 
-Running this in two Python threads does not make two CPU cores execute Python bytecode in parallel inside the same process. The threads take turns holding the GIL.
+- 5 ms is an upper bound, not a fixed tick. If no other thread is waiting, nothing switches.
+- Which waiting thread gets the GIL next is up to the OS.
 
-## What the GIL Does Not Mean
+## Working Around the GIL
 
-The GIL does not mean:
-
-```text
-Python cannot do concurrency.
-Python cannot have multiple threads.
-Python async is caused by the GIL.
-One Python process cannot handle multiple I/O requests.
-```
-
-Those are different claims.
-
-The GIL specifically limits parallel execution of Python bytecode across threads in one CPython process.
-
-## Why I/O Threads Still Work
-
-Threads are still useful for I/O-bound work.
-
-For example:
-
-```text
-call database
-call external API
-read file
-wait for network
-```
+### Threads Still Work for I/O
 
 When a thread waits on I/O, it usually does not need to hold the GIL. The interpreter can let another thread run Python bytecode while the first thread is waiting.
-
-That is why this distinction matters:
 
 | Workload | Do threads help? | Why |
 |---|---|---|
 | I/O-bound | Often yes | Waiting threads can release the GIL |
 | CPU-bound Python | Usually no | Threads compete for Python bytecode execution |
 
-中文记忆：
+### Multiple Processes
 
-```text
-I/O-bound: 线程大部分时间在等，GIL 影响小。
-CPU-bound: 线程都想跑 Python，GIL 影响大。
-```
+| | Thread | Process |
+|---|---|---|
+| Memory | Shared | One copy each, uses more |
+| Passing data | Read the same variable | Pickle and send across processes (IPC) |
+| Startup | Fast | Slow |
+| Parallel CPU work | No, limited by the GIL | Yes |
 
-## Why Async Has Nothing to Do with Bypassing the GIL
-
-`async` and `await` are about coroutine scheduling.
-
-An async program usually has one event loop running on one thread:
-
-```text
-one process
-└── one event-loop thread
-    ├── coroutine A
-    ├── coroutine B
-    └── coroutine C
-```
-
-Only one coroutine runs at a time on that event-loop thread. A coroutine gives up control when it reaches an `await`.
-
-That behavior is not caused by the GIL. It is caused by the event loop model.
-
-```text
-GIL:
-  controls which OS thread can execute Python bytecode
-
-async/await:
-  controls when a coroutine yields back to the event loop
-```
-
-So this statement is wrong:
-
-```text
-Async runs one task at a time because of the GIL.
-```
-
-Better statement:
-
-```text
-Async runs one coroutine at a time because the event loop is single-threaded.
-The GIL is about Python threads, not coroutine scheduling.
-```
-
-## Thread Switching vs Coroutine Switching
-
-Threads are scheduled by the operating system.
-
-```text
-Thread switching = preemptive
-The OS can interrupt a thread and run another one.
-```
-
-Coroutines are scheduled by the event loop.
-
-```text
-Coroutine switching = cooperative
-A coroutine yields only at await.
-```
-
-This is why async code is easier to reason about in some I/O-heavy paths:
-
-```python
-async def handler():
-    step_1()
-    step_2()
-    await call_database()
-    step_3()
-```
-
-Between `step_1()` and `await call_database()`, another coroutine will not run unless this code explicitly awaits.
-
-The GIL is not the mechanism doing that. The event loop is.
-
-## Multiple Processes Bypass the GIL
-
-The GIL is per process.
-
-```text
-process 1 -> its own GIL
-process 2 -> its own GIL
-process 3 -> its own GIL
-```
-
-That is why CPU-bound Python work usually needs multiple processes, not multiple threads.
-
-Examples:
-
-```text
-multiprocessing
-process pool
-Uvicorn workers
-Celery workers
-separate service workers
-```
-
-For FastAPI/Uvicorn:
+Because the GIL is per process, CPU-bound Python work needs multiple processes, not multiple threads: `multiprocessing`, `ProcessPoolExecutor`, Celery workers, or Uvicorn workers.
 
 ```bash
-uvicorn app.main:app --workers 4
+uvicorn app.main:app --workers 4   # 4 worker processes, 4 GILs
 ```
 
-This starts multiple worker processes. Each worker has its own interpreter and its own GIL. That can use multiple CPU cores for Python bytecode execution.
+### C Extensions
 
-But remember:
+Some native libraries, such as NumPy, can release the GIL while doing heavy work in C, so threads may run in parallel there. This depends on the library. Do not assume all C extensions do it.
 
-```text
-workers are processes, not threads
+### Free-Threaded Python
+
+PEP 703 lets CPython be built without the GIL ("free-threaded"). Python 3.13 shipped it as an experimental build (`python3.13t`), and 3.14 made it officially supported, but still not the default. The standard CPython you install today still has a GIL.
+
+## GIL vs Async
+
+The GIL decides which **thread** runs. Async decides which **coroutine** runs inside one thread. They work at different levels.
+
+| | GIL | Async |
+|---|---|---|
+| Decides | Which thread runs Python | Which coroutine runs on the event-loop thread |
+| Switches | About every 5 ms, or when a thread waits on I/O | Only at `await` |
+
+Async runs one coroutine at a time because it has only one thread, not because of the GIL. The two only meet in one place: coroutines run only while their thread holds the GIL (see the animation above).
+
+A common mistake is blocking inside `async def`:
+
+```python
+@app.get("/user")
+async def get_user():
+    time.sleep(2)      # blocking, not await
+    return {"ok": True}
 ```
 
-## C Extensions Can Release the GIL
+`time.sleep` releases the GIL, but the event loop still freezes for 2 seconds, because the code never reaches an `await`. Use `await asyncio.sleep(2)` instead.
 
-Some native extensions can release the GIL while doing heavy work outside the Python interpreter.
+## Cheat Sheet
 
-Examples often include numerical or data libraries when operating in native code:
+### Interview Q&A
 
-```text
-NumPy
-pandas
-some compression libraries
-some crypto libraries
-```
+**Q: Can Python have multiple threads?**
 
-But this depends on the implementation. Do not assume all C extensions release the GIL.
+Yes. The GIL only stops them from running Python bytecode in parallel.
 
-The safe mental model:
+**Q: Does the GIL mean a server can handle only one request at a time?**
 
-```text
-Pure Python CPU-heavy code: GIL serializes threads.
-Native code may release the GIL, but verify the library.
-```
+No. I/O-bound servers can handle many requests concurrently, because waiting threads release the GIL.
 
-## Common Interview Traps
+**Q: Does async bypass the GIL?**
 
-| Wrong statement | Better answer |
-|---|---|
-| Python cannot have multiple threads | Python can have multiple threads; the GIL limits parallel Python bytecode execution |
-| The GIL means only one request can be handled | I/O-bound servers can handle many concurrent requests |
-| Async bypasses the GIL | Async is coroutine scheduling, not a GIL bypass |
-| The GIL is why async tasks switch | Async tasks switch at `await` because of the event loop |
-| Threads always improve performance | Threads help I/O-bound work, not CPU-heavy Python bytecode |
-| More threads fix CPU-bound Python | Use processes or native code that releases the GIL |
+No. Async schedules coroutines on one thread, so there is nothing to bypass.
 
-## Decision Table
+**Q: Will more threads speed up CPU-bound Python?**
+
+No. Use multiple processes, or native code that releases the GIL.
+
+**Q: Does the GIL make my code thread-safe?**
+
+No. It only protects the interpreter. Use locks for your own shared variables.
+
+**Q: Is `time.sleep` inside `async def` fine, since it releases the GIL?**
+
+No. It still blocks the event loop. Use `await asyncio.sleep`.
+
+### Decision Table
 
 | Situation | Better tool |
 |---|---|
@@ -282,28 +171,3 @@ Native code may release the GIL, but verify the library.
 | Many WebSocket connections | Async |
 | Pure Python CPU-heavy computation | Multiple processes |
 | CPU-heavy native library that releases GIL | Threads may help, verify |
-| Need parallelism across cores for Python code | Processes |
-
-## How to Explain It in an Interview
-
-Use this:
-
-> The GIL is a CPython interpreter lock. In one process, only one thread can execute Python bytecode at a time. That means Python threads do not give true parallelism for CPU-bound Python code. But threads can still help I/O-bound work because waiting on I/O usually releases the GIL. Async is a different concept: it is cooperative coroutine scheduling on an event loop, and coroutine switching happens at `await`, not because of the GIL. For CPU-bound Python work, use multiple processes or native code that releases the GIL.
-
-Short version:
-
-```text
-GIL limits Python bytecode across threads.
-async controls coroutine scheduling.
-For CPU-bound Python, use processes.
-For I/O-bound work, threads or async can both help.
-```
-
-中文版本：
-
-```text
-GIL 解决的是 CPython 解释器内部线程执行 bytecode 的互斥问题。
-async/await 解决的是协程在 I/O 等待时如何让出 event loop。
-CPU-bound Python 多线程会被 GIL 串行化。
-I/O-bound 多线程影响小，因为等待 I/O 时通常会释放 GIL。
-```
