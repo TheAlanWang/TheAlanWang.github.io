@@ -1949,3 +1949,65 @@ select {
         display: none;
     }
 }
+
+/* Animated GIL diagram (assets/notes/gil-diagram.js) */
+.gil-anim {
+    --ga-lock: #c7861a;
+    --ga-lock-soft: #f6e7c8;
+    --ga-c1: #2f7d6d;
+    --ga-c2: #3d63b8;
+    --ga-c3: #b0476a;
+    --ga-surface: rgb(var(--paper-rgb));
+    margin: 24px 0 28px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--ga-surface);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+:root[data-theme="dark"] .gil-anim {
+    --ga-lock: #e3a43c;
+    --ga-lock-soft: #3a2e17;
+    --ga-c1: #4fb39e;
+    --ga-c2: #7096e6;
+    --ga-c3: #e07599;
+}
+
+.gil-anim__scroll { overflow-x: auto; }
+.gil-anim__svg { display: block; width: 100%; min-width: 640px; height: auto; color: var(--text); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+.gil-anim .ga-box { fill: var(--ga-surface); stroke: currentColor; stroke-width: 2; }
+.gil-anim .ga-mem { fill: none; stroke: var(--muted); stroke-dasharray: 4 3; }
+.gil-anim .ga-lane { fill: var(--bg); stroke: var(--line-strong); stroke-width: 1.5; transition: stroke 0.3s; }
+.gil-anim .ga-lane.active { stroke: var(--ga-lock); stroke-width: 2.5; }
+.gil-anim .ga-text { fill: currentColor; font-size: 12px; }
+.gil-anim .ga-head { fill: currentColor; font-size: 13px; font-weight: 600; }
+.gil-anim .ga-muted, .gil-anim .ga-status { fill: var(--muted); font-size: 11px; }
+.gil-anim .ga-status.on { fill: var(--ga-lock); font-weight: 600; }
+.gil-anim .ga-gil circle { fill: var(--ga-lock); }
+.gil-anim .ga-gil text { fill: var(--ga-surface); font-size: 10px; font-weight: 600; }
+.gil-anim .ga-move { transition: transform 0.6s ease, opacity 0.3s; }
+.gil-anim .ga-coro rect { fill: var(--c); }
+.gil-anim .ga-coro text { fill: var(--ga-surface); font-size: 11px; font-weight: 600; }
+.gil-anim .ga-coro.frozen { opacity: 0.4; }
+.gil-anim .ga-dash { fill: none; stroke: var(--muted); stroke-dasharray: 5 4; }
+.gil-anim .ga-line { stroke: var(--muted); stroke-width: 1.5; }
+.gil-anim .ga-arrowhead { fill: var(--muted); }
+.gil-anim .ga-core { fill: var(--ga-lock-soft); stroke: var(--ga-lock); stroke-width: 1.5; }
+.gil-anim .ga-pulse { animation: ga-pulse 1.6s ease-in-out infinite; }
+@keyframes ga-pulse { 50% { opacity: 0.5; } }
+
+.gil-anim__bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.gil-anim__status { margin: 0 !important; flex: 1 1 320px; min-height: 3.4em; font-size: 0.95rem; color: var(--prose-text); }
+.gil-anim__status b { margin-right: 6px; color: var(--ga-lock); font-variant-numeric: tabular-nums; }
+.gil-anim__btns { display: flex; gap: 8px; }
+.gil-anim__btn { font: inherit; font-size: 0.9rem; cursor: pointer; padding: 5px 14px; border-radius: 8px; border: 1px solid var(--ga-lock); color: var(--ga-lock); background: transparent; }
+.gil-anim__btn:hover { background: var(--ga-lock-soft); }
+.gil-anim__btn:focus-visible { outline: 2px solid var(--ga-lock); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .gil-anim .ga-move, .gil-anim .ga-lane { transition: none; }
+    .gil-anim .ga-pulse { animation: none; }
+}
