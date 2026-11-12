@@ -25,6 +25,19 @@ module.exports = function (eleventyConfig) {
         return collectionApi.getFilteredByTag("posts").sort((left, right) => right.date - left.date);
     });
 
+    // Homepage category cards: name, one-line blurb, and a filtered /posts/ link.
+    eleventyConfig.addCollection("categoryCards", () => {
+        const cards = [
+            { name: "Knowledge", blurb: "Notes on AI systems, backend, data, and cloud." },
+            { name: "Projects", blurb: "What I built, how it works, and what I measured." },
+            { name: "System Design & Algorithms", label: "System Design &<br>Algorithms", blurb: "Design questions and algorithm walkthroughs." }
+        ];
+        return cards.map((card) => ({
+            ...card,
+            url: `/posts/?category=${encodeURIComponent(card.name)}`
+        }));
+    });
+
     eleventyConfig.addCollection("recentPosts", (collectionApi) => {
         return collectionApi.getFilteredByTag("posts").sort((left, right) => right.date - left.date).slice(0, 5);
     });
