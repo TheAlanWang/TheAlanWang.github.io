@@ -55,6 +55,16 @@ bodyClass: page-home
             <p class="lead-copy">{{ site.homeIntroText }}</p>
         </section>
 
+        <nav class="category-cards" aria-label="Browse posts by category">
+            {% for card in collections.categoryCards %}
+                <a class="category-card" href="{{ card.url }}">
+                    <span class="category-card-name">{{ (card.label or card.name) | safe }}</span>
+                    <span class="category-card-blurb">{{ card.blurb }}</span>
+                    <span class="category-card-count">Browse &rarr;</span>
+                </a>
+            {% endfor %}
+        </nav>
+
         <section id="posts" class="content-section">
             <div class="section-row">
                 <h2 class="section-row-title">{{ site.postsIntroTitle }}</h2>
