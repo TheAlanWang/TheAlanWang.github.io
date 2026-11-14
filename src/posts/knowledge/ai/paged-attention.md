@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: PagedAttention
 description: "PagedAttention in short: why reserving KV cache memory per request wastes most of it, how vLLM splits the cache into fixed-size blocks like OS memory pages, and how that enables more concurrent requests and prefix sharing."
 excerpt: "Instead of reserving max-length memory for every request, vLLM hands out small KV cache blocks on demand, like an operating system's memory pages. Almost nothing is wasted, so more requests fit at once."
-date: 2026-11-13T14:00:00-08:00
+date: 2026-11-06T14:00:00-08:00
 category: Knowledge
 subcategory: AI
 topic: "Inference & Serving"
@@ -13,6 +13,10 @@ tags:
 permalink: /posts/paged-attention/index.html
 ---
 ## Overview
+
+> PagedAttention manages the **KV cache**. Instead of reserving the maximum length for every request, it splits GPU memory into small **fixed-size blocks**, 16 tokens by default. When a request's last block is full, it gets a new block. Each request has a **block table** that records where its blocks are. So almost no memory is wasted, and **more requests can run at the same time**.
+>
+> The trade-off: since nothing is reserved, memory can **run out** in the middle of generation. Then vLLM pauses a request, frees its blocks, and **recomputes** its KV cache later. Also, a request's blocks are scattered in memory, so attention needs a **special kernel** that follows the block table to find them.
 
 PagedAttention is how **vLLM manages KV cache memory**. It does not change *what* is stored (that is the [KV cache](/posts/kv-cache/)); it changes *how the cache is laid out* in GPU memory. The idea comes from **paging** in operating systems.
 
@@ -67,3 +71,8 @@ A: It is a trade-off. Bigger blocks waste more space at the end of each request.
 **Q: What happens when all blocks are in use?**
 
 A: New requests wait in the queue. If a running request needs another block and none is free, vLLM preempts some requests: it frees their blocks and recomputes their K and V when space opens up.
+
+## Try It
+
+<div class="qkv-demo kv-cache-demo paged-demo" data-paged-demo></div>
+<script src="/assets/notes/paged-attention-demo.js" defer></script>

@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: Inference Optimization Layers
 description: "Three layers for making LLM inference faster: algorithm-level (what gets computed), system-level (how requests and memory are managed), and kernel-level (how fast one GPU operation runs)."
 excerpt: "LLM inference gets faster at three layers: change what gets computed, change how requests and memory are managed, or make a single GPU operation run faster."
-date: 2026-11-13T11:00:00-08:00
+date: 2026-11-06T11:00:00-08:00
 category: Knowledge
 subcategory: AI
 topic: "Inference & Serving"
