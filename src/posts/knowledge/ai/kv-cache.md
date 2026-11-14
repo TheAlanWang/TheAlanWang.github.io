@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: KV Cache
 description: "KV cache in short: what it stores, why it makes LLM generation faster, how big it gets, and how it relates to PagedAttention and prefix caching."
 excerpt: "An LLM keeps the keys and values of every earlier token so it never recomputes them. That trade of memory for compute is why GPU memory, not compute, limits how many requests can run at once."
-date: 2026-11-13T12:00:00-08:00
+date: 2026-11-06T12:00:00-08:00
 category: Knowledge
 subcategory: AI
 topic: "Inference & Serving"

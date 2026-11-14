@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: "Q, K, V: Attention Basics"
 description: "How attention works from scratch: what Q, K and V are, how they are computed, how one token mixes in the others, what heads and GQA are, and why K and V are cached."
 excerpt: "Every token makes three vectors: Q to ask, K to be matched, V to hand over. Attention compares one token's Q with every K, then mixes the V's by those scores."
-date: 2026-11-13T13:00:00-08:00
+date: 2026-11-06T13:00:00-08:00
 category: Knowledge
 subcategory: AI
 topic: "Models & Training"
