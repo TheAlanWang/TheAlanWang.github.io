@@ -77,38 +77,78 @@ navKey: posts
             return parts.join("/");
         };
 
-        const urlFor = (key) => {
-            if (!key) return "/posts/";
+        const readQuery = () => (new URLSearchParams(location.search).get("q") || "").trim();
+
+        const urlFor = (key, query = readQuery()) => {
             const params = new URLSearchParams();
-            key.split("/").forEach((value, index) => params.set(levels[index], value));
-            return `/posts/?${params}`;
+            if (key) key.split("/").forEach((value, index) => params.set(levels[index], value));
+            if (query) params.set("q", query);
+            const search = params.toString();
+            return search ? `/posts/?${search}` : "/posts/";
         };
+
+        // Search: the full-text index (/search.json) loads on first use; until it
+        // arrives, the titles and excerpts already on the page are searched.
+        const searchInput = document.querySelector("[data-post-search-input]");
+        const searchForm = document.querySelector("[data-post-search]");
+        const hrefOf = (post) => post.querySelector(".stream-title a").getAttribute("href");
+        const postText = new Map(posts.map((post) => [hrefOf(post), post.textContent.toLowerCase()]));
+        let indexState = "none";
+        const loadIndex = () => {
+            if (indexState !== "none") return;
+            indexState = "loading";
+            fetch("/search.json")
+                .then((response) => response.json())
+                .then((entries) => {
+                    entries.forEach((entry) => {
+                        if (!postText.has(entry.u)) return;
+                        postText.set(entry.u, [entry.t, entry.e, entry.c, entry.b].join(" ").toLowerCase());
+                    });
+                    indexState = "loaded";
+                    render();
+                })
+                .catch(() => { indexState = "none"; });
+        };
+        const matchesQuery = (post, words) =>
+            words.every((word) => (postText.get(hrefOf(post)) || "").includes(word));
 
         const render = () => {
             const key = readKey();
+            const query = readQuery();
+            const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+            if (words.length) loadIndex();
+            if (document.activeElement !== searchInput) searchInput.value = query;
             const path = key ? key.split("/") : [];
             const matching = posts.filter((post) =>
-                path.every((value, index) => post.dataset[levels[index]] === value)
+                path.every((value, index) => post.dataset[levels[index]] === value) &&
+                matchesQuery(post, words)
             );
+            const filtered = Boolean(key || words.length);
 
             // Unfiltered: page through the list. Filtered: show every match.
             posts.forEach((post) => {
                 const index = matching.indexOf(post);
-                post.hidden = index === -1 || (!key && index >= limit);
+                post.hidden = index === -1 || (!filtered && index >= limit);
                 post.classList.remove("post-item-first-visible", "post-item-last-visible");
             });
             const visible = posts.filter((post) => !post.hidden);
             visible[0]?.classList.add("post-item-first-visible");
             visible[visible.length - 1]?.classList.add("post-item-last-visible");
 
-            const remaining = key ? 0 : matching.length - limit;
+            const remaining = filtered ? 0 : matching.length - limit;
             showMore.hidden = remaining <= 0;
             showMoreButton.textContent = `Show ${Math.min(pageSize, remaining)} more`;
 
-            title.textContent = key ? path[path.length - 1] : defaultTitle;
-            copy.textContent = key
-                ? `${matching.length} ${matching.length === 1 ? "post" : "posts"}${path.length > 1 ? ` in ${path.slice(0, -1).join(" / ")}` : ""}`
-                : defaultCopy;
+            const count = `${matching.length} ${matching.length === 1 ? "post" : "posts"}`;
+            if (words.length) {
+                title.textContent = `“${query}”`;
+                copy.textContent = `${count}${key ? ` in ${path.join(" / ")}` : ""}`;
+            } else {
+                title.textContent = key ? path[path.length - 1] : defaultTitle;
+                copy.textContent = key
+                    ? `${count}${path.length > 1 ? ` in ${path.slice(0, -1).join(" / ")}` : ""}`
+                    : defaultCopy;
+            }
 
             allLink.classList.toggle("is-active", !key);
             groups.forEach((group) => {
@@ -149,6 +189,15 @@ navKey: posts
         });
 
         window.addEventListener("popstate", render);
+
+        // Typing updates the URL (?q=…) without adding a history entry per keystroke.
+        searchInput.addEventListener("input", () => {
+            history.replaceState(null, "", urlFor(readKey(), searchInput.value.trim()));
+            limit = pageSize;
+            render();
+        });
+        searchInput.addEventListener("focus", loadIndex, { once: true });
+        searchForm.addEventListener("submit", (event) => event.preventDefault());
 
         showMoreButton.addEventListener("click", () => {
             limit += pageSize;

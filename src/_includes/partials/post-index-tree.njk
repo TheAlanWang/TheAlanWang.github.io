@@ -1,5 +1,10 @@
 <nav class="post-index-nav">
     <p class="post-index-label">Table of Contents</p>
+    <form class="post-search" role="search" action="/posts/" method="get" data-post-search>
+        <label class="visually-hidden" for="post-search-input">Search posts</label>
+        <input id="post-search-input" class="post-search-input" type="search" name="q"
+               placeholder="Search posts" autocomplete="off" spellcheck="false" data-post-search-input>
+    </form>
     <ul class="post-index-tree">
         <li class="post-index-category">
             <a href="/posts/" class="post-index-all" data-index-all>All posts</a>

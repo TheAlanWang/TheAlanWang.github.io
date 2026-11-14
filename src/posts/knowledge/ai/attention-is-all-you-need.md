@@ -30,6 +30,8 @@ The paper also showed better translation quality than prior RNN- and CNN-based s
 - how multi-head attention changes representation capacity
 - the main blocks that shaped later language models beyond machine translation
 
+For a step-by-step walkthrough of how Q, K and V work, see [Q, K, V: Attention Basics](/posts/qkv-attention-basics/).
+
 ## Questions and Answers
 
 ### Why was replacing recurrence such a big step?
