@@ -1,0 +1,5 @@
+---
+permalink: /search.json
+eleventyExcludeFromCollections: true
+---
+[{% for post in collections.postsDesc %}{{ {"t": post.data.title, "u": post.url, "e": post.data.excerpt or "", "c": [post.data.category, post.data.subcategory, post.data.topic or ""] | join(" "), "b": (post.content | striptags | replace("\n", " "))} | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}]
