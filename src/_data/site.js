@@ -1,7 +1,7 @@
 module.exports = {
   name: "Alan Wang",
   url: "https://thealanwang.github.io",
-  assetVersion: "2026-11-08-gil-v1",
+  assetVersion: "2026-11-17-lock-demo-v1",
   socialImage:
     "https://thealanwang.github.io/assets/social/linkedin-preview.png",
   tagline: "AI that works beyond the demo.",
