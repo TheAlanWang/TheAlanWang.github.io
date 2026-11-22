@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: KV Cache
 description: "KV cache in short: what it stores, why it makes LLM generation faster, how big it gets, and how it relates to PagedAttention and prefix caching."
 excerpt: "An LLM keeps the keys and values of every earlier token so it never recomputes them. That trade of memory for compute is why GPU memory, not compute, limits how many requests can run at once."
-date: 2026-11-06T12:00:00-08:00
+date: 2026-11-13T18:10:00-08:00
 category: Knowledge
 subcategory: AI
 topic: "Inference & Serving"
@@ -11,11 +11,15 @@ kind: Note
 tags:
   - posts
 permalink: /posts/kv-cache/index.html
+series: inference
+seriesOrder: 6
+order: 3
 ---
 ## Overview
 
-> The KV cache is **per request**. For each token, we store its **K and V vectors** at every layer, so the next token doesn't need to **recompute** them.
-> The trade-off is **GPU memory**. The cache grows with every token, so memory limits how many requests can run at once.
+> The KV cache **stores each request's K and V vectors in GPU memory**, for every token and every layer, so the next token doesn't need to **recompute** them.
+>
+> The trade-off is **GPU memory**: the cache grows with every token, so memory limits how many requests can run at once.
 
 An LLM generates text one **token** at a time. To produce each new token, every attention layer looks back at all earlier tokens through their **K (key)** and **V (value)** vectors. (New to Q, K and V? Start with [Q, K, V: Attention Basics](/posts/qkv-attention-basics/).)
 
@@ -63,9 +67,9 @@ A: vLLM must be able to fit at least one max-length sequence in memory, so a ver
 
 **Q: KV cache vs. prefix caching?**
 
-A: The KV cache lives inside one request and saves recomputing earlier tokens while that request generates. Prefix caching lets **different requests** share cached blocks when they start with **exactly the same tokens**, such as the same system prompt. The match must start from the first token and be exact: one different token ends the shared part. The shared part is computed once, so the next request skips that work and its first token comes back sooner. Output is unchanged, because the reused K and V are identical to what would have been recomputed.
+A: The KV cache lives inside one request and saves recomputing earlier tokens while that request generates. Prefix caching lets **different requests** share cached blocks when they start with **exactly the same tokens**, such as the same system prompt. The match must start from the first token and be exact: one different token ends the shared part. The shared part is computed once, so the next request skips that part of its prefill and its first token comes back sooner (lower TTFT; see [Prefill and Decode](/posts/prefill-and-decode/)). Output is unchanged, because the reused K and V are identical to what would have been recomputed.
 
-## Try It
+## Demo
 
 Three figures, from one token to the whole cache: how a token's K and V are cut into heads (and how MHA, GQA and MQA differ), how the cache grows by one column per new token, and how much memory it all takes.
 

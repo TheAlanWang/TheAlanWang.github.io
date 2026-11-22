@@ -21,7 +21,18 @@ pageShellClass: post-layout
                     {% endif %}
                     <span class="stream-date">{{ date | displayDate }}</span>
                 </div>
-                <h1 class="post-title">{{ title }}</h1>
+                {% if zh or lang == "zh" %}
+                    {% set enUrl = page.url.slice(0, -3) if lang == "zh" else page.url %}
+                    <div class="post-title-row">
+                        <h1 class="post-title">{{ title }}</h1>
+                        <nav class="lang-switch" aria-label="Language">
+                            <a href="{{ enUrl }}" lang="en"{% if lang != "zh" %} aria-current="page"{% endif %}>EN</a>
+                            <a href="{{ enUrl }}zh/" lang="zh"{% if lang == "zh" %} aria-current="page"{% endif %}>中</a>
+                        </nav>
+                    </div>
+                {% else %}
+                    <h1 class="post-title">{{ title }}</h1>
+                {% endif %}
                 {% if excerpt %}
                     <p class="post-dek">{{ excerpt }}</p>
                 {% endif %}
@@ -30,6 +41,14 @@ pageShellClass: post-layout
             <div class="prose" data-prose>
                 {{ content | safe }}
             </div>
+
+            {% if series %}
+                {% set nav = collections.posts | seriesNav(series, page.url) %}
+                {# Posts in a series link back to the hub post, which lists the reading order. #}
+                {% if not nav.isHub %}
+                    <p class="series-nav"><a href="{{ nav.hub.url }}">← {{ nav.hub.data.title }}</a></p>
+                {% endif %}
+            {% endif %}
         </article>
 
         <aside class="post-toc" aria-label="On this page" data-post-toc hidden>

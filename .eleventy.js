@@ -11,6 +11,15 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "css": "css" });
     eleventyConfig.addPassthroughCopy({ "assets": "assets" });
 
+    // Posts that share a `series` name, in reading order (`seriesOrder`). Used for the
+    // previous / next links at the bottom of a post.
+    eleventyConfig.addFilter("seriesNav", (posts, name, url) => {
+        const list = (posts || []).filter((post) => post.data.series === name)
+            .sort((left, right) => (left.data.seriesOrder ?? 0) - (right.data.seriesOrder ?? 0));
+        const i = list.findIndex((post) => post.url === url);
+        return { hub: list[0], prev: i > 0 ? list[i - 1] : null, next: i >= 0 && i < list.length - 1 ? list[i + 1] : null, isHub: i === 0 };
+    });
+
     eleventyConfig.addFilter("displayDate", (value) => {
         const date = value instanceof Date ? value : new Date(value);
 
@@ -22,7 +31,13 @@ module.exports = function (eleventyConfig) {
     });
 
     eleventyConfig.addCollection("postsDesc", (collectionApi) => {
-        return collectionApi.getFilteredByTag("posts").sort((left, right) => right.date - left.date);
+        // Overview (hub) posts stay pinned at the top, in their `order`; everything else is newest first.
+        const pinned = (post) => post.data.topic === "Overviews";
+        return collectionApi.getFilteredByTag("posts").sort((left, right) => {
+            if (pinned(left) !== pinned(right)) return pinned(left) ? -1 : 1;
+            if (pinned(left)) return (left.data.order ?? 0) - (right.data.order ?? 0);
+            return right.date - left.date;
+        });
     });
 
     // Homepage category cards: name, one-line blurb, and a filtered /posts/ link.
@@ -44,7 +59,7 @@ module.exports = function (eleventyConfig) {
 
     // Reading order for topics within a subcategory; unlisted topics follow, alphabetically.
     const topicOrder = {
-        "Knowledge/AI": ["Foundations", "Models & Training", "Inference & Serving", "Agents & RAG", "Evals & Production"]
+        "Knowledge/AI": ["Overviews", "Foundations", "Models & Training", "Inference & Serving", "Agents & RAG", "Evals & Production"]
     };
     const topicRank = (post) => {
         const order = topicOrder[`${post.data.category}/${post.data.subcategory}`] || [];

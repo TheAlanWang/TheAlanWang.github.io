@@ -216,9 +216,8 @@
 
   function mount(root) {
     root.innerHTML =
-      '<nav class="qd-dots" aria-label="Steps"></nav>' +
+      '<div class="qd-nav"><nav class="qd-dots" aria-label="Steps"></nav><div class="qd-row"><button type="button" class="qd-btn" data-prev>Back</button><button type="button" class="qd-btn primary" data-next>Next</button></div></div>' +
       '<div class="qd-card" aria-live="polite"><h3 class="qd-title"></h3><p class="qd-text"></p><div class="qd-stage"></div><p class="qd-key"></p></div>' +
-      '<div class="qd-nav"><button type="button" class="qd-btn" data-prev>Back</button><button type="button" class="qd-btn primary" data-next>Next</button></div>' +
       '<p class="qd-hint">Numbers are picked to make the idea clear. A real model uses thousands of numbers per token.</p>';
     const dots = root.querySelector(".qd-dots");
     let i = 0;

@@ -61,7 +61,7 @@ A: Both are **ANN** algorithms. HNSW uses a hierarchical graph, while IVFFlat pa
 | Strength | better recall and query latency | faster to build, less memory |
 | Cost | more memory, takes longer to build | needs data to train the clusters; recall depends on `probes` |
 
-## Try It
+## Demo
 
 The same 220 points drawn on each layer. Click a layer to place a query and watch the search go from the top layer down. Set `ef_search` to 1 and try a few spots: sometimes it stops at a local optimum. Raise it and the same spot finds the true nearest point.
 

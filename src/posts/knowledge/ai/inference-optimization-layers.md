@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: Inference Optimization Layers
 description: "Three layers for making LLM inference faster: algorithm-level (what gets computed), system-level (how requests and memory are managed), and kernel-level (how fast one GPU operation runs)."
 excerpt: "LLM inference gets faster at three layers: change what gets computed, change how requests and memory are managed, or make a single GPU operation run faster."
-date: 2026-11-06T11:00:00-08:00
+date: 2026-11-13T15:50:00-08:00
 category: Knowledge
 subcategory: AI
 topic: "Inference & Serving"
@@ -11,6 +11,9 @@ kind: Note
 tags:
   - posts
 permalink: /posts/inference-optimization-layers/index.html
+series: inference
+seriesOrder: 5
+order: 2
 ---
 ## Overview
 
@@ -19,7 +22,7 @@ LLM inference can be made faster at three layers:
 | Layer | What it changes | Examples |
 |---|---|---|
 | **Algorithm-level** | **what** gets computed | [KV cache](/posts/kv-cache/), quantization (FP8 / INT4), speculative decoding |
-| **System-level** (serving) | **how requests and memory are managed** | PagedAttention, continuous batching, prefix caching |
+| **System-level** (serving) | **how requests and memory are managed** | [PagedAttention](/posts/paged-attention/), [continuous batching](/posts/continuous-batching/), prefix caching |
 | **Kernel-level** | **how fast one operation runs on the GPU** | FlashAttention, CUDA / Triton kernels, fused operators |
 
 ## Algorithm-level
@@ -36,8 +39,8 @@ Change the math or the amount of work, so the model does less.
 Keep the GPU busy and the memory full of useful work. This is what vLLM and SGLang do.
 
 - **[PagedAttention](/posts/paged-attention/)**: split the KV cache into fixed-size blocks and allocate them on demand, so almost no memory is wasted.
-- **Continuous batching**: add and remove requests at every step instead of waiting for a whole batch to finish.
-- **Prefix caching**: reuse KV cache blocks across requests that start with the same tokens.
+- **[Continuous batching](/posts/continuous-batching/)**: add and remove requests at every step instead of waiting for a whole batch to finish.
+- **Prefix caching**: reuse KV cache blocks across requests that start with the same tokens, so the shared part skips prefill. See [Prefill and Decode](/posts/prefill-and-decode/).
 
 ## Kernel-level
 
