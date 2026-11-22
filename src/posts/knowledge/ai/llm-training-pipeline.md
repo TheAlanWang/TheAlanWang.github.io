@@ -6,11 +6,12 @@ excerpt: "How an LLM is trained: pre-training, mid-training, and post-training w
 date: 2026-10-17T12:00:00-07:00
 category: Knowledge
 subcategory: AI
-topic: "Models & Training"
+topic: "Overviews"
 kind: Note
 tags:
   - posts
 permalink: /posts/llm-training-pipeline/index.html
+order: 2
 ---
 
 ## Step 1: Pre-training

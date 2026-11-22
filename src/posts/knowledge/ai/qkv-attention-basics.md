@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: "Q, K, V: Attention Basics"
 description: "How attention works from scratch: what Q, K and V are, how they are computed, how one token mixes in the others, what heads and GQA are, and why K and V are cached."
 excerpt: "Every token makes three vectors: Q to ask, K to be matched, V to hand over. Attention compares one token's Q with every K, then mixes the V's by those scores."
-date: 2026-11-06T13:00:00-08:00
+date: 2026-11-13T17:40:00-08:00
 category: Knowledge
 subcategory: AI
 topic: "Models & Training"
@@ -11,6 +11,9 @@ kind: Note
 tags:
   - posts
 permalink: /posts/qkv-attention-basics/index.html
+series: inference
+seriesOrder: 1
+order: 1
 ---
 ## Overview
 
@@ -64,7 +67,7 @@ How many K and V heads a model has is fixed by its design:
 - Its **K** and **V** are read by every later token, at every layer.
 - Attention is **causal**: a token only sees tokens before it, so its K and V never change once computed.
 
-So K and V are stored instead of recomputed. That store is the [KV cache](/posts/kv-cache/).
+So K and V are stored instead of recomputed. That store is the [KV cache](/posts/kv-cache/). Filling it for the whole prompt at once is **prefill**; adding one token per step is **decode** (see [Prefill and Decode](/posts/prefill-and-decode/)).
 
 ## Q&A
 
@@ -80,7 +83,7 @@ A: In length, yes: each head is 128 numbers so the dot product works. In count, 
 
 A: Causal attention. A token only looks at earlier tokens, so later tokens cannot change its K and V. Compute once, reuse every step.
 
-## Try It
+## Demo
 
 Step through one attention pass on the example sentence, from the neural-network picture of Q, K and V to how the KV cache fills up across layers.
 

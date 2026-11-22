@@ -122,14 +122,15 @@
 
       el.innerHTML =
         '<div class="qd-row lk-modes">' + modes + "</div>" +
+        '<div class="qd-nav"><div class="qd-dots">' + dots + '</div><div class="qd-row">' +
+        '<button type="button" class="qd-btn" data-go="-1"' + (step === 0 ? " disabled" : "") + ">Back</button>" +
+        '<button type="button" class="qd-btn primary" data-go="1"' + (step === n - 1 ? " disabled" : "") + ">Next</button></div></div>" +
         '<p class="qd-hint">' + esc(m.intro) + "</p>" +
         '<div class="lk-db"><div class="lk-db-h">Row in <b>' + sc.table + '</b> after step ' + (step + 1) + '</div>' +
         '<div class="qd-scroll"><table class="lk-table"><tr>' + head + "</tr><tr>" + body + "</tr></table></div></div>" +
         '<div class="lk-time"><div class="lk-step lk-head"><div class="lk-n">#</div><div class="t1">Transaction 1 (T1)</div><div class="t2">Transaction 2 (T2)</div></div>' + rows + "</div>" +
-        '<p class="' + (s.key ? "qd-key" : "qd-text") + ' lk-note">' + esc(s.note) + "</p>" +
-        '<div class="qd-nav"><div class="qd-dots">' + dots + '</div><div class="qd-row">' +
-        '<button type="button" class="qd-btn" data-go="-1"' + (step === 0 ? " disabled" : "") + ">Back</button>" +
-        '<button type="button" class="qd-btn primary" data-go="1"' + (step === n - 1 ? " disabled" : "") + ">Next</button></div></div>";
+        '<p class="' + (s.key ? "qd-key" : "qd-text") + ' lk-note">' + esc(s.note) + "</p>";
+
     }
 
     el.addEventListener("click", (e) => {

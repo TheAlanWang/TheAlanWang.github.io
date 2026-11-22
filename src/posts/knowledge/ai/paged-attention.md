@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: PagedAttention
 description: "PagedAttention in short: why reserving KV cache memory per request wastes most of it, how vLLM splits the cache into fixed-size blocks like OS memory pages, and how that enables more concurrent requests and prefix sharing."
 excerpt: "Instead of reserving max-length memory for every request, vLLM hands out small KV cache blocks on demand, like an operating system's memory pages. Almost nothing is wasted, so more requests fit at once."
-date: 2026-11-06T14:00:00-08:00
+date: 2026-11-13T20:05:00-08:00
 category: Knowledge
 subcategory: AI
 topic: "Inference & Serving"
@@ -11,6 +11,9 @@ kind: Note
 tags:
   - posts
 permalink: /posts/paged-attention/index.html
+series: inference
+seriesOrder: 7
+order: 4
 ---
 ## Overview
 
@@ -48,7 +51,7 @@ Waste per request is at most the unused part of its last block: fewer than 16 to
 
 ## What It Enables
 
-- **Continuous batching**: PagedAttention frees the memory; continuous batching fills it with more requests. Together they are why vLLM's throughput is high.
+- **[Continuous batching](/posts/continuous-batching/)**: PagedAttention frees the memory; continuous batching fills it with more requests. Together they are why vLLM's throughput is high.
 - **Prefix caching**: requests that start with the same tokens can point their block tables at the **same physical blocks**, so the shared prefix is stored once.
 - **Preemption**: when the pool runs out, vLLM can pause a request, release its blocks, and recompute them later, instead of failing.
 
@@ -72,7 +75,7 @@ A: It is a trade-off. Bigger blocks waste more space at the end of each request.
 
 A: New requests wait in the queue. If a running request needs another block and none is free, vLLM preempts some requests: it frees their blocks and recomputes their K and V when space opens up.
 
-## Try It
+## Demo
 
 <div class="qkv-demo kv-cache-demo paged-demo" data-paged-demo></div>
 <script src="/assets/notes/paged-attention-demo.js" defer></script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ 'zh-Hans' if lang == 'zh' else 'en' }}">
 <head>
     {% set metaDescription = description or site.homeIntroText %}
     {% set metaTitle = (title + " | " + site.name) if title else site.name %}
