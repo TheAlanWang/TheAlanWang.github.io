@@ -72,19 +72,22 @@
 
   function mount(root) {
     root.innerHTML = `
-      <div class="gil-anim__scroll">${SVG}</div>
       <div class="gil-anim__bar">
-        <p class="gil-anim__status" aria-live="polite"></p>
         <div class="gil-anim__btns">
-          <button type="button" class="gil-anim__btn" data-toggle>Pause</button>
-          <button type="button" class="gil-anim__btn" data-next>Next step</button>
+          <button type="button" class="gil-anim__btn" data-prev>&#9664; Previous</button>
+          <button type="button" class="gil-anim__btn" data-toggle>Play</button>
+          <button type="button" class="gil-anim__btn" data-next>Next &#9654;</button>
         </div>
-      </div>`;
+        <span class="gil-anim__count"></span>
+      </div>
+      <p class="gil-anim__status" aria-live="polite"></p>
+      <div class="gil-anim__scroll">${SVG}</div>`;
     const q = (sel) => root.querySelector(sel);
     const status = q(".gil-anim__status");
+    const count = q(".gil-anim__count");
     const toggle = q("[data-toggle]");
-    const next = q("[data-next]");
     const move = (el, x, y) => { el.style.transform = `translate(${x}px, ${y}px)`; };
+    const N = FRAMES.length;
     let i = 0;
     let timer = null;
 
@@ -106,17 +109,18 @@
         move(el, WAIT[k][0], WAIT[k][1]);
         el.classList.remove("frozen");
       });
-      status.innerHTML = `<b>${n + 1}/${FRAMES.length}</b>${f.cap}`;
+      count.textContent = `${n + 1}/${N}`;
+      status.textContent = f.cap;
     }
-    const step = () => { i = (i + 1) % FRAMES.length; show(i); };
+    const go = (d) => { i = (i + d + N) % N; show(i); };
     const stop = () => { if (timer) clearInterval(timer); timer = null; toggle.textContent = "Play"; };
-    const start = () => { stop(); timer = setInterval(step, 2800); toggle.textContent = "Pause"; };
+    // Manual by default; Play steps every 4 s so there is time to read each caption.
+    const start = () => { stop(); timer = setInterval(() => go(1), 4000); toggle.textContent = "Pause"; };
 
     toggle.addEventListener("click", () => (timer ? stop() : start()));
-    next.addEventListener("click", () => { stop(); step(); });
+    q("[data-prev]").addEventListener("click", () => { stop(); go(-1); });
+    q("[data-next]").addEventListener("click", () => { stop(); go(1); });
     show(0);
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) stop();
-    else start();
   }
 
   document.querySelectorAll("[data-gil-diagram]").forEach(mount);

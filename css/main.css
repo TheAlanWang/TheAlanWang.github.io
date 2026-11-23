@@ -2000,9 +2000,9 @@ select {
 @keyframes ga-pulse { 50% { opacity: 0.5; } }
 
 .gil-anim__bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
-.gil-anim__status { margin: 0 !important; flex: 1 1 320px; min-height: 3.4em; font-size: 0.95rem; color: var(--prose-text); }
-.gil-anim__status b { margin-right: 6px; color: var(--ga-lock); font-variant-numeric: tabular-nums; }
-.gil-anim__btns { display: flex; gap: 8px; }
+.gil-anim__count { color: var(--ga-lock); font-weight: 600; font-variant-numeric: tabular-nums; }
+.gil-anim__status { margin: 0 !important; font-size: 0.95rem; color: var(--prose-text); }
+.gil-anim__btns { display: flex; flex-wrap: wrap; gap: 8px; }
 .gil-anim__btn { font: inherit; font-size: 0.9rem; cursor: pointer; padding: 5px 14px; border-radius: 8px; border: 1px solid var(--ga-lock); color: var(--ga-lock); background: transparent; }
 .gil-anim__btn:hover { background: var(--ga-lock-soft); }
 .gil-anim__btn:focus-visible { outline: 2px solid var(--ga-lock); outline-offset: 2px; }
