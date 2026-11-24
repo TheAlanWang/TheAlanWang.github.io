@@ -12,8 +12,8 @@ tags:
   - posts
 permalink: /posts/model-weights/index.html
 series: inference
-seriesOrder: 2
-order: 2
+seriesOrder: 3
+order: 3
 zh: true
 ---
 ## Overview

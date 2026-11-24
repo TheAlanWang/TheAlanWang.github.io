@@ -23,7 +23,9 @@
   }
 
   function mount(el) {
-    let heads = 2, sel = 2, size = "demo";
+    // data-mh-size="real" locks the demo to the Llama-3-8B shapes and hides the size buttons.
+    const realOnly = el.dataset.mhSize === "real";
+    let heads = 2, sel = 2, size = realOnly ? "real" : "demo", model = "l3";
 
     const vecRow = (label, v, cls) => '<tr><th>' + label + "</th>" + v.map((x, c) => '<td class="' + cls(c) + '">' + fmt2(x) + "</td>").join("") + "</tr>";
     const colCls = (c) => (heads === 2 ? (c < 2 ? "mh-h1" : "mh-h2") : "");
@@ -61,25 +63,37 @@
       }
       return '<span class="mh-box ' + (cls || "") + '"><span class="mh-m" style="grid-template-columns:repeat(' + vc + ', 8px)">' + cells + "</span><b>" + name + "</b><em>" + dimsText + "</em></span>";
     };
-    // Llama-3-8B: 4096 = 32 Q heads × 128; K and V 1024 = 8 heads × 128; every 4 Q heads share one K/V head.
-    function realFlow() {
-      const N = "n";
-      const head = (k, g, cls) => '<div class="mh-tag ' + (cls === "c1" ? "mh-h1" : cls === "c2" ? "mh-h2" : "") + '">head ' + k + (ZH ? "（用第 " + g + " 组 K、V）" : " (uses K/V group " + g + ")") + "</div>" +
-        '<div class="mh-line">' + ebox("Q" + sub(k), N + "×128", 4, 3, cls) + op("·") + ebox("K" + sub(g) + "ᵀ", "128×" + N, 3, 4, cls) + op("=") + ebox(ZH ? "分数" : "scores", N + "×" + N, 4, 4, cls) +
-        op("→ softmax →") + ebox(ZH ? "比例" : "shares", N + "×" + N, 4, 4, cls) + op("×") + ebox("V" + sub(g), N + "×128", 4, 3, cls) + op("=") + ebox("A" + sub(k), N + "×128", 4, 3, cls) + "</div>";
+    // Real models. Q heads set the head dim (d ÷ qh = 128); kvh is a design choice: equal to qh is MHA, fewer is GQA.
+    const MODELS = {
+      l2: { name: "Llama-2-7B", d: 4096, qh: 32, kvh: 32 },
+      l3: { name: "Llama-3-8B", d: 4096, qh: 32, kvh: 8 },
+      l70: { name: "Llama-3-70B", d: 8192, qh: 64, kvh: 8 },
+    };
+    function realFlow(m) {
+      const N = "n", hd = m.d / m.qh, g = m.qh / m.kvh, kw = m.kvh * hd, mha = g === 1;
+      const grp = (k) => Math.ceil(k / g);
+      const head = (k, cls) => '<div class="mh-tag ' + (cls === "c1" ? "mh-h1" : cls === "c2" ? "mh-h2" : "") + '">head ' + k + (ZH ? "（用第 " + grp(k) + " 组 K、V）" : " (uses K/V group " + grp(k) + ")") + "</div>" +
+        '<div class="mh-line">' + ebox("Q" + sub(k), N + "×" + hd, 4, 3, cls) + op("·") + ebox("K" + sub(grp(k)) + "ᵀ", hd + "×" + N, 3, 4, cls) + op("=") + ebox(ZH ? "分数" : "scores", N + "×" + N, 4, 4, cls) +
+        op("→ softmax →") + ebox(ZH ? "比例" : "shares", N + "×" + N, 4, 4, cls) + op("×") + ebox("V" + sub(grp(k)), N + "×" + hd, 4, 3, cls) + op("=") + ebox("A" + sub(k), N + "×" + hd, 4, 3, cls) + "</div>";
+      const more = mha
+        ? (ZH ? "每个 Q head 都有自己的一组 K、V（MHA）……" : "every Q head has its own K/V head (MHA) …")
+        : (ZH ? "head 1～" + g + " 用第 1 组；head " + (g + 1) + "～" + 2 * g + " 用第 2 组……" : "heads 1-" + g + " use group 1; heads " + (g + 1) + "-" + 2 * g + " use group 2 …");
+      const share = mha
+        ? (ZH ? "K、V 也有 " + m.kvh + " 个 head：每个 Q head 一组（MHA）。" : "K/V also have " + m.kvh + " heads: one per Q head (MHA).")
+        : (ZH ? "K、V 只有 " + m.kvh + " 个 head：" + m.kvh + " × " + hd + " = " + kw + "；每 " + g + " 个 Q head 共用一组 K、V（GQA）。" : "K/V have only " + m.kvh + " heads: " + m.kvh + " × " + hd + " = " + kw + "; every " + g + " Q heads share one K/V head (GQA).");
       return '<div class="mh-flow">' +
         '<div class="mh-tag">' + (ZH ? "① 乘矩阵，再切成 head" : "① Multiply, then cut into heads") + "</div>" +
-        '<div class="mh-line">' + ebox("x̂", N + "×4096", 4, 6) + op("×") + ebox("q_proj", "4096×4096", 6, 6) + op("=") + ebox("Q", N + "×4096", 4, 6) +
-        op(ZH ? "→ 切成 32 份，每份 " + N + "×128" : "→ 32 pieces of " + N + "×128") + "</div>" +
-        '<div class="mh-line">' + ebox("x̂", N + "×4096", 4, 6) + op("×") + ebox("k_proj", "4096×1024", 6, 4) + op("=") + ebox("K", N + "×1024", 4, 4) +
-        op(ZH ? "→ 切成 8 份，每份 " + N + "×128（V 一样）" : "→ 8 pieces of " + N + "×128 (V the same)") + "</div>" +
-        '<div class="mh-tag">' + (ZH ? "② 每个 Q head 各算一遍（共 32 个）" : "② Each Q head on its own (32 of them)") + "</div>" +
-        head(1, 1, "c1") + head(2, 1, "c1") + '<div class="mh-tag">⋮ ' + (ZH ? "head 3、4 也用第 1 组；head 5～8 用第 2 组……" : "heads 3, 4 also use group 1; heads 5-8 use group 2 …") + "</div>" + head(32, 8, "c2") +
+        '<div class="mh-line">' + ebox("x̂", N + "×" + m.d, 4, 6) + op("×") + ebox("q_proj", m.d + "×" + m.d, 6, 6) + op("=") + ebox("Q", N + "×" + m.d, 4, 6) +
+        op(ZH ? "→ 切成 " + m.qh + " 份，每份 " + N + "×" + hd : "→ " + m.qh + " pieces of " + N + "×" + hd) + "</div>" +
+        '<div class="mh-line">' + ebox("x̂", N + "×" + m.d, 4, 6) + op("×") + ebox("k_proj", m.d + "×" + kw, 6, mha ? 6 : 4) + op("=") + ebox("K", N + "×" + kw, 4, mha ? 6 : 4) +
+        op(ZH ? "→ 切成 " + m.kvh + " 份，每份 " + N + "×" + hd + "（V 一样）" : "→ " + m.kvh + " pieces of " + N + "×" + hd + " (V the same)") + "</div>" +
+        '<div class="mh-tag">' + (ZH ? "② 每个 Q head 各算一遍（共 " + m.qh + " 个）" : "② Each Q head on its own (" + m.qh + " of them)") + "</div>" +
+        head(1, "c1") + head(2, grp(2) === 1 ? "c1" : "c2") + '<div class="mh-tag">⋮ ' + more + "</div>" + head(m.qh, "c2") +
         '<div class="mh-tag">' + (ZH ? "③ 拼起来" : "③ Join") + "</div>" +
-        '<div class="mh-line">' + ebox("A" + sub(1), N + "×128", 4, 3, "c1") + op("+ … +") + ebox("A" + sub(32), N + "×128", 4, 3, "c2") + op("=") + ebox("A", N + "×4096", 4, 6) + op("×") +
-        ebox("o_proj", "4096×4096", 6, 6) + op("=") + ebox("O", N + "×4096", 4, 6) + "</div></div>" +
-        '<p class="qd-hint">' + (ZH ? "n = token 数（prompt 有多少个 token）。4096 ÷ 128 = 32 个 Q head；1024 ÷ 128 = 8 组 K、V；32 ÷ 8 = 每 4 个 Q head 共用一组（GQA）。每个 head 的分数表都是 n × n，一共 32 张。"
-          : "n = number of tokens in the prompt. 4096 ÷ 128 = 32 Q heads; 1024 ÷ 128 = 8 K/V heads; 32 ÷ 8 = every 4 Q heads share one (GQA). Every head's score table is n × n: 32 of them.") + "</p>";
+        '<div class="mh-line">' + ebox("A" + sub(1), N + "×" + hd, 4, 3, "c1") + op("+ … +") + ebox("A" + sub(m.qh), N + "×" + hd, 4, 3, "c2") + op("=") + ebox("A", N + "×" + m.d, 4, 6) + op("×") +
+        ebox("o_proj", m.d + "×" + m.d, 6, 6) + op("=") + ebox("O", N + "×" + m.d, 4, 6) + "</div></div>" +
+        '<p class="qd-hint">' + (ZH ? "n = token 数（prompt 有多少个 token）。" + m.d + " ÷ " + m.qh + " 个 Q head = 每个 head " + hd + "；" + share + "每个 head 的分数表都是 n × n，一共 " + m.qh + " 张。"
+          : "n = number of tokens in the prompt. " + m.d + " ÷ " + m.qh + " Q heads = " + hd + " per head; " + share + " Every head's score table is n × n: " + m.qh + " of them.") + "</p>";
     }
 
     function card(h, k) {
@@ -101,8 +115,9 @@
       const dimsHead = "<tr><th></th>" + [0, 1, 2, 3].map((c) => '<th class="' + colCls(c) + '">' + (ZH ? "第 " + (c + 1) + " 个数" : "#" + (c + 1)) + "</th>").join("") + "</tr>";
       const btn = (attr, val, cur, lab) => '<button type="button" class="qd-btn" data-' + attr + '="' + val + '" aria-pressed="' + (cur === val) + '">' + lab + "</button>";
 
-      const sizeRow = '<div class="qd-row">' + btn("size", "demo", size, ZH ? "demo 尺寸（4 个数）" : "Demo size (4 numbers)") + btn("size", "real", size, ZH ? "Llama-3-8B 真实尺寸" : "Llama-3-8B real size") + "</div>";
-      if (size === "real") { el.innerHTML = sizeRow + realFlow(); return; }
+      const sizeRow = '<div class="qd-row">' + btn("size", "demo", size, ZH ? "demo 尺寸（4 个数）" : "Demo size (4 numbers)") + btn("size", "real", size, ZH ? "真实模型尺寸" : "Real model size") + "</div>";
+      const modelRow = '<div class="qd-row">' + Object.keys(MODELS).map((k) => btn("model", k, model, MODELS[k].name)).join("") + "</div>";
+      if (size === "real") { el.innerHTML = (realOnly ? "" : sizeRow) + modelRow + realFlow(MODELS[model]); return; }
       el.innerHTML = sizeRow +
         '<div class="qd-row">' + btn("heads", 1, heads, ZH ? "1 个 head" : "1 head") + btn("heads", 2, heads, ZH ? "2 个 head" : "2 heads") + "</div>" +
         '<div class="qd-row pf-pick"><span class="qd-hint">' + (ZH ? "看哪个 token：" : "Token:") + "</span>" + TOKENS.map((u, j) => btn("pick", j, sel, esc(u))).join("") + "</div>" +
@@ -130,6 +145,7 @@
       const b = e.target.closest("button");
       if (!b) return;
       if (b.dataset.size) size = b.dataset.size;
+      else if (b.dataset.model) model = b.dataset.model;
       else if (b.dataset.heads) heads = +b.dataset.heads;
       else if (b.dataset.pick) sel = +b.dataset.pick;
       render();

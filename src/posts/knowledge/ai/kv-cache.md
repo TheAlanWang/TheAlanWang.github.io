@@ -12,8 +12,8 @@ tags:
   - posts
 permalink: /posts/kv-cache/index.html
 series: inference
-seriesOrder: 6
-order: 3
+seriesOrder: 8
+order: 4
 ---
 ## Overview
 

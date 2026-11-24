@@ -1,7 +1,7 @@
 module.exports = {
   name: "Alan Wang",
   url: "https://thealanwang.github.io",
-  assetVersion: "2026-11-22-gil-steps",
+  assetVersion: "2026-11-23-inference-math",
   socialImage:
     "https://thealanwang.github.io/assets/social/linkedin-preview.png",
   tagline: "AI that works beyond the demo.",

@@ -12,7 +12,7 @@ tags:
   - posts
 permalink: /posts/prefill-and-decode/index.html
 series: inference
-seriesOrder: 4
+seriesOrder: 5
 zh: true
 order: 1
 ---

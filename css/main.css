@@ -2012,6 +2012,50 @@ select {
     .gil-anim .ga-pulse { animation: none; }
 }
 
+/* Inference Math calculator (assets/notes/inference-math-demo.js) */
+.im-demo .im-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px 16px; align-items: end; }
+.im-demo .im-field { display: grid; gap: 5px; font-size: 0.85rem; color: var(--muted); }
+.im-demo .im-field b { color: var(--text); font-variant-numeric: tabular-nums; }
+.im-demo .im-seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.im-demo .qd-btn[aria-pressed="true"] { background: var(--text); color: rgb(var(--paper-rgb)); border-color: var(--text); }
+.im-demo .im-quiz { display: flex; gap: 6px; align-items: center; font-size: 0.85rem; color: var(--text); cursor: pointer; }
+.im-demo .im-rows { display: grid; gap: 10px; }
+.im-demo .im-row { display: grid; gap: 3px; }
+.im-demo .im-row > span { color: var(--muted); font-size: 0.82rem; }
+.im-demo .im-row .qd-mono { color: var(--text); overflow-wrap: anywhere; }
+.im-demo .im-ans { color: var(--qd-hot); font: inherit; font-weight: 700; }
+.im-demo button.im-ans { border: 1px dashed var(--qd-hot); border-radius: 6px; background: var(--qd-hot-soft); padding: 0 6px; cursor: pointer; filter: blur(4px); }
+.im-demo button.im-ans:hover, .im-demo button.im-ans:focus-visible { filter: blur(2px); }
+.im-demo .im-roof { display: block; width: 100%; min-width: 420px; height: auto; font-family: ui-monospace, Menlo, monospace; }
+.im-demo .im-grid { stroke: var(--line); stroke-width: 1; }
+.im-demo .im-ax { fill: var(--muted); font-size: 10px; }
+.im-demo .im-bal { stroke: var(--muted); stroke-dasharray: 4 3; }
+.im-demo .im-line { fill: none; stroke: var(--text); stroke-width: 2.5; }
+.im-demo .im-pt.dec { fill: var(--qd-hot); }
+.im-demo .im-pt.pre { fill: var(--qd-q); }
+.im-demo .im-lbl { font-size: 11px; font-weight: 600; }
+.im-demo .im-lbl.dec { fill: var(--qd-hot); }
+.im-demo .im-lbl.pre { fill: var(--qd-q); }
+
+/* Inference Math: K / Q shape figure (static HTML in inference-math.md, reuses the .mh-* matrix styles) */
+.im-shape .im-gqa { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.im-shape .im-grp { display: grid; gap: 3px; padding: 4px; border-radius: 6px; border: 1px solid var(--c); --c: var(--qd-q); --s: var(--qd-q-soft); }
+.im-shape .im-grp.g2 { --c: var(--qd-k); --s: var(--qd-k-soft); }
+.im-shape .im-qs { display: flex; gap: 3px; }
+.im-shape .im-qs i, .im-shape .im-k { font: 600 0.68rem ui-monospace, Menlo, monospace; font-style: normal; border-radius: 4px; text-align: center; padding: 2px 4px; }
+.im-shape .im-qs i { background: var(--s); color: var(--c); }
+.im-shape .im-k { background: var(--c); color: rgb(var(--paper-rgb)); }
+.im-shape .im-more { border: none; align-content: center; color: var(--muted); padding: 0 4px; }
+.im-shape .im-cut { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 4px; }
+.im-shape .im-cut-l { font-size: 0.72rem; color: var(--muted); }
+.im-shape .im-segs { display: flex; }
+.im-shape .im-segs i { display: grid; justify-items: center; min-width: 52px; padding: 2px 4px; font: 600 0.68rem ui-monospace, Menlo, monospace; font-style: normal; border: 1px solid var(--c); margin-left: -1px; background: var(--s); color: var(--c); --c: var(--qd-q); --s: var(--qd-q-soft); }
+.im-shape .im-segs i.g2 { --c: var(--qd-k); --s: var(--qd-k-soft); }
+.im-shape .im-segs i b { font-size: 0.62rem; font-weight: 600; }
+.im-shape .im-segs i.more { min-width: 28px; border-color: var(--line-strong); background: none; color: var(--muted); align-content: center; }
+.im-shape .mh-box.c1 .mh-m i:not(.dots) { background: color-mix(in srgb, var(--qd-q) 45%, transparent); }
+.im-shape .mh-box.c2 .mh-m i:not(.dots) { background: color-mix(in srgb, var(--qd-k) 45%, transparent); }
+
 /* HNSW interactive demo (assets/notes/hnsw-demo.js) */
 .hnsw-demo {
     --hd-surface: rgb(var(--paper-rgb));

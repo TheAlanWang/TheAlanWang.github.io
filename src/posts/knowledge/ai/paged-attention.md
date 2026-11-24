@@ -12,8 +12,8 @@ tags:
   - posts
 permalink: /posts/paged-attention/index.html
 series: inference
-seriesOrder: 7
-order: 4
+seriesOrder: 9
+order: 5
 ---
 ## Overview
 

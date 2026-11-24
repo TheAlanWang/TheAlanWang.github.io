@@ -12,8 +12,8 @@ tags:
   - posts
 permalink: /posts/inference-optimization-layers/index.html
 series: inference
-seriesOrder: 5
-order: 2
+seriesOrder: 7
+order: 3
 ---
 ## Overview
 

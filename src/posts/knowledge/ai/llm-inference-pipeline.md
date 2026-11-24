@@ -31,9 +31,11 @@ order: 1
 ### 1. Basics: How a Request Runs
 
 1. [Q, K, V: Attention Basics](/posts/qkv-attention-basics/): what each token computes inside a layer.
-2. [Model Weights](/posts/model-weights/): the matrices it multiplies by, and how they are stored.
-3. [Forward Pass](/posts/forward-pass/): one run of the model, step by step, from the token lookup to the next word.
-4. [Prefill and Decode](/posts/prefill-and-decode/): why a request runs in two phases with different bottlenecks.
+2. [Multi-Head Attention and GQA](/posts/multi-head-gqa/): how attention is cut into heads, and why 4 Q heads share one K/V head.
+3. [Model Weights](/posts/model-weights/): the matrices it multiplies by, and how they are stored.
+4. [Forward Pass](/posts/forward-pass/): one run of the model, step by step, from the token lookup to the next word.
+5. [Prefill and Decode](/posts/prefill-and-decode/): why a request runs in two phases with different bottlenecks.
+6. [Inference Math](/posts/inference-math/): the numbers behind it: weight size, KV per token, decode speed, and the roofline.
 
 ### 2. Optimizing Inference
 
