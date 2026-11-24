@@ -12,8 +12,8 @@ tags:
   - posts
 permalink: /posts/forward-pass/index.html
 series: inference
-seriesOrder: 3
-order: 3
+seriesOrder: 4
+order: 4
 zh: true
 ---
 ## Overview

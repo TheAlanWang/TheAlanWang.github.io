@@ -88,4 +88,13 @@ A: Causal attention. A token only looks at earlier tokens, so later tokens canno
 Step through one attention pass on the example sentence, from the neural-network picture of Q, K and V to how the KV cache fills up across layers.
 
 <div class="qkv-demo" data-qkv-demo></div>
+
+### Multi-Head and GQA
+
+How Q is cut into 32 heads, K and V into 8, and how every 4 Q heads share one K/V head. "Demo size" runs the tiny model from [Forward Pass](/posts/forward-pass/) with 2 heads; "Llama-3-8B real size" draws the true shapes.
+
+<div class="qkv-demo pf-demo mw-demo mh-demo" data-mh-demo></div>
+
 <script src="/assets/notes/qkv-demo.js" defer></script>
+<script src="/assets/notes/tiny-llama.js" defer></script>
+<script src="/assets/notes/multi-head-demo.js" defer></script>

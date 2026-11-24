@@ -12,8 +12,8 @@ tags:
   - posts
 permalink: /posts/continuous-batching/index.html
 series: inference
-seriesOrder: 8
-order: 5
+seriesOrder: 10
+order: 6
 ---
 ## Overview
 
