@@ -11,6 +11,8 @@ kind: Note
 tags:
   - posts
 permalink: /posts/sql-basics/index.html
+series: databases
+seriesOrder: 2
 ---
 ## SQL 
 

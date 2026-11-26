@@ -59,7 +59,8 @@ module.exports = function (eleventyConfig) {
 
     // Reading order for topics within a subcategory; unlisted topics follow, alphabetically.
     const topicOrder = {
-        "Knowledge/AI": ["Overviews", "Foundations", "Models & Training", "Inference & Serving", "Agents & RAG", "Evals & Production"]
+        "Knowledge/AI": ["Overviews", "Foundations", "Models & Training", "Inference & Serving", "Agents & RAG", "Evals & Production"],
+        "Knowledge/Data Systems": ["Overviews", "Database Basics", "Deep Dives"]
     };
     const topicRank = (post) => {
         const order = topicOrder[`${post.data.category}/${post.data.subcategory}`] || [];

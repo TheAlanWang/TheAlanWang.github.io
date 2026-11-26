@@ -2677,3 +2677,30 @@ select {
 .mw-demo .mh-box .mh-m i.hi { background: var(--qd-hot); }
 .mw-demo .mh-m i.dots { background: none; font-size: 8px; line-height: 8px; text-align: center; color: var(--muted); font-style: normal; }
 .mw-demo .mh-box .mh-m i.dots { background: none; }
+
+/* B-Tree and B+ Tree demos (assets/notes/btree-demo.js) */
+.bt-demo .qd-btn[aria-pressed="true"] { background: var(--text); color: rgb(var(--paper-rgb)); border-color: var(--text); }
+.bt-demo .bt-toggles { align-items: center; }
+.bt-demo .bt-lab { width: 48px; font-size: 0.8rem; color: var(--muted); }
+.bt-demo .bt-svg { display: block; width: 100%; min-width: 300px; height: auto; margin: 0 auto; font-family: ui-monospace, Menlo, monospace; }
+.bt-demo .bt-edge { stroke: var(--line-strong); stroke-width: 1.5; }
+.bt-demo .bt-edge.on { stroke: var(--qd-q); stroke-width: 2.5; }
+.bt-demo .bt-link line { stroke: var(--muted); stroke-width: 1.5; }
+.bt-demo .bt-link path { fill: var(--muted); }
+.bt-demo .bt-link.on line { stroke: var(--qd-q); stroke-width: 2.5; }
+.bt-demo .bt-link.on path { fill: var(--qd-q); }
+.bt-demo .bt-box { fill: var(--qd-surface); stroke: var(--line-strong); stroke-width: 1.5; }
+.bt-demo .bt-node.seen .bt-box { fill: var(--qd-q-soft); }
+.bt-demo .bt-node.now .bt-box { fill: var(--qd-q-soft); stroke: var(--qd-q); stroke-width: 2.5; }
+.bt-demo .bt-node.over .bt-box { fill: var(--qd-hot-soft); stroke: var(--qd-hot); stroke-width: 2.5; }
+.bt-demo .bt-sep { stroke: var(--line-strong); }
+.bt-demo .bt-key { fill: var(--text); font-size: 12px; text-anchor: middle; dominant-baseline: central; }
+.bt-demo .bt-cell { fill: none; }
+.bt-demo .bt-cell.take { fill: var(--qd-v-soft); }
+.bt-demo .bt-cell.new { fill: var(--qd-hot-soft); }
+.bt-demo .bt-key.take { fill: var(--qd-v); font-weight: 700; }
+.bt-demo .bt-key.stop { fill: var(--muted); text-decoration: line-through; }
+.bt-demo .bt-key.new { fill: var(--qd-hot); font-weight: 700; }
+.bt-demo .bt-side { fill: var(--muted); font-size: 11px; dominant-baseline: central; }
+.bt-demo .bt-stats { display: grid; gap: 4px; color: var(--text); }
+.bt-demo .bt-trail { color: var(--muted); margin-left: 6px; overflow-wrap: anywhere; }

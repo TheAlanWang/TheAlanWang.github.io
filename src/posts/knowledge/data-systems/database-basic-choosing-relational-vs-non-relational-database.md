@@ -11,6 +11,8 @@ kind: Note
 tags:
   - posts
 permalink: /posts/database-basic-choosing-relational-vs-non-relational-database/index.html
+series: databases
+seriesOrder: 1
 ---
 ## Overview
 
