@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: LLM Inference Pipeline
+title: "Contents: LLM Inference"
 description: "A reading map for LLM inference: what happens to one request from prompt to answer, and which post explains each part, from Q, K, V to continuous batching."
 excerpt: "One request, from prompt to answer, and the order to read the posts that explain each part."
 date: 2026-11-20T12:00:00-08:00
@@ -44,4 +44,4 @@ order: 1
 3. [PagedAttention](/posts/paged-attention/): split that memory into small blocks and hand them out as needed, so little is wasted.
 4. [Continuous Batching](/posts/continuous-batching/): use the freed blocks to let new requests join at every step.
 
-Each post ends with a link back to this page. For how the weights are made in the first place, see [LLM Training Pipeline](/posts/llm-training-pipeline/).
+For how the weights are made in the first place, see [LLM Training Pipeline](/posts/llm-training-pipeline/).
