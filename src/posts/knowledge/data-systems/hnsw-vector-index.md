@@ -11,6 +11,8 @@ kind: Note
 tags:
   - posts
 permalink: /posts/hnsw-vector-index/index.html
+series: databases
+seriesOrder: 5
 ---
 ## Overview
 

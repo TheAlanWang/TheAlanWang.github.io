@@ -13,6 +13,8 @@ tags:
 image: /assets/sketches/database-basics.svg
 imageFit: contain
 permalink: /posts/database-basic-optimistic-lock-vs-pessimistic-lock/index.html
+series: databases
+seriesOrder: 6
 ---
 
 ## Overview

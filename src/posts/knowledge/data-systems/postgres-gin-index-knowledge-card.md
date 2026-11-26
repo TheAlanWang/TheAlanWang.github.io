@@ -13,6 +13,8 @@ tags:
 image: /assets/sketches/postgres-indexing-review.svg
 imageFit: contain
 permalink: /posts/postgres-indexing-review-btree-bplus-gin/index.html
+series: databases
+seriesOrder: 4
 ---
 
 This is a review note for Postgres indexing. It covers B-tree, B+ tree, GIN, table/index storage, primary keys, jsonb operators, index selection, SQL syntax, trade-offs, and common interview traps.
@@ -64,7 +66,7 @@ CREATE UNIQUE INDEX users_pkey ON users (userid);
 
 ## Part 2. B-tree Index
 
-`B` means `Balanced`, not `Binary`.
+`B` does not mean `Binary`. The inventors never said what it stands for; Balanced, Bayer, and Boeing are common guesses.
 
 A B-tree index is the default Postgres index type. It is a self-balancing multi-way search tree, designed to keep lookup depth small.
 
@@ -74,7 +76,7 @@ A B-tree index is the default Postgres index type. It is a self-balancing multi-
 | Insert/delete | `O(log n)` | Index maintenance cost is paid on writes |
 | Range query | `O(log n + k)` | `k` is the number of matching rows |
 
-For 10 million rows, a full table scan may inspect 10 million rows. A B-tree lookup can reach the target in roughly a few dozen page steps, depending on fanout and caching.
+For 10 million rows, a full table scan may inspect 10 million rows. A B-tree index on 10 million rows is only about 3 levels deep, so a lookup reads about 3 pages, and the top levels are usually already in memory.
 
 Good query patterns:
 
@@ -121,96 +123,7 @@ You cannot jump directly to created_at without status.
 
 ## Part 3. B+ Tree: What Databases Usually Use
 
-Postgres, MySQL, and Oracle often call the index a `B-tree index`, but the database-friendly implementation is B+ tree style. `B-tree` is the historical umbrella term.
-
-中文记忆：
-
-```text
-数据库口中的 B-tree，很多时候实际在讲 B+ tree 的索引思想。
-不要理解成 Binary Tree；B = Balanced。
-```
-
-Core B+ tree rules:
-
-```text
-1. All data lives only in leaf nodes.
-2. All keys also appear in leaf nodes.
-3. Internal-node keys are guide copies, not real row data.
-```
-
-中文记忆：
-
-```text
-内部节点 = 指路牌
-叶子节点 = 真正存 key + data / row pointer 的地方
-所有 key 在叶子层完整出现；内部 key 只是冗余导航副本
-```
-
-Classic B-tree versus B+ tree:
-
-| Feature | Classic B-tree | B+ tree |
-|---|---|---|
-| Data location | Internal nodes and leaf nodes | Leaf nodes only |
-| Key location | Internal and leaf nodes, usually not duplicated the same way | Internal guide keys plus complete keys in leaves |
-| Internal nodes | Store key plus data | Store only keys for navigation |
-| Leaf nodes | Independent | Linked together |
-| Range query | May need to walk back up | Scan forward through linked leaves |
-
-Correct mental picture:
-
-```text
-                       [50]            guide key, not data
-                      /    \
-                  [20]      [80]       guide keys
-                 /    \    /    \
-            +------+ +------+ +------+ +------+
-            |10|d  | |30|d  | |60|d  | |90|d  |
-            |20|d  | |40|d  | |70|d  | |95|d  |
-            +--<->-+ +--<->-+ +--<->-+ +------+
-               linked leaf pages
-```
-
-Range query flow:
-
-```sql
-WHERE id BETWEEN 10 AND 60
-```
-
-```text
-Step 1: seek the starting leaf, O(log n)
-root [50] -> left -> [20] -> left -> first leaf
-
-Step 2: scan linked leaves, O(k)
-leaf 1: 10 yes, 20 yes
-leaf 2: 30 yes, 40 yes
-leaf 3: 60 yes
-leaf 4: 70 > 60, stop
-
-Total: O(log n + k)
-```
-
-Why databases prefer B+ tree:
-
-- The tree is shorter because internal nodes do not store data.
-- More keys fit in each internal page, so fewer random page reads are needed.
-- Range queries are fast after the start leaf is found.
-- Ordered scans are efficient because leaves are already linked in sorted order.
-- Full index scans can walk the leaf level sequentially.
-
-Query pattern summary:
-
-| Query pattern | B-tree / B+ tree behavior |
-|---|---|
-| `WHERE id = 5` | Similar point lookup, `O(log n)` |
-| `BETWEEN` range | B+ tree shines because it scans linked leaves |
-| `ORDER BY` | B+ tree shines because leaf order matches index order |
-
-One-line memory hook:
-
-```text
-Internal nodes navigate. Leaf nodes store the data.
-内部节点导航，叶子节点存数据。
-```
+Postgres calls its index `btree`, but it is built like a B+ tree: rows (or row pointers) only in the leaves, and the leaves linked in order. Why that makes the tree short and range queries fast is covered in [B-Tree and B+ Tree](/posts/b-tree-and-b-plus-tree/).
 
 ## Part 4. GIN Index
 
@@ -497,7 +410,7 @@ Ask these in order:
 
 | Wrong statement | Correct statement |
 |---|---|
-| B in B-tree means Binary | B means Balanced |
+| B in B-tree means Binary | B does not mean Binary; the tree is balanced and multi-way |
 | It is a reversed index | It is an inverted index |
 | In Postgres, the table itself is a B-tree | In Postgres, the table is a heap; the index is B-tree/GIN/etc. |
 | A table must have a primary key | It does not have to, but it usually should |
