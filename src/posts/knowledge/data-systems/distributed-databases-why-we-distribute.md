@@ -14,7 +14,7 @@ image: /assets/projects/distributed-databases-scaling-paths.svg
 imageFit: contain
 permalink: /posts/distributed-databases-why-we-distribute/index.html
 series: databases
-seriesOrder: 7
+seriesOrder: 8
 ---
 
 Distributed databases are easy to describe and much harder to build. At a high level, the idea is simple: store and serve data across multiple machines instead of one. The reason that gets hard so quickly is that a database is not only a storage engine. It is also a correctness system, a query system, and a failure-handling system.

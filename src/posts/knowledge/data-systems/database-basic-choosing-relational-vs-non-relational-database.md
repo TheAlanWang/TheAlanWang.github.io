@@ -13,14 +13,15 @@ tags:
 permalink: /posts/database-basic-choosing-relational-vs-non-relational-database/index.html
 series: databases
 seriesOrder: 1
+order: 1
+zh: true
 ---
 ## Overview
 
 > I would start with the application's requirements: the data structure, query patterns, and consistency needs.
 > 
-> I'd choose a relational database, like PostgreSQL, when we need **joins, constraints, or transactions ([ACID](#acid))**. For example, in an online shopping system, creating an order and updating inventory should happen together, so a relational database would be a strong choice.
-> 
-> I'd consider a non-relational database when **one access pattern dominates**, or when its data model fits the workload better. For example, a document database can work well for flexible product information, a key-value store can support fast cache lookups, and a wide-column store like Cassandra fits chat messages at scale.
+> - **Relational database**, like PostgreSQL: when we need **joins, constraints, or transactions ([ACID](/posts/transactions-and-acid/))**. For example, in an online shopping system, creating an order and updating inventory should happen together, so a relational database would be a strong choice.
+> - **Non-relational database**: when **one access pattern dominates**, or when its data model fits the workload better. For example, a document database can work well for flexible product information, a key-value store can support fast cache lookups, and a wide-column store like Cassandra fits chat messages at scale.
 > 
 > I would also consider **scalability**, **maintenance**, and the team's experience. I wouldn't assume that NoSQL is always faster or that SQL cannot scale. My default would usually be relational, unless there's a specific requirement that makes another database a better fit. In practice, many systems use both: relational as the source of truth, with specialized stores for specific parts.
 
@@ -40,14 +41,7 @@ Typical: orders, payments, inventory, accounts, bookings, permissions.
 
 <h3 id="acid">ACID</h3>
 
-Relational databases guarantee ACID on every transaction:
-
-|                 | Meaning                                          | Example                                              |
-| --------------- | ------------------------------------------------ | ---------------------------------------------------- |
-| **Atomicity**   | All steps succeed, or none do                    | Create order and reduce inventory together           |
-| **Consistency** | Data always follows the rules (constraints)      | An order can't point to a user that doesn't exist    |
-| **Isolation**   | Concurrent transactions don't step on each other | Two people buy the last seat, only one succeeds      |
-| **Durability**  | Once committed, data survives a crash            | Payment is saved even if the server dies right after |
+**Relational databases** run every transaction with **ACID** guarantees: **all or nothing**, **rules always hold**, **concurrent transactions don't interfere**, and **committed data survives a crash**. See [Transactions and ACID](/posts/transactions-and-acid/).
 
 ## Non-relational
 
@@ -62,7 +56,7 @@ It's not one thing. It's a family of specialized stores, each built for one acce
 | Graph | Social graph, recommendations | Neighbors, paths |
 | Search engine | Full-text search | Terms, filters, relevance |
 
-Choose it when one narrow, stable access pattern dominates and the data can tolerate eventual consistency (view counts, feeds, logs, events).
+Choose it when one narrow, stable access pattern dominates (sessions, view counts, feeds, logs, events). Many of these stores let you trade strong consistency for speed, but that is a choice, not a requirement: DynamoDB, for example, offers both eventually consistent and strongly consistent reads.
 
 **Access pattern**: one specific way the app reads or writes a piece of data. It's not just "read vs write". It's the exact shape of the query. Common ones:
 
@@ -81,9 +75,10 @@ Choose it when one narrow, stable access pattern dominates and the data can tole
 1. How will the data be **queried**?
 	- By key, by time range, with joins, full-text search, or graph traversal?
 	- Only a few fixed queries: use a store built for them. Many queries, or likely to change: use relational.
-2. Must the data be **correct immediately**?
-	- Payments and inventory must be. Use relational.
-	- View counts, feeds, and analytics can be a little behind. Non-relational is fine.
+2. Must every read see the **latest write**?
+	- Payments and inventory must. They also need transactions, so use relational: on one machine it gives both by default.
+	- View counts, feeds, and analytics can be a little behind, so eventual consistency is fine.
+	- Strong consistency is not unique to relational databases, and a relational read replica can return stale data too. What matters is where each read goes.
 3. Do writes need to **update multiple records together**?
 	- If yes, use relational. Transactions are its core strength.
 4. How much will it **scale**?
@@ -101,8 +96,8 @@ Most systems use more than one database: relational for the core records, plus s
 | System                               | Relational                | Non-relational                              | Why                                               |
 | ------------------------------------ | ------------------------- | ------------------------------------------- | ------------------------------------------------- |
 | URL shortener                        |                           | Key-value (DynamoDB), Redis cache           | Lookup by short code only, very read-heavy        |
-| Chat (WhatsApp, Discord)             | Postgres: users, channels | Wide-column (Cassandra): messages           | Messages: append, then read latest by channel     |
-| News feed (Twitter)                  | Postgres: users, follows  | Cassandra: posts. Redis: feed cache         | Feed is precomputed per user and read by key      |
+| Chat                                 | Postgres: users, channels | Wide-column (Cassandra): messages           | Messages: append, then read latest by channel     |
+| News feed                            | Postgres: users, follows  | Cassandra: posts. Redis: feed cache         | Feed is precomputed per user and read by key      |
 | E-commerce orders                    | Postgres                  |                                             | Orders, payments, inventory need transactions     |
 | Payment system                       | Postgres                  |                                             | Strong consistency, no double charge, audit trail |
 | Ticketing / hotel booking            | Postgres                  |                                             | No double booking, row locks on seats or rooms    |
@@ -111,21 +106,21 @@ Most systems use more than one database: relational for the core records, plus s
 | Rate limiter                         |                           | Redis                                       | Counters with TTL, very fast                      |
 | Metrics monitoring                   |                           | Time-series (Prometheus, InfluxDB)          | Query by time range, old data expires             |
 | Search / autocomplete                | Postgres: source of truth | Elasticsearch: synced copy for search       | Full-text search, fuzzy matching, ranking         |
-| Nearby places (Yelp, Uber)           | Postgres + PostGIS        | or Redis geo                                | Query by location radius                          |
-| File storage (Dropbox)               | Postgres: file metadata   | S3 for the files (object storage, not a DB) | Files are large blobs, metadata needs queries     |
+| Nearby places                        | Postgres + PostGIS        | or Redis geo                                | Query by location radius                          |
+| File storage                         | Postgres: file metadata   | S3 for the files (object storage, not a DB) | Files are large blobs, metadata needs queries     |
 | Social graph ("People you may know") | Postgres: users           | Graph (Neo4j): friendships                  | Multi-hop friend traversal                        |
 
 ## Postgres vs MongoDB
 
 When people say "SQL vs NoSQL", they usually mean these two. MongoDB is a document database, one type of NoSQL.
 
-*Checked 2026-10: PostgreSQL 18 (19 in beta), MongoDB 8.3. The gap keeps shrinking, so recheck when versions change.*
+*Checked 2026-11: PostgreSQL 19, MongoDB 8.3. The gap keeps shrinking, so recheck when versions change.*
 
 | | Postgres | MongoDB |
 |---|---|---|
 | Data shape | Tables, rows, fixed schema | JSON documents, fields can differ |
 | Related data | Separate tables, joined at query time | Nested in one document, read in one go |
-| Transactions | Strong, multi-table is core | Multi-document since 4.0, but not its main strength |
+| Transactions | Strong, multi-table is core | Multi-document since 4.0, across shards since 4.2, but not its main strength |
 | Flexible fields | `jsonb` (since 9.4) | Native |
 | Scaling out | Read replicas, partitioning. Sharding needs an extension like Citus | Built-in sharding |
 

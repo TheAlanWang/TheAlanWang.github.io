@@ -12,7 +12,8 @@ tags:
   - posts
 permalink: /posts/b-tree-and-b-plus-tree/index.html
 series: databases
-seriesOrder: 3
+seriesOrder: 4
+order: 4
 ---
 
 ## Overview

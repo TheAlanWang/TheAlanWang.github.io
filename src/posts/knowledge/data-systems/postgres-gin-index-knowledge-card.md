@@ -14,7 +14,7 @@ image: /assets/sketches/postgres-indexing-review.svg
 imageFit: contain
 permalink: /posts/postgres-indexing-review-btree-bplus-gin/index.html
 series: databases
-seriesOrder: 4
+seriesOrder: 5
 ---
 
 This is a review note for Postgres indexing. It covers B-tree, B+ tree, GIN, table/index storage, primary keys, jsonb operators, index selection, SQL syntax, trade-offs, and common interview traps.
