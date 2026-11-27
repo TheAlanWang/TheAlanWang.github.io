@@ -13,6 +13,7 @@ tags:
 permalink: /posts/sql-basics/index.html
 series: databases
 seriesOrder: 2
+order: 2
 ---
 ## SQL 
 
